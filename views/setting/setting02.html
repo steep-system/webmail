@@ -1,0 +1,617 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+    <title>邮箱设置</title>
+    <link href="../../style/layout.css" type="text/css" rel="stylesheet" />
+    <link href="../../skin/default/skin.css" type="text/css" rel="stylesheet" />
+    <link href="../../style/share_list.css" type="text/css" rel="stylesheet" />
+    
+    <link href="../../skin/default/mailList_skin.css" type="text/css" rel="Stylesheet" />
+    <link href="../../style/mail_list.css" type="text/css" rel="Stylesheet" />
+	<style type="text/css">
+	passwdinput.correct{border:1px solid green;}
+	passwdinput.error{border:1px solid red;}
+	#passwdtips{float:left;margin:5px 0 0 0px;}
+	#passwdtips span{float:left;width:35px;height:20px;color:#fff;overflow:hidden;background:#ccc;margin-right:2px;line-height:20px;text-align:center;}
+	#passwdtips.s1 .active{background:#f30;}
+	#passwdtips.s2 .active{background:#fc0;}
+	#passwdtips.s3 .active{background:#cc0;}
+	#passwdtips.s4 .active{background:#090;}
+	</style>
+    <script src="../../js/jquery-1.3.2.min.js"></script>
+	<script src="../index/lang"></script>
+	<script src="../../js/dialog/zDrag.js"></script>
+	<script src="../../js/dialog/zDialog.js"></script>
+	<script>
+	/** 强度规则
+	 + ------------------------------------------------------- +
+	 1) 任何少于6个字符的组合，弱；任何字符数的同类字符组合，弱；
+	 2) 任何字符数的两类字符组合，中；
+	 3) 12位字符数以下的三类或四类字符组合，强；
+	 4) 12位字符数以上的三类或四类字符组合，非常好。
+	 + ------------------------------------------------------- +
+	**/
+	//检测密码强度
+	function checkStrong(sValue)
+	{
+	 var modes = 0;
+	 if (sValue.length < 6) return modes;
+	 if (/\d/.test(sValue)) modes++; //数字
+	 if (/[a-z]/.test(sValue)) modes++; //小写
+	 if (/[A-Z]/.test(sValue)) modes++; //大写  
+	 if (/\W/.test(sValue)) modes++; //特殊字符
+	 switch (modes)
+	 {
+	  case 1:
+	   return 1;
+	   break;
+	  case 2:
+	   return 2;
+	  case 3:
+	  case 4:
+	   return sValue.length < 12 ? 3 : 4
+	   break;
+	 }
+	}
+	
+	$(document).ready( function() {
+		$("#timezone").attr("value", "<?php echo $data['timezone'];?>");
+		$("#lang").attr("value", "<?php echo $data['lang'];?>");
+		$("#mailcode").attr("value", "<?php echo $data['mailcode'];?>");
+		$("#delaytime").attr("value", "<?php echo $data['delaytime'];?>");
+
+		if($('#autofwd_mark').val()==1){
+			$('#tautofwd').attr('disabled',false);
+			$('#tautofwd').attr('checked',true);
+			$('#autofwd').val(1);
+			$('#fwdaddress').attr('disabled',false);
+			$('#fwdaddress').val('<?php echo $data['fwdaddress'];?>');
+			$('#tfwdtype').attr('disabled',false);
+			if($('#fwdtype_mark').val()==0){
+				$('#tfwdtype').attr('checked',true);
+				$('#fwdtype').val(0);
+			}
+		}
+
+		$('#tautofwd').bind("click",function(){
+			if($(this).attr('checked')){
+				$('#fwdaddress').attr('disabled',false);
+				$('#tfwdtype').attr('disabled',false);
+				$('#autofwd').val(1);
+			}else{
+				$('#fwdaddress').val('');
+				$('#fwdaddress').attr('disabled',true);
+				$('#tfwdtype').attr('disabled',true);
+				$('#autofwd').val(0);
+			}
+		});
+
+		$('#tfwdtype').bind("click",function(){
+			if($(this).attr('checked')){
+				$('#fwdtype').val(0);
+			}else{
+				$('#fwdtype').val(1);
+			}
+		});
+
+		$('#btnChangePassword').bind('click',function(){
+			if($('#newpassword').val()=="" || 0 == checkStrong($('#newpassword').val())){
+				parent.Dialog.alert(lang.set.S0027);
+<?php
+if ($extpasswd) {
+	echo "			}else if(checkStrong($('#newpassword').val()) < 2) {\n";
+	echo "				parent.Dialog.alert(lang.set.S0054);\n";
+}?>
+			}else if($('#newpassword2').val()==""){
+				parent.Dialog.alert(lang.set.S0028);
+			}else if($('#newpassword').val()!=$('#newpassword2').val()){
+				parent.Dialog.alert(lang.set.S0029);
+				$('#newpassword').val('');
+				$('#newpassword2').val('');
+			}else{
+				var password = $('#newpassword').val();
+				password=password.replace(/\+/g,"%2B");
+				password=password.replace(/\&/g,"%26");
+				$.ajax({
+					type: "post",
+					url : "changepassword",
+					dataType:'json',
+					data:"password="+password,
+					success: function(data,textStatus){
+						if(data.state==0){
+							parent.showtip(lang.set.S0030);
+						}else if (1 == data.state) {
+							Dialog.alert(lang.tip.P1000);
+						} else if (2 == data.state) {
+							Dialog.alert(lang.tip.E1000);
+						}
+					}
+				});
+				$('#newpassword').val('');
+				$('#newpassword2').val('');
+			}
+			return false;
+		});
+
+		$('#btnSave').bind('click',function(){
+			if($('#tautofwd').attr('checked')){
+				if(!isemail($('#fwdaddress').val())){
+					Dialog.alert(lang.mail.M0083);
+				}else{
+					$('#form1').submit();
+				}
+			}else{
+				$('#form1').submit();
+			}
+		});
+
+		$('#btnPopAccountTest').unbind('click').bind('click',function(){
+			if (!popValidate()) {
+				return false;
+			}
+			$.ajax({
+				type: "post",
+				url : "popaccounttest",
+				dataType: "html",
+				data: "popmailaddress="+$('#popmailaddress').val()+"&popmailpass="+$('#popmailpass').val()+"&pophost="+$('#pophost').val()+"&popport="+$('#popport').val(),
+				success: function(data,textStatus){
+					if(data==1){
+						Dialog.alert(lang.set.S0036);
+					}else{
+						Dialog.alert(lang.set.S0037);
+					}
+				}
+			});
+		});
+		
+		$('#btnPopmailEdit').unbind('click').bind('click',function(){
+			if (!popValidate()) {
+				return false;
+			}
+			
+			$.ajax({
+				type: "post",
+				url : "editpop",
+				dataType:'html',
+				data:"popmailaddress="+$('#popmailaddress').val()+"&popmailpass="+$('#popmailpass').val()+"&pophost="+$('#pophost').val()+"&popport="+$('#popport').val()+"&isdupl="+$("input[name='isdupl']:checked").val(),
+				success: function(data,textStatus){
+					if(data==1){
+						$('#popmailaddress').val('');
+						$('#popmailpass').val('');
+						$('#pophost').val('');
+						listpop();
+					}else if(data==2){
+						Dialog.alert(lang.set.S0037);
+					}else if(data==0){
+						Dialog.alert(lang.set.S0038);
+					}
+				}
+			});
+		});
+
+		$('#btnPopmailEditCancel').unbind('click').bind('click',function(){
+			$('#popmailaddress').val('');
+			$('#popmailpass').val('');
+			$('#pophost').val('');
+			$('#popport').val('110');
+			listpop();
+		});
+		
+		listpop();
+	});
+
+	function listpop(){
+		$('#poplist').empty();
+		$.ajax({
+			type: "post",
+			url : "listpop",
+			dataType:'json',
+			success: function(data,textStatus){
+				$('#poplist').empty();
+				if(data != 0){
+					for(var i=0;i<data.length;i++){
+						$('#poplist').append('<tr><td>'+data[i][2]+'</td><td width="10px">&nbsp;</td><td><a href="javascript:void(0)" onclick="delPop(\''+data[i][2]+'\')" class="bluelink">'+lang.set.S0039+'</a></td><td>&nbsp;</td><td><a href="javascript:void(0)" onclick="onclick=editPop(\''+data[i][2]+'\')" class="bluelink">'+lang.set.S0040+'</td></tr>');
+					}
+				}else{
+					$('#poplist').empty();
+				}
+			}
+		});
+	}
+
+	function isEmail(str) {
+		validRegExp = /^[^@]+@[^@]+.[a-z]{2,}$/i;
+		if (str.search(validRegExp) == -1){
+		  return false;
+		}
+		return true;	
+	}
+	
+	function popValidate(){
+		var popmailaddress = $("#popmailaddress").val();
+		var popmailpass = $("#popmailpass").val();
+		var pophost = $("#pophost").val();
+		var popport = $("#popport").val();
+		
+		if (popmailaddress == "") {
+			Dialog.alert(lang.set.S0041);
+			return false;
+		} else if (popmailpass == "") {
+			Dialog.alert(lang.set.S0043);
+			return false;
+		} else if (pophost == "") {
+			Dialog.alert(lang.set.S0044);
+			return false;
+		} else {
+			return true;
+		}
+	}
+	
+	function isemail(str){
+		var result=str.match(/^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/);
+		if(result==null) return false;
+		return true;
+	}
+	
+	function delPop(address){
+		if (window.confirm(lang.set.S0045) == true){
+			$.ajax({
+				type: "post",
+				url : "delpop",
+				dataType:'html',
+				data:"address="+address,
+				success: function(data,textStatus){
+					listpop();
+				}
+			});
+		}
+	}
+
+	function editPop(address){
+		$.ajax({
+			type: "post",
+			url: "popinfo",
+			dataType: "json",
+			data: "address="+address,
+			success: function(data, textStatus){
+				if (data != 0){
+					$("#popmailaddress").val(data[0][2]);
+					$("#popmailpass").val(data[0][3]);
+					$("#pophost").val(data[0][0]);
+					$("#popport").val(data[0][1]);
+					$("input[name='isdupl']").filter("[value='"+data[0][4]+"']").attr("checked","checked");
+				}
+			}
+		});
+	}
+	
+	window.onload = function ()
+	{
+	 var oTips = document.getElementById("passwdtips");
+	 var oInput = document.getElementById("newpassword");
+	 var aSpan = oTips.getElementsByTagName("span");
+	 var aStr = new Array;
+	 var i = 0; 
+	 
+	 aStr = lang.set.S0053.split(",");
+	 oInput.onkeyup = oInput.onfocus = oInput.onblur = function ()
+	 {
+	  var index = checkStrong(this.value);
+	  this.className = index ? "correct" : "error";
+	  oTips.className = "s" + index;
+	  for (i = 0; i < aSpan.length; i++)aSpan[i].className = aSpan[i].innerHTML = "";
+	  index && (aSpan[index - 1].className = "active", aSpan[index - 1].innerHTML = aStr[index - 1])
+	 }
+	};
+
+	
+	</script>
+    
+    <style type="text/css">
+    <!--[if IE]>
+    /*IE-specific markup*/
+    #bottomDiv{
+    position:absolute;
+    top:expression(offsetParent.scrollTop + (document.getElementById("divSetupPage").offsetHeight-50));
+    }
+    <![endif]-->
+    </style>
+</head>
+<body style="background-color:#eee">
+	<input type="hidden" id="autofwd_mark" value="<?php echo $data['autofwd'];?>">
+	<input type="hidden" id="fwdtype_mark" value="<?php echo $data['fwdtype'];?>">
+    <div id="divSetupPage">
+        
+         <div class="boldCaption"><span style="font-size:14px;"><?php echo LANG_SET_S0006;?></span></div>
+       
+         <div id="divTabPanel">
+             <div id="divTabBG">   
+                  <span id="spanTab1">
+                        <a href="setting?type=1" id="tabUsualTab" ><span id="spanUsualTabTxt"><?php echo LANG_SET_S0007;?></span></a>
+                  </span>
+                  <span id="spanTab2">
+                        <a href="javascript:void(1)" id="tabAccountTab"  class="tabSelect"><span id="spanAccountTabTxt"><?php echo LANG_SET_S0008;?></span></a>
+                  </span>
+             </div>
+             <form action="save?type=2" method="POST" id="form1">
+             <input type="hidden" id="fwdtype" name="fwdtype" value="1">
+			 <input type="hidden" id="autofwd" name="autofwd" value="0">
+            <div id="divSetupTabContent">
+                <table id="" border="0" style=" ">
+                    <tr>
+                        <td>
+                            <div id="divAccountInfo"><span class="boldLabel"><?php echo LANG_SET_S0015;?></span></div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div id="divMailNick">
+                                <table>
+                                    <tr>
+                                        <td><?php echo LANG_SET_S0016;?>：</td>
+                                        <td><input id="nickname" name="nickname" type="text" value="<?php echo $data['nickname'];?>"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td>&nbsp;</td>
+                                        <td>
+                                            <div class="divPadding">
+                                                <span class="lbl"><?php echo LANG_SET_S0017;?></span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="divLine"></div>
+                            
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div id="divPsnlInfo">
+                                <table style="height:210px">
+                                    <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
+                                    <tr>
+                                        <td><?php echo LANG_CONTACT_C0019;?>：</td>
+                                        <td><input id="cell" name="cell" type="text" size="30" value="<?php echo $data['cell'];?>"/> </td>
+                                    </tr>
+                                    <tr>
+                                        <td><?php echo LANG_CONTACT_C0020;?>：</td>
+                                        <td><input id="tel" name="tel" type="text" size="30" value="<?php echo $data['tel'];?>"/> </td>
+                                    </tr>
+                                    <tr>
+                                        <td></td><td></td>
+                                    </tr>                                   
+                                    <tr>
+                                        <td><?php echo LANG_CONTACT_C0023;?>：</td>
+                                        <td><input id="homeaddress" name="homeaddress" type="text" size="40" value="<?php echo $data['homeaddress'];?>"/> </td>
+                                    </tr>                                   
+                                    <tr>
+                                        <td><?php echo LANG_CONTACT_C0025;?>：</td>
+                                        <td>
+                                            <textarea cols="10" id="memo" name="memo" rows="200" style="width:400px; height:40px"><?php echo $data['memo'];?></textarea>
+                                        </td>
+                                    </tr>
+                                </table>
+                               
+                            </div>
+                        </td>
+                    </tr>
+                    <?php
+                    if(PANDORA_SETTING_POP == 1){
+                    	echo '<tr>
+                        <td>
+                            <div id="divAlterpwd"><span class="boldLabel">'.LANG_SET_S0046.'</span></div>
+                        </td>
+                    </tr>
+              		<tr>
+                        <td>
+                            <div id="divAlterPwdInfo">
+                                <table>
+                                    <tr>
+                                        <td>'.LANG_SET_S0047.'：</td>
+                                        <td><input id="popmailaddress" type="text" style="width:180px"/></td>
+                                        <td><input type="button" id="btnPopAccountTest" style="width:50px;margin-left:10px;" value="'.LANG_SET_S0048.'"/></td>
+                                    </tr>
+                                    <td>&nbsp;</td></tr>
+                                    <tr>
+                                        <td>'.LANG_SET_S0049.'：</td>
+                                        <td><input id="popmailpass" type="password" style="width:80px"/></td>
+                                    </tr>
+                                    <tr><td>&nbsp;</td>
+                                    <tr>
+                                        <td>'.LANG_SET_S0050.'：</td>
+                                        <td><input id="pophost" type="text" style="width:120px"/></td>
+                                    </tr>
+                                    <tr><td>&nbsp;</td>
+                                    <tr>
+                                        <td>'.LANG_SET_S0051.'：</td>
+                                        <td><input id="popport" type="text" value="110" style="width:40px"/></td>
+                                    </tr>
+                                    <td>&nbsp;</td>
+                                    <tr>
+                                        <td>'.LANG_SET_S0052.'：</td>
+                                        <td><input type="radio" name="isdupl" value = "1" checked>'.LANG_COMMON_COM087.'&nbsp;
+											<input type="radio" name="isdupl" value = "0">'.LANG_COMMON_COM088.'</td>
+                                    </tr>
+                                    <tr><td>&nbsp;</td>
+                                    <tr><td><input type="button" id="btnPopmailEdit" value="'.LANG_COMMON_COM026.'">&nbsp;<input type="button" id="btnPopmailEditCancel" value="'.LANG_COMMON_COM005.'"></span></td>
+                                    </tr>
+                                </table>
+                                <br>
+                                <hr>
+                                <table id="poplist"></table>
+                            </div>
+                        </td>
+                    </tr>';
+                    }
+                    ?>
+                    <tr>
+                        <td>
+                            <div id="divAlterpwd"><span class="boldLabel"><?php echo LANG_SET_S0035;?></span></div>
+                        </td>
+                    </tr>
+                     <tr>
+                        <td>
+                            <div id="divAlterPwdInfo">
+                                <table>
+                                    <tr>
+                                    <td><input id="autocontact" name="autocontact" type="radio" value="1" <?php echo $acmark[0];?>/></td>
+                                     <td>&nbsp;&nbsp;<?php echo LANG_COMMON_COM087;?></td>
+                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                    <td><input id="autocontact" name="autocontact" type="radio" value="0"<?php echo $acmark[1];?>/></td>
+                                     <td>&nbsp;&nbsp;<?php echo LANG_COMMON_COM088;?></td>
+                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div id="divAlterpwd"><span class="boldLabel"><?php echo LANG_SET_S0032;?></span></div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div id="divAlterPwdInfo">
+                                <table>
+                                    <tr>
+                                    <td><input id="tautofwd" type="checkbox" value="1"/></td>
+                                     <td>&nbsp;&nbsp;<?php echo LANG_SET_S0010;?></td>
+                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                    <td>&nbsp;&nbsp;<?php echo LANG_SET_S0033;?>：</td>
+                                    <td><input id="fwdaddress" name="fwdaddress" type="text" style="width:160px" disabled/></td>
+                                     <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                    <td><input id="tfwdtype" type="checkbox" value="1" disabled/></td>
+                                     <td>&nbsp;&nbsp;<?php echo LANG_SET_S0034;?></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div id="divAlterpwd"><span class="boldLabel"><?php echo LANG_SET_S0018;?></span></div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div id="divAlterPwdInfo">
+                                <table>
+                                    <tr>
+                                    <td>&nbsp;&nbsp;<?php echo LANG_SET_S0019;?>：</td>
+                                    <td><input id="newpassword" type="password" /></td>
+                                    <td>&nbsp;&nbsp;<?php echo LANG_SET_S0020;?>：</td>
+                                    <td><input id="newpassword2" type="password" /></td>
+                                    <td>&nbsp;&nbsp;<button id="btnChangePassword" <?php echo $mark;?>><?php echo LANG_SET_S0021;?></button></td>
+                                    </tr>
+									<tr>
+									<td></td>
+									<td colspan=4><div id="passwdtips"><span></span><span></span><span></span><span></span></div></td>
+                                </table>
+								
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div id="divTimeZone"><span class="boldLabel"><?php echo LANG_SET_S0022;?></span></div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div id="divTimeZoneInfo">
+							<?php
+							print '<select id="timezone" name="timezone">';
+							/*
+							foreach($timezones as $region => $list) {
+								print '<optgroup label="' . $region . '">' . "\n";
+								foreach($list as $timezone => $name) {
+									print '<option value="' . $timezone . '">' . $name . '</option>' . "\n";
+								}
+								print '<optgroup>' . "\n";
+							}
+							*/
+							
+							foreach($timezones as $timezone => $comment) {
+								print '<option value="' . $timezone . '">' . $timezone . ' ' . $comment . '</option>' . "\n";
+							}
+							
+							print '</select>';
+							?>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div id="divTimeZone"><span class="boldLabel"><?php echo LANG_SET_S0023;?></span></div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div id="divTimeZoneInfo">
+                            <select id="lang" name="lang">
+                            <option value="zh"><?php echo LANG_SET_S0002;?></option>
+                            <option value="cn"><?php echo LANG_SET_S0003;?></option>
+                            <option value="en"><?php echo LANG_SET_S0004;?></option>
+                            <option value="jp"><?php echo LANG_SET_S0005;?></option>
+                            </select>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div id="divTimeZone"><span class="boldLabel"><?php echo LANG_SET_S0024;?></span></div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div id="divTimeZoneInfo">
+                            <select id="mailcode" name="mailcode">
+                            <option value="utf-8">UTF-8</option>
+                            <option value="gb2312">GB2312</option>
+                            <option value="gbk">GBK</option>
+                            <option value="big5">BIG5</option>
+                            <option value="euc-jp">EUC-JP</option>
+                            <option value="iso-2022-jp">ISO-2022-JP</option>
+                            </select>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div id="divDelySend"><span class="boldLabel"><?php echo LANG_SET_S0025;?></span></div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div id="divdelySendInfo">
+                                <select id="delaytime" name="delaytime">
+                                    <option value="0"><?php echo LANG_SET_S0026;?></option>
+                                    <option value="30">30<?php echo LANG_COMMON_COM033;?></option>
+                                    <option value="60">1<?php echo LANG_COMMON_COM041;?></option>
+                                    <option value="300">5<?php echo LANG_COMMON_COM041;?></option>
+                                    <option value="900">15<?php echo LANG_COMMON_COM041;?></option>
+                                </select>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr><td height="30px"></td></tr>
+                </table>
+            </div>  
+          </form>
+         </div>
+    </div>
+
+<br>       <br>       <br>    
+         
+    <div id="bottomDiv">
+            <div id="divButton">
+                <button id="btnSave"><?php echo LANG_SET_S0013;?></button>
+                &nbsp; &nbsp;
+                <button onclick="window.location.href='../index/main'"><?php echo LANG_SET_S0014;?></button>
+            </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,90 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+    <title><?php echo LANG_MAIL_M0103;?></title>
+    <link href="../../style/mail_list.css" type="text/css" rel="Stylesheet"/>
+    <link href="../../skin/default/mailList_skin.css" type="text/css" rel="Stylesheet" />
+    <script src="../../js/jquery-1.3.2.min.js"></script>
+    <script src="../index/lang"></script>
+    <script src="../../js/dialog/zDrag.js"></script>
+    <script src="../../js/dialog/zDialog.js"></script>
+    <script>
+    $(document).ready( function() {
+    	if(top==window){
+    		$('#info_sent').html('<a href="javascript:window.close();" class="mailDoneLink">'+lang.common.COM022+'</a>');
+    	}else{
+    		parent.closetip();
+    		parent.getinfo();
+    	}
+    });
+    
+    function newdraft(){
+    	parent.opennewmail();
+    }
+    
+    function addnewcontact(realname,email){
+    	var postdata = 'data={"realname":"'+encodeURIComponent(realname)+'","email":"'+encodeURIComponent(email)+'","cell":"","tel":"","nickname":"","birthday":"","address":"","company":"","memo":"","group":"","id":""}';
+    	$.ajax({
+			type: "post",
+			url : "../contact/saveuser",
+			dataType:'html',
+			data:postdata,
+			success: function(data,textStatus){
+				if(data==1){
+					Dialog.alert(lang.contact.C0034);
+				}else if(data==2){
+					Dialog.alert(lang.contact.C0002);
+				}else{
+					Dialog.alert(lang.contact.E1000);
+				}
+			}
+		});
+    }
+    </script>
+</head>
+<body>
+    <div id="divPanel_mail_done">
+        <div>
+            <table class="tbMailDone" >
+                <tr>
+                    <td class="okIconTd" rowspan="6"  valign="top">
+                        <div id="okIcoDone" class="okIcon"></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="mailSent"><?php echo $strres1;?></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="mailSentDetails"><?php echo $strres2;?></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td id="info_sent">
+                        <a href="javascript:window.location.href='../index/main';" class="mailDoneLink"><?php echo LANG_MAIL_M0107;?></a>
+                        &nbsp;&nbsp;
+                        <a href="javascript:newdraft();" class="mailDoneLink"><?php echo LANG_MAIL_M0108;?></a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        
+        
+        <div id="mailSentWhere" style="display:<?php echo $shownewcontact;?>;">
+            <div class="mailHasSent"><?php echo LANG_MAIL_M0109;?>：</div>
+            
+            <br />
+            
+            <div class="sentWhere">
+                <ul >
+                    <?php echo $strnewcontact;?>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+
+</body>
+</html>

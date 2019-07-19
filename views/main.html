@@ -1,0 +1,241 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+    <title>MAIN</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+   <link href="../../style/layout.css" type="text/css" rel="stylesheet" />
+   <link href="../../skin/default/skin.css" type="text/css" rel="stylesheet" />
+    <link href="../../style/share_list.css" type="text/css" rel="stylesheet" /><!-- -->
+    
+    <link href="../../skin/default/mailList_skin.css" type="text/css" rel="Stylesheet" />
+    <link href="../../style/mail_list.css" type="text/css" rel="Stylesheet" />
+    
+    <style type="text/css">
+<!--
+html,body {
+overflow-x:hidden;
+overflow-y:hidden;
+}
+
+-->
+    </style>
+    <script src="../../js/jquery-1.3.2.min.js"></script>
+<script src="../index/lang"></script>
+    <script src="../../js/progressbar/jquery.progressbar.min.js"></script>
+    <script>
+    $(document).ready( function() {
+    	getDiskinfo();
+    	getMailinfo();
+    });
+
+    function getDiskinfo(){
+    	if($('#diskauth').val()==1){
+    		$.ajax({
+    			type: "post",
+    			url : "../disk/getdiskinfo",
+    			timeout: 60000,
+    			dataType:'json',
+    			success: function(data,textStatus){
+    				if(data){
+    					var sizerate = (parseInt(data.osize)/(data.maxsize*1024*1024))*100;
+    					if(sizerate>100){
+    						sizerate = 100;
+    					}
+    					$('#sizeplan').html(sizerate.toFixed(0)+"%");
+    					$('#diskused').html(data.size+" ("+sizerate.toFixed(0)+"%"+")");
+    					$("#sizeplan").progressBar({ showText: false,
+    					boxImage: '../../js/progressbar/images/progressbar.gif',
+    					steps: 20,
+    					width: 140,
+    					max:100,
+    					barImage: {
+    						0:  '../../js/progressbar/images/progressbg_blue.gif',
+    						50: '../../js/progressbar/images/progressbg_orange.gif',
+    						80: '../../js/progressbar/images/progressbg_red.gif'
+    					}
+    					});
+    				}
+    			}
+    		});
+    	}
+    }
+
+    function getMailinfo(){
+    	$.ajax({
+    		type: "post",
+    		url : "../mail/mailboxinfo?time="+new Date().getTime(),
+    		timeout: 60000,
+    		dataType:'json',
+    		success: function(data,textStatus){
+    			if(data){
+    				$('#inboxinfo').html("("+data.unread+")");
+    				var strunreadinfo = '<span style="font-size:13px;color:#005590;padding-left:10px;">'+lang.common.COM072+'</span>';
+    				if(data.unread>0){
+    					strunreadinfo = '<span id="spanMailsNum" style="padding-left:10px;">'+data.unread+'</span>&nbsp;<span style="font-size:13px;">'+lang.mail.M0011+'</span><span>'+lang.mail.M0013+' </span>';
+    				}
+    				$('#unreadinfo').html(strunreadinfo);
+
+    				var sizerate = data.perused;
+    				if(sizerate>100){
+    					sizerate = 100;
+    				}
+    				$('#mailsizeplan').html(sizerate.toFixed(0)+"%");
+    				$('#mailboxused').html(data.capacity+" ("+sizerate.toFixed(0)+"%"+")");
+    				$("#mailsizeplan").progressBar({ showText: false,
+    				boxImage: '../../js/progressbar/images/progressbar.gif',
+    				steps: 20,
+    				width: 140,
+    				max:100,
+    				barImage: {
+    					0:  '../../js/progressbar/images/progressbg_blue.gif',
+    					50: '../../js/progressbar/images/progressbg_orange.gif',
+    					80: '../../js/progressbar/images/progressbg_red.gif'
+    				}
+    				});
+    			}
+    		}
+    	});
+    }
+    </script>
+</head>
+<body>
+<input type="hidden" id="diskauth" value="<?php echo $this->diskauth;?>">
+    <div id="divPage">
+            <table width="100%" border="0" cellpadding="0" cellspacing="0" id="tbAnnounce"  >
+            <tr>
+                <td class="tdLeftWeight">
+                    <div id="divHello">
+                        <span id="spanHello"><?php echo $greeting;?>，<?php echo $user;?></span>
+                    </div>
+                    <div id="divMailBrief">
+                        <span id="spanIcoMail" class="icoMail"></span>
+                        <span style="font-size:13px;" id="unreadinfo"></span>
+                    </div>
+                    <!--<div id="divMailLink">
+                        <span style="margin-left:22px;"><a href="javascript:void(1);" onclick="parent.getinfo();parent.newmailtip(0);parent.doOpeninbox();" class="linkedStyle2" style="text-decoration:none;">收件箱<span id="inboxinfo"></span></a> </span>
+                        <span style="margin-left:10px;"><a href="javascript:void(1)" class="linkedStyle2" onclick="parent.doChangeurl('../contact/list',6)" style="text-decoration:none;">联系人</a></span>
+                        <span style="margin-left:10px;"><a href="javascript:void(1)" class="linkedStyle2" onclick="parent.doChangeurl('../disk/list',7)" style="text-decoration:none;">网盘</a></span>
+                    </div>-->
+                    <div id="divAnnBody">
+                        <div id="divAnnTabBg">
+                            <span id="spanAnnTabBg_Left"></span>
+                            <span id="spanAnnTabBg_Right"></span>
+                            <span id="">
+                                <a id="spanAnnTab" href="javascript:void(1)" class="TabSelected"><span id="spanAnnTabTxt" ><?php echo LANG_COMMON_COM073;?></span></a>
+                            </span>
+                            <!--<span id="">
+                                <a id="spanLabelTab" href="#" ><span id="spanLabelTabTxt" >标签</span></a>
+                            </span>-->
+                        </div>
+                        <div id="divTabContent"><?php echo $notice;?></div>
+                  
+              </td>
+                <td width="200"  valign="top">
+                    <!--<div id="divWeather">
+                        <div class="bigWeath">天气预报</div>
+                        <div style="height:75px; ">
+                            <span id="picSun"></span>
+                            <span id="WeathLoc">上海<br />Shanghai</span>
+                        </div>
+                        <div class="weaDetails">18C~20C &nbsp;晴转多云</div>
+                        <div class="weaDetails">明天：19C~23C &nbsp;晴转多云</div>
+                        <div class="weaNextDetails">
+                            <a href="#">[未来<span class="redDay">&nbsp;7天&nbsp;</span>天气]</a>
+                        </div>
+                    </div>-->
+					
+                    <div id="capa_main">
+					
+ <div class="capa_shareList">
+	<div class="shareList-info" >
+	  <div class="shareList-info-toptit shareList-info-top">
+	   <span><?php echo LANG_COMMON_COM074;?></span>	   
+	  </div>
+	  <div class="shareList-info-content">
+		<div class="shareList-info-space"> 
+			<h3><span style="text-decoration:none;"><?php echo LANG_COMMON_COM075;?></span></h3>
+			<div class="shareList-info-space-graph">
+				<!--<div class="space-graph space-graph-shareList">-->
+					<!--<div class="space-graph g-probar"  style="width:32%">-->
+						<div align="center"><span class="progressBar" id="mailsizeplan"></span></div>
+					<!--</div>-->
+				<!--</div>-->
+			</div>
+			<div class="shareList-info-space-con">
+				<span class="shareList-info-space-used"><?php echo LANG_DISK_D0012;?>：<span id="mailboxused"></span></span><br />
+				<!--<span class="shareList-info-space-remain">剩下的空间容量：348459 KB</span>-->
+			</div>
+		</div>
+		<div class="shareList-info-bg shareList-info-list">
+		</div>
+	  </div>
+	</div>
+ </div>
+ <div class="capa_shareList" style="margin-top:20px;">
+	<div class="shareList-info" >
+	  <div class="shareList-info-toptit shareList-info-top">
+	   <span><?php echo LANG_DISK_D0009;?></span>	   
+	  </div>
+	  <div class="shareList-info-content">
+		<div class="shareList-info-space"> 
+			<h3><span style="text-decoration:none;" id="diskdesc"><?php echo LANG_DISK_D0010;?></span></h3>
+			<div class="shareList-info-space-graph">
+				<!--<div class="space-graph space-graph-shareList">-->
+					<!--<div class="space-graph g-probar"  style="width:32%">-->
+						<div align="center"><span class="progressBar" id="sizeplan"></span></div>
+					<!--</div>-->
+				<!--</div>-->
+			</div>
+			<div class="shareList-info-space-con">
+				<span class="shareList-info-space-used"><span id="disktip"><?php echo LANG_DISK_D0012;?>：</span><span id="diskused"></span></span><br />
+				<!--<span class="shareList-info-space-remain">剩下的空间容量：348459 KB</span>-->
+			</div>
+		</div>
+		<div class="shareList-info-bg shareList-info-list">
+		</div>
+	  </div>
+	</div>
+ </div>
+ 
+                    </div>
+					
+
+              </td>
+            </tr>
+      </table>
+        
+        
+<?php
+
+if (!isset($footer)) {
+echo <<<EOT
+        <div id="divFoot">
+            <div id="divFootLinkPnl">
+                <!--<span><a class="divFootLink" href ="#">域名管理</a></span><span class="splitLink">|</span>
+                <span><a class="divFootLink" href ="#">体验室</a></span><span class="splitLink">|</span>
+                <span><a class="divFootLink"  href ="#">邮箱助手</a></span><span class="splitLink">|</span>
+                <span><a class="divFootLink"  href ="#">域名管理</a></span><span class="splitLink">|</span>
+                <span><a class="divFootLink"  href ="#">手机登录</a></span><span class="splitLink">|</span>
+                <span><a class="divFootLink"  href ="#">团队博客</a></span><span class="splitLink">|</span>
+                <span><a class="divFootLink"  href ="#">加入我们</a></span><span class="splitLink">|</span>-->
+                <span>
+EOT;
+echo LANG_COMMON_COM069;
+echo <<<EOT
+	</span>
+            </div>
+            <span class="spanCopyright">  Powered by gridware information technology co.,ltd © 2010 all right reserved</span>
+        </div>
+EOT;
+
+} else {
+
+echo $footer;
+
+}
+
+?>
+
+    </div>
+</body>
+</html>

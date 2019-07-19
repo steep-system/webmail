@@ -1,0 +1,245 @@
+BODY {
+	SCROLLBAR-ARROW-COLOR: #666666; SCROLLBAR-FACE-COLOR: #ffffff; SCROLLBAR-DARKSHADOW-COLOR: #666666; SCROLLBAR-HIGHLIGHT-COLOR: #ffffff; SCROLLBAR-SHADOW-COLOR: #ffffff; SCROLLBAR-TRACK-COLOR: #f5f5f5; SCROLLBAR-3DLIGHT-COLOR: #666666
+}
+TD {
+	FONT-FAMILY: "宋体", "新宋体"; COLOR: #333333; FONT-SIZE: 9pt
+}
+TD.h19 {
+	LINE-HEIGHT: 19px
+}
+TD.white {
+	FONT-FAMILY: "宋体", "新宋体"; COLOR: #ffffff; FONT-SIZE: 9pt
+}
+TD.f10 {
+	FONT-FAMILY: "宋体", "新宋体"; FONT-SIZE: 14px
+}
+P {
+	LINE-HEIGHT: 16pt; TEXT-INDENT: 18pt; FONT-FAMILY: "宋体", "新宋体"; COLOR: #333333; TEXT-DECORATION: none
+}
+.font10 {
+	FONT-SIZE: 10pt
+}
+.h20 {
+	LINE-HEIGHT: 20px; COLOR: #666666
+}
+.shadow {
+	FILTER: DropShadow(Color=#0A2A3D, OffX=1, OffY=1, Positive=1); HEIGHT: 0px
+}
+.v7 {
+	FONT-FAMILY: "Verdana","Arial",  "Helvetica", "sans-serif"; FONT-SIZE: 7pt; FONT-WEIGHT: bold
+}
+.v8 {
+	FONT-FAMILY: "Verdana", "Arial", "Helvetica", "sans-serif"; FONT-SIZE: 8pt
+}
+.title {
+	FILTER: DropShadow(Color=#bdbdbd, OffX=1, OffY=1, Positive=1); FONT-STYLE: italic; FONT-FAMILY: "黑体", "宋体"; HEIGHT: 0px; COLOR: #ff9900; FONT-SIZE: 12px; FONT-WEIGHT: bold
+}
+.t_ora {
+	FILTER: DropShadow(Color=#bdbdbd, OffX=1, OffY=1, Positive=1); FONT-FAMILY: "宋体", "黑体"; LETTER-SPACING: 6px; HEIGHT: 0px; COLOR: #cc6600; FONT-SIZE: 14px; FONT-WEIGHT: bold
+}
+.t_ora_s {
+	FILTER: DropShadow(Color=#bdbdbd, OffX=1, OffY=1, Positive=1); FONT-FAMILY: "宋体", "黑体"; HEIGHT: 0px; COLOR: #cc6600; FONT-SIZE: 12px; FONT-WEIGHT: bold
+}
+.t_green {
+	FILTER: DropShadow(Color=#bdbdbd, OffX=1, OffY=1, Positive=1); FONT-FAMILY: "宋体", "黑体"; HEIGHT: 0px; COLOR: #339933; FONT-SIZE: 9pt; FONT-WEIGHT: bold
+}
+.t_w {
+	FILTER: DropShadow(Color=#333333, OffX=1, OffY=1, Positive=1); FONT-FAMILY: "宋体", "黑体"; LETTER-SPACING: 3px; HEIGHT: 0px; COLOR: #ffffff; FONT-SIZE: 9pt; FONT-WEIGHT: normal
+}
+UL {
+	LINE-HEIGHT: 19px; LIST-STYLE-TYPE: square; TEXT-INDENT: 0pt; COLOR: #0e3b7e; MARGIN-LEFT: 18pt; LIST-STYLE-IMAGE: url(../images/bullet_oradot.gif)
+}
+UL.h24 {
+	LINE-HEIGHT: 24px; LIST-STYLE-TYPE: square; TEXT-INDENT: 0pt; COLOR: #0e3b7e; MARGIN-LEFT: 24pt; LIST-STYLE-IMAGE: url(../images/bullet_oradot.gif)
+}
+UL.bluedot {
+	LINE-HEIGHT: 18px; LIST-STYLE-TYPE: square; TEXT-INDENT: 0pt; COLOR: #0e3b7e; MARGIN-LEFT: 18pt; LIST-STYLE-IMAGE: url(../images/bullet_bluedot.gif)
+}
+UL.green {
+	LINE-HEIGHT: 26px; LIST-STYLE-TYPE: square; TEXT-INDENT: 0pt; COLOR: #0e3b7e; MARGIN-LEFT: 20pt; LIST-STYLE-IMAGE: url(../images/bullet_green.gif)
+}
+LI.dblue {
+	LIST-STYLE-TYPE: none; TEXT-INDENT: 0pt; COLOR: #0e3b7e; MARGIN-LEFT: 0px
+}
+OL {
+	LINE-HEIGHT: 18px; COLOR: #0e3b7e; MARGIN-LEFT: 30px; FONT-SIZE: 9pt
+}
+A:link {
+	COLOR: #0e3b7e; TEXT-DECORATION: none
+}
+A:visited {
+	COLOR: #0e3b7e; TEXT-DECORATION: none
+}
+A:hover {
+	COLOR: #ff9900; TEXT-DECORATION: none
+}
+A.blue2ora:link {
+	COLOR: #0e3b7e; TEXT-DECORATION: none
+}
+A.blue2ora:visited {
+	COLOR: #0e3b7e; TEXT-DECORATION: none
+}
+A.blue2ora:hover {
+	COLOR: #ff9900; TEXT-DECORATION: none
+}
+A.grey2black:link {
+	COLOR: #666666; TEXT-DECORATION: none
+}
+A.grey2black:visited {
+	COLOR: #666666; TEXT-DECORATION: none
+}
+A.grey2black:hover {
+	COLOR: #000000; TEXT-DECORATION: none
+}
+A.w2line:link {
+	COLOR: #ffffff; TEXT-DECORATION: none
+}
+A.w2line:visited {
+	COLOR: #ffffff; TEXT-DECORATION: none
+}
+A.w2line:hover {
+	COLOR: #ffffff; TEXT-DECORATION: underline
+}
+A.shadow:link {
+	FILTER: DropShadow(Color=#0A2A3D, OffX=1, OffY=1, Positive=1); HEIGHT: 0px; COLOR: #ffffff; TEXT-DECORATION: none
+}
+A.shadow:visited {
+	FILTER: DropShadow(Color=#0A2A3D, OffX=1, OffY=1, Positive=1); HEIGHT: 0px; COLOR: #ffffff; TEXT-DECORATION: none
+}
+A.shadow:hover {
+	FILTER: DropShadow(Color=#0A2A3D, OffX=1, OffY=1, Positive=1); HEIGHT: 0px; COLOR: #cc6600; TEXT-DECORATION: none
+}
+A.o2b:link {
+	COLOR: #cc6600; TEXT-DECORATION: none
+}
+A.o2b:visited {
+	COLOR: #cc6600; TEXT-DECORATION: none
+}
+A.o2b:hover {
+	COLOR: #0e3b7e; TEXT-DECORATION: none
+}
+A.b2bl:link {
+	COLOR: #000000; TEXT-DECORATION: underline
+}
+A.b2bl:visited {
+	COLOR: #000000; TEXT-DECORATION: underline
+}
+A.b2bl:hover {
+	COLOR: #336699; TEXT-DECORATION: underline
+}
+A.b2w:link {
+	COLOR: #000000; TEXT-DECORATION: underline
+}
+A.b2w:visited {
+	COLOR: #000000; TEXT-DECORATION: underline
+}
+A.b2w:hover {
+	COLOR: #ffffff; TEXT-DECORATION: underline
+}
+A.o2w:link {
+	COLOR: #ffcc66; FONT-WEIGHT: bold; TEXT-DECORATION: none
+}
+A.o2w:visited {
+	COLOR: #ffcc66; FONT-WEIGHT: bold; TEXT-DECORATION: none
+}
+A.o2w:hover {
+	COLOR: #ffffff; FONT-WEIGHT: bold; TEXT-DECORATION: none
+}
+.bg_wave {
+	BACKGROUND: url(../images/bg_greywave.gif) #ffffff no-repeat center center
+}
+.bg_council {
+	BACKGROUND-IMAGE: url(../images/bg_council.jpg); BACKGROUND-ATTACHMENT: fixed; BACKGROUND-REPEAT: no-repeat; BACKGROUND-POSITION: right top
+}
+.bg_hammer {
+	BACKGROUND-IMAGE: url(../images/bg_hammer.jpg); BACKGROUND-ATTACHMENT: fixed; BACKGROUND-REPEAT: no-repeat; BACKGROUND-POSITION: right top
+}
+.bg_compass {
+	BACKGROUND-IMAGE: url(../images/bg_compass.jpg); BACKGROUND-ATTACHMENT: fixed; BACKGROUND-REPEAT: no-repeat; BACKGROUND-POSITION: right bottom
+}
+.bg_global {
+	BACKGROUND-IMAGE: url(../images/bg_global.jpg); BACKGROUND-ATTACHMENT: fixed; BACKGROUND-REPEAT: no-repeat; BACKGROUND-POSITION: right bottom
+}
+.bg_man {
+	BACKGROUND-IMAGE: url(../images/bg_man.jpg); BACKGROUND-ATTACHMENT: fixed; BACKGROUND-REPEAT: no-repeat; BACKGROUND-POSITION: right bottom
+}
+.input_white {
+	BORDER-BOTTOM: #eeeeee 1px solid; BORDER-LEFT: #999999 1px solid; BACKGROUND-COLOR: #ffffff; WIDTH: 120px; HEIGHT: 16px; FONT-SIZE: 9pt; BORDER-TOP: #999999 1px solid; BORDER-RIGHT: #eeeeee 1px solid
+}
+.td_yel_notop {
+	BORDER-BOTTOM: #d3c398 1px solid; BORDER-LEFT: #d3c398 1px solid; BACKGROUND-COLOR: #f3efe1; COLOR: #cc6600; BORDER-TOP: #d3c398 0px solid; BORDER-RIGHT: #d3c398 1px solid
+}
+.td1 {
+	COLOR: #000000; FONT-SIZE: 15px
+}
+HR {
+	BORDER-BOTTOM: #2f5b9c 1px dotted; BORDER-LEFT: #2f5b9c 1px dotted; HEIGHT: 1px; BORDER-TOP: #2f5b9c 1px dotted; BORDER-RIGHT: #2f5b9c 1px dotted
+}
+HR.v {
+	BORDER-BOTTOM: #aacff1 1px dotted; BORDER-LEFT: #aacff1 1px dotted; HEIGHT: 1px; BORDER-TOP: #aacff1 1px dotted; BORDER-RIGHT: #aacff1 1px dotted
+}
+HR.investgate {
+	BORDER-BOTTOM: 1px; BORDER-LEFT: 1px; HEIGHT: 10px; BORDER-TOP: 1px; BORDER-RIGHT: 1px
+}
+HR.dot_ora {
+	BORDER-BOTTOM: #ff9900 1px dotted; BORDER-LEFT: #ff9900 1px dotted; HEIGHT: 1px; BORDER-TOP: #ff9900 1px dotted; BORDER-RIGHT: #ff9900 1px dotted
+}
+.b_grey2 {
+	FILTER: Shadow(Color=#999999, Direction=135, strength=2); HEIGHT: 123px
+}
+.b_grey {
+	BORDER-BOTTOM: #cccccc 1px solid; BORDER-LEFT: #cccccc 1px solid; BORDER-TOP: #cccccc 1px solid; BORDER-RIGHT: #cccccc 1px solid
+}
+.frame_ora {
+	BORDER-BOTTOM: #cccccc 1px solid; BORDER-LEFT: #cccccc 1px solid; BACKGROUND-COLOR: #ff9900; WIDTH: 208px; HEIGHT: 16px; COLOR: #ffffff; FONT-SIZE: 9pt; BORDER-TOP: #cccccc 1px solid; BORDER-RIGHT: #cccccc 1px solid
+}
+.frame_blue {
+	BORDER-BOTTOM: #cccccc 1px solid; BORDER-LEFT: #cccccc 1px solid; BACKGROUND-COLOR: #4e8fc6; WIDTH: 208px; HEIGHT: 16px; COLOR: #ffffff; FONT-SIZE: 9pt; BORDER-TOP: #cccccc 1px solid; BORDER-RIGHT: #cccccc 1px solid
+}
+.frame_lblue {
+	BORDER-BOTTOM: #cccccc 1px solid; BORDER-LEFT: #cccccc 1px solid; BACKGROUND-COLOR: #d9ebf9; WIDTH: 208px; HEIGHT: 16px; COLOR: #000000; FONT-SIZE: 9pt; BORDER-TOP: #cccccc 1px solid; BORDER-RIGHT: #cccccc 1px solid
+}
+.frame_2 {
+	BORDER-BOTTOM: #4e8fc6 1px solid; BORDER-LEFT: #4e8fc6 1px solid; BACKGROUND-COLOR: #f3f9ff; HEIGHT: 17px; COLOR: #333333; BORDER-TOP: #4e8fc6 1px solid; BORDER-RIGHT: #4e8fc6 1px solid
+}
+INPUT.border1 {
+	BORDER-BOTTOM: #e6e6e6 1px solid; BORDER-LEFT: #393939 1px solid; BACKGROUND-COLOR: #ececec; WIDTH: 110px; HEIGHT: 16px; COLOR: #5e5e2f; FONT-SIZE: 9pt; BORDER-TOP: #393939 1px solid; BORDER-RIGHT: #e6e6e6 1px solid
+}
+FORM {
+	PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; PADDING-TOP: 0px
+}
+.w90 {
+	BORDER-BOTTOM: #eeeeee 1px solid; BORDER-LEFT: #999999 1px solid; BACKGROUND-COLOR: #ffffff; WIDTH: 90px; HEIGHT: 18px; COLOR: #336699; BORDER-TOP: #999999 1px solid; BORDER-RIGHT: #eeeeee 1px solid
+}
+.w180 {
+	BORDER-BOTTOM: #eeeeee 1px solid; BORDER-LEFT: #999999 1px solid; BACKGROUND-COLOR: #ffffff; WIDTH: 175px; HEIGHT: 18px; COLOR: #336699; BORDER-TOP: #999999 1px solid; BORDER-RIGHT: #eeeeee 1px solid
+}
+.frame_w150 {
+	BORDER-BOTTOM: #6699cc 1px solid; BORDER-LEFT: #6699cc 1px solid; BACKGROUND-COLOR: #f1f5fa; WIDTH: 150px; HEIGHT: 18px; COLOR: #336699; BORDER-TOP: #6699cc 1px solid; BORDER-RIGHT: #6699cc 1px solid
+}
+.button_lblue {
+	BORDER-BOTTOM: #6699cc 1px solid; BORDER-LEFT: #6699cc 1px solid; BACKGROUND-COLOR: #d6e3f1; HEIGHT: 18px; COLOR: #336699; BORDER-TOP: #6699cc 1px solid; BORDER-RIGHT: #6699cc 1px solid
+}
+.button_ora {
+	BORDER-BOTTOM: #dd9933 1px solid; BORDER-LEFT: #dd9933 1px solid; BACKGROUND-COLOR: #cc6600; FONT-FAMILY: "宋体", "新宋体"; HEIGHT: 16px; COLOR: #ffffff; FONT-SIZE: 9pt; BORDER-TOP: #dd9933 1px solid; BORDER-RIGHT: #dd9933 1px solid
+}
+.navbutton {
+	BORDER-BOTTOM: #003366 1px solid; BORDER-LEFT: white 0px solid; PADDING-BOTTOM: 2px; BACKGROUND-COLOR: #6699cc; PADDING-LEFT: 2px; PADDING-RIGHT: 2px; HEIGHT: 100%; MARGIN-LEFT: 1px; VERTICAL-ALIGN: top; BORDER-TOP: white 0px solid; BORDER-RIGHT: #003366 1px solid; PADDING-TOP: 4px
+}
+.font_w {
+	COLOR: #ffffff
+}
+.blue {
+	COLOR: #336699
+}
+.ora {
+	FONT-FAMILY: "Verdana", "Arial"; COLOR: #cc6600; FONT-SIZE: 9pt
+}
+.dblue {
+	COLOR: #0e3b7e
+}
+.button {
+	BACKGROUND-COLOR: #dbdbc9; FONT-FAMILY: "Verdana", "Arial", "Helvetica", "sans-serif"; HEIGHT: 16px; COLOR: #484833; FONT-SIZE: 9pt
+}
+
+

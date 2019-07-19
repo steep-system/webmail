@@ -1,0 +1,533 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" class="mainBody">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title><?php echo $this->sinfo['domaintitle'].LANG_COMMON_COM071;?></title>
+<link href="../../style/layout.css" type="text/css" rel="stylesheet" />
+<link href="../../skin/default/skin.css" type="text/css" rel="stylesheet" />
+<link href="../../style/share_list.css" type="text/css" rel="stylesheet" />
+<link href="../../style/mail_list.css" type="text/css"  rel="Stylesheet" />
+<link href="../../skin/default/mailList_skin.css" type="text/css"  rel="Stylesheet" />
+<script src="../../js/jquery-1.3.2.min.js"></script>
+<script src="../index/lang"></script>
+<script src="../../js/jquery.hotkeys-0.7.9.min.js"></script>
+<script src="../../js/dialog/zDrag.js"></script>
+<script src="../../js/dialog/zDialog.js"></script>
+<script src="../../js/mailtip.js"></script>
+<script>
+document.oncontextmenu=new Function("event.returnValue=false;");
+document.onselectstart=new Function("event.returnValue=false;");
+var title_timer = null;
+$(document).ready( function() {
+	getinfo();
+	listFolder();
+	//$('#frame_content').contents().find('#pagemark').focus();
+	if($('#frame_content').attr('src')!='main'){
+		$('#frame_content').contents().find('#pagemark').focus();
+	}
+	$('body').bind('click',function(){
+		//document.getElementById("frame_content").contentWindow.setSelect();
+		if(typeof(document.getElementById("frame_content").contentWindow.$('#nofocus').val())!='undefined'){
+			document.getElementById("frame_content").contentWindow.$('#pagemark').focus();
+		}
+	});
+});
+
+function changecolor(id){
+	for(var i=1;i<=8;i++){
+		if(id==i){
+			if(id==8){
+				$('.gSb-webdiscs').css('background-color','#6392c8');
+			}else{
+				$('#menu_'+i).css('background-color','#6392c8');
+			}
+			if(i>=7){
+				$('#menu_'+i+' a').css('color','#ffffff');
+			}else{
+				$('#menu_'+i).css('color','#ffffff');
+			}
+		}else{
+			$('.gSb-webdiscs').css('background-color','');
+			$('#menu_'+i).css('background-color','');
+			//$('#menu_'+i).css('background-color','');
+			if(i>=7){
+				$('#menu_'+i+' a').css('color','#005590');
+			}else{
+				$('#menu_'+i).css('color','');
+			}
+		}
+	}
+	$('.gSb-cnav-tit').css('background-color','');
+	$('.gSb-cnav-tit span').css('color','#005590');
+}
+
+function changeurl(url,id){
+	if(typeof(document.getElementById("frame_content").contentWindow.$('#writemark').val())!='undefined'){
+		oper = 0;
+		Dialog.confirm(lang.mail.M0066,function(){
+			document.getElementById("frame_content").contentWindow.save();
+		},function(){doChangeurl(url,id);});
+	}else{
+		doChangeurl(url,id);
+	}
+}
+
+function doChangeurl(url,id){
+	url = url + '?time='+new Date().getTime();
+	$(document).unbind('keydown');
+	$('#frame_content').attr('src',url);
+	$('#frame_content').load(function(){
+		$('#frame_content').contents().find('#pagemark').focus();
+	});
+	changecolor(id);
+}
+
+function changeurl_ex(url,id){
+	if(typeof(document.getElementById("frame_content").contentWindow.$('#writemark').val())!='undefined'){
+		oper = 0;
+		Dialog.confirm(lang.mail.M0066,function(){
+			document.getElementById("frame_content").contentWindow.save();
+		},function(){doChangeurl_ex(url,id);});
+	}else{
+		doChangeurl_ex(url,id);
+	}
+}
+
+function doChangeurl_ex(url,id){
+	$(document).unbind('keydown');
+	$('#frame_content').attr('src',url);
+	$('#frame_content').load(function(){
+		$('#frame_content').contents().find('#pagemark').focus();
+	});
+	changecolor(id);
+}
+
+function openservice(url){
+	url = url + '&time='+new Date().getTime();
+	$(document).unbind('keydown');
+	$('#frame_content').attr('src',url);
+	$('#frame_content').load(function(){
+		$('#frame_content').contents().find('#pagemark').focus();
+	});
+	changecolor(id);
+}
+
+function intofolder(folder,fname){
+	if(typeof(document.getElementById("frame_content").contentWindow.$('#writemark').val())!='undefined'){
+		oper = 0;
+		Dialog.confirm(lang.mail.M0066,function(){
+			document.getElementById("frame_content").contentWindow.save();
+		},function(){doIntofolder(folder,fname);});
+	}else{
+		doIntofolder(folder,fname);
+	}
+}
+
+function doIntofolder(folder,fname){
+	changecolor(10);
+	url = '../mail/myfolder?folder='+folder+'&fname='+fname+'&time='+new Date().getTime();
+	$(document).unbind('keydown');
+	$('#frame_content').attr('src',url);
+	$('#frame_content').load(function(){
+		$('#frame_content').contents().find('#pagemark').focus();
+	});
+	$('#flist_'+folder).css('background-color','#6392c8');
+	$('#fspan_'+folder).css('color','#ffffff');
+}
+
+function getinfo(){
+	$.ajax({
+		type: "post",
+		url : "../mail/getinfo?time="+new Date().getTime(),
+		timeout: 60000,
+		dataType:'json',
+		success: function(data,textStatus){
+			if(data){
+				$('#inbox_unread').html(data.inbox.unread);
+				$('#inbox_total').html(data.inbox.total);
+
+				$('#sent_unread').html(data.sent.unread);
+				$('#sent_total').html(data.sent.total);
+
+				$('#draft_unread').html(data.draft.unread);
+				$('#draft_total').html(data.draft.total);
+
+				$('#trash_unread').html(data.trash.unread);
+				$('#trash_total').html(data.trash.total);
+
+				$('#junk_unread').html(data.junk.unread);
+				$('#junk_total').html(data.junk.total);
+			}else{
+				alert(lang.common.COM021);
+			}
+		}
+	});
+}
+
+function setinfo(folder,type,property,val){
+	var tempval = parseInt($('#'+folder+'_'+property).html());
+	if(type=='inc'){
+		tempval = tempval + val;
+	}else if(type=='dec'){
+		tempval = tempval - val;
+		if(tempval<0)tempval = 0;
+	}
+	$('#'+folder+'_'+property).html(tempval);
+	if(property=='unread'){
+		document.getElementById('frame_content').contentWindow.$('.mailsunreadCnt').html(tempval);
+	}else{
+		document.getElementById('frame_content').contentWindow.$('.mailsCnt').html(tempval);
+	}
+}
+
+function newmailtip(type){
+	$.ajax({
+		type: "post",
+		url : "../mail/newmailtip?ajax=1&time="+new Date().getTime(),
+		timeout: 20000,
+		dataType:'json',
+		success: function(data,textStatus){
+			if(data.code){
+				if(data.cnt>0){
+					$('#newmailcnt').empty();
+					$('#newmailcnt').html(data.cnt);
+					if(type==1){
+						clearTimeout(title_timer);
+						var step = 0;
+						flashTitle(data.cnt,step);
+					}
+					getinfo();
+					viewMsg();
+				}
+			}else{
+				//window.top.location.href = data.url;
+			}
+		}
+	});
+}
+
+function flashTitle(cnt,step){
+	step++
+	if (step==3) {step=1}
+	if (step==1) {document.title=lang.common.COM056+cnt+lang.common.COM057+"！"}
+	if (step==2) {document.title="                     <?php echo $this->sinfo['domaintitle'].LANG_COMMON_COM071;?>"}
+	title_timer = setTimeout("flashTitle("+cnt+","+step+");",500);
+}
+
+function openinbox(){
+	if(typeof(document.getElementById("frame_content").contentWindow.$('#writemark').val())!='undefined'){
+		oper = 0;
+		Dialog.confirm(lang.mail.M0066,function(){
+			document.getElementById("frame_content").contentWindow.save();
+		},function(){doOpeninbox();});
+	}else{
+		doOpeninbox();
+	}
+}
+
+function doOpeninbox(){
+	clearTimeout(title_timer);
+	document.title = '<?php echo $this->sinfo['domaintitle'].LANG_COMMON_COM071;?>';
+	$('#frame_content').attr('src','../mail/mailbox?f=inbox&time='+new Date().getTime());
+	closeDiv();
+	
+	changecolor(1);
+	
+	if ($('#openfolder_mark').val() == 1) {
+		$('#flist_inbox').css('background-color','#6392c8');
+		$('#fspan_inbox').css('color','#ffffff');
+	}
+	
+	$('#frame_content').load(function(){
+		$('#frame_content').contents().find('#pagemark').focus();
+	});
+	
+	
+}
+
+function openmailbox(mailbox,id){
+	getinfo();
+	if(typeof(document.getElementById("frame_content").contentWindow.$('#writemark').val())!='undefined'){
+		Dialog.confirm(lang.mail.M0066,function(){
+			document.getElementById("frame_content").contentWindow.save();
+		},function(){doOpenmailbox(mailbox,id);});
+	}else{
+		doOpenmailbox(mailbox,id);
+	}
+}
+
+function opennewmail(){
+	$('#frame_content').attr('src','../mail/write?&time='+new Date().getTime());
+}
+
+function doOpenmailbox(mailbox,id){
+	$('#frame_content').attr('src','../mail/mailbox?f='+mailbox+'&time='+new Date().getTime());
+	
+	changecolor(id);
+	
+	if ($('#openfolder_mark').val() == 1) {
+		$('#flist_' + mailbox).css('background-color','#6392c8');
+		$('#fspan_' + mailbox).css('color','#ffffff');
+	}
+}
+
+function openMyfolder(){
+	if($('#myfolder_mark').attr('class')=='fileIco2'){
+		$('#myfolder_mark').attr('class','fileIco');
+		$('#myfolder_list').css('display','block');
+		$('#common_folders').css('display', 'none');
+		$('#openfolder_mark').val(1);
+	}else{
+		$('#myfolder_mark').attr('class','fileIco2');
+		$('#myfolder_list').css('display','none');
+		$('#common_folders').css('display', 'block');
+		$('#openfolder_mark').val(0);
+	}
+	listFolder();
+}
+
+var folderdata = {};
+
+function expandSubfolder(folder) {
+	if ('none' == $('#sfl_' + folder).css('display')) {
+		$('#sfm_' + folder).attr('class','expandIco');
+		$('#sfl_' + folder).css('display', 'block');
+		delete folderdata[folder];
+	} else {
+		$('#sfm_' + folder).attr('class','expandIco2');
+		$('#sfl_' + folder).css('display', 'none');
+		folderdata[folder] = 1;
+	}
+
+}
+
+function listSubfolder(subdata, depth) {
+	
+	var strfolder = '';
+	var tmp_indent;
+	
+	 for (var k in subdata){
+		if (typeof(subdata[k].sub) != "undefined") {
+			tmp_indent = 12*(depth + 1) - 12; 
+		} else {
+			tmp_indent = 12*(depth + 1)
+		}
+		strfolder = strfolder + '<div class="gSb-cnav-tit" id="flist_'+subdata[k].path+'"><div class="fileLeft" style="white-space:nowrap;text-overflow:ellipsis;overflow:hidden;"><a href="javascript:void(1)" onclick="intofolder(\''+subdata[k].path+'\',\''+subdata[k].title+'\')">'+
+					'<span id="fspan_'+ subdata[k].path +'" style="padding-top:3px;padding-bottom:3px;padding-left:' + tmp_indent + 'px;cursor:pointer;">';
+					
+		if (typeof(subdata[k].sub) != "undefined") {
+			if (null == folderdata[subdata[k].path]) {
+				strfolder = strfolder + '<div class="expandIco"';
+			} else {
+				strfolder = strfolder + '<div class="expandIco2"';
+			}
+			
+			strfolder = strfolder + ' id="sfm_' + subdata[k].path + '" onclick="expandSubfolder(\'' + subdata[k].path + '\')"></div>'
+		}
+		
+		strfolder = strfolder + subdata[k].name + '</span></a></div>';
+					
+		if (typeof(subdata[k].sub) != "undefined") {
+			strfolder = strfolder + '</div>';
+			if (null == folderdata[subdata[k].path]) {
+				strfolder = strfolder + '<div id="sfl_' + subdata[k].path + '" style="display:block">';
+			} else {
+				strfolder = strfolder + '<div id="sfl_' + subdata[k].path + '" style="display:none">';
+			}
+			
+			strfolder = strfolder + listSubfolder(subdata[k].sub, depth + 1);
+			
+		} else {
+			if (null != folderdata[subdata[k].path]) {
+				delete folderdata[subdata[k].path];
+			}
+		}
+		
+		strfolder = strfolder + '</div>';
+	}
+	
+	return strfolder;
+}
+
+function listFolder(){
+	$('#myfolder_list').empty();
+	$.ajax({
+		type: "post",
+		url : "../mail/listfolder?time="+new Date().getTime(),
+		timeout: 60000,
+		dataType:'json',
+		success: function(data,textStatus){
+			if(data!=null){
+				strfolder = listSubfolder(data, 0);
+				$('#myfolder_list').html(strfolder);
+			}
+			setMyFolderScroll();
+		}
+	});
+	
+}
+
+function setMyFolderScroll(){
+	var ie = !-[1,];
+	if(ie){
+		if($('.fileFrame').attr('scrollHeight')>25){
+			$('.fileFrame').css('height',<?php echo ($_COOKIE['CLIENT_Y_SCREEN']-500);?>);
+			$('.fileFrame').css('overflow-y','auto');
+			$('.fileFrame').css('overflow-x','hidden');
+		}else{
+			$('.fileFrame').css('height','25px');
+			$('.fileFrame').css('overflow','hidden');
+		}
+	}else{
+		if($('#openfolder_mark').val()==0){
+			$('.fileFrame').css('height','25px');
+			$('.fileFrame').css('overflow','hidden');
+		}else{
+			$('.fileFrame').css('height',<?php echo ($_COOKIE['CLIENT_Y_SCREEN']-500);?>);
+			$('.fileFrame').css('overflow-y','auto');
+			$('.fileFrame').css('overflow-x','hidden');
+		}
+	}
+}
+
+function showtip(msg){
+	$('#tip').empty();
+	$('#tip').css('display','block');
+	$('#tip').html(msg);
+	setTimeout("closetip()",2000);
+}
+
+function showtip2(msg){
+	$('#tip').empty();
+	$('#tip').css('display','block');
+	$('#tip').html(msg);
+}
+
+function closetip(){
+	$('#tip').empty();
+	$('#tip').css('display','none');
+}
+
+function showloadingtip(){
+	$('#loadingtip').css('display','block');
+}
+
+function closeloadingtip(){
+	$('#loadingtip').css('display','none');
+}
+</script>
+</head>
+<body scroll="no" class="mainBody">
+<input type="hidden" id="openfolder_mark" value="0">
+<!--outer Begin-->
+<div class="outer">
+<!--header Begin-->
+<div class="header">
+  <div class="fn-bg gTop">
+    <div class="theme-tl">
+      <h1 class="logo logo-ext-163"><a href="../index/index"><img src="getlogo" alt="" border="0" class="gLogo" style="margin:20px 0 0 5px;"/></a></h1>
+      <div class="info">
+        <div class="g-addr g-addr-arr" > <strong><?php echo $user;?></strong><em>&lt;<?php echo $mail;?>&gt;</em> </div>
+        [<a style="margin-left:2px; margin-right:2px;" href="javascript:void(1)" onclick="changeurl('main',0)"><?php echo LANG_MAIL_M0107;?></a>|
+		<a style="margin-left:2px; margin-right:2px;" href="javascript:void(1)" onclick="changeurl('../set/setting?type=1',0)"><?php echo LANG_COMMON_COM058;?></a>|
+		<a style="margin-left:2px; margin-right:2px;" href="javascript:void(1)" onclick="changeurl('../mail/mailboxmanage',0)"><?php echo LANG_MAIL_M0143;?></a>]</div>
+        <div style="clear:both;">
+        <div class="tip" id="tip" style="display:none;">loading...</div>
+        <div class="loadingtip" id="loadingtip" style="display:none;"><img src="../../image/loding01.gif"> loading...</div>
+        </div>
+		<div class="search" style="padding-right:10px; padding-left:10px; padding-top:20px; padding-bottom:5px; width: 230px; float:right; position:absolute; right:140px; z-index:999;">
+		  <form action="" method="post" name="search" onSubmit="if (search.keyword.value != '') changeurl_ex('../mail/search?k=' + search.keyword.value,0); return false;">
+			<input name="keyword" type="text" value="<?php echo LANG_COMMON_COM090;?>" onFocus="this.value=''" style="padding-top:2px; height:16px; width: 160px; border: 1px solid #748793; font-size:11px; float:left;">
+			<input name="button" type="submit" value="<?php echo LANG_COMMON_COM089;?>" style="padding-top:1px; height:20px; width: 60px; font-size:13px; float:right;">
+		  </form>
+		</div>
+      <div class="ser-stl ser ">
+	  <a href="javascript:void(1)" onclick="openservice('../mail/write?oper=service');"><?php echo LANG_COMMON_COM059;?></a> | <a href="javascript:void(1)" onclick="Dialog.alert('请致电 18616921773 问询')"><?php echo LANG_COMMON_COM045;?></a> | <a href="../auth/logout"><?php echo LANG_COMMON_COM060;?></a></div>
+    </div>
+    <div class="clear"></div>
+  </div>
+</div>
+<!--header End-->
+<!--container Begin-->
+<div class="container" style="background:#748793">
+  <div class="gSidebar theme-sb-top">
+    <div class="core"> <a href="javascript:void(1)" class="check" onclick="getinfo();newmailtip(0);openinbox();" style="padding-left:4px;"><?php echo LANG_COMMON_COM061;?></a><a href="javascript:void(1)" class="compose" onclick="changeurl('../mail/write')" style="padding-left:2px;"><?php echo LANG_MAIL_M0067;?></a> </div>
+    <div class="sidebar-b-bg sidebar">
+      <div class="sidebar-top-bg sidebar-top"></div>
+      <div class="sidebar-wrap">
+        <div class="cnav gSb-sfolder" id="common_folders" style="display:block">
+          <ul>
+            <li><a href="javascript:void(1)" class="on" onclick="getinfo();newmailtip(0);openinbox();" id="menu_1"><div class="ico ico-inbox"></div><span class="mailInfoFont"><?php echo LANG_MAIL_M0010;?>&nbsp;(<label id="inbox_unread"></label>/<label id="inbox_total"></label>)</span></a> </li>
+			<li><a href="javascript:void(1)" onclick="openmailbox('draft',2);" class="on" id="menu_2"><div class="ico ico-draft"></div><span class="mailInfoFont"><?php echo LANG_MAIL_M0043;?>&nbsp;(<label id="draft_unread"></label>/<label id="draft_total"></label>)</span></a> </li>
+			<li><a href="javascript:void(1)" onclick="openmailbox('sent',3);" class="on" id="menu_3"><div class="ico ico-sent"></div><span class="mailInfoFont"><?php echo LANG_MAIL_M0028;?>&nbsp;(<label id="sent_unread"></label>/<label id="sent_total"></label>)</span></a></li>
+			<li><a href="javascript:void(1)" onclick="openmailbox('trash',4);" class="on" id="menu_4"><div class="ico ico-deleted"></div><span class="mailInfoFont"><?php echo LANG_MAIL_M0029;?>&nbsp;(<label id="trash_unread"></label>/<label id="trash_total"></label>)</span></a></li>
+			<li><a href="javascript:void(1)" onclick="openmailbox('junk',5);" class="on" id="menu_5"><div class="ico ico-junk"></div><span class="mailInfoFont"><?php echo LANG_MAIL_M0030;?>&nbsp;(<label id="junk_unread"></label>/<label id="junk_total"></label>)</span></a></li>
+			<li><a href="javascript:void(1)" onclick="changeurl('../archive/condition',6);" class="on" id="menu_6"><div class="ico ico-archive"></div><span class="mailInfoFont"><?php echo LANG_MAIL_M0160;?>&nbsp;</span></a></li> 
+		  </ul>
+        </div>
+        <div class="ln-thin ln-c-mid"><b class="ext1"></b></div>
+        <div class="fileFrame" style="height:25px;">
+          <div class="cnav gSb-sOTmail">
+            <div class="gSb-cnav-tit" style="padding-bottom:2px;padding-top:2px;">
+              <div class="fileLeft"><a href="javascript:void(0);" onclick="openMyfolder();" style="color: #005590;">
+			   <div class="fileIco2" id="myfolder_mark"></div>
+                <?php echo LANG_COMMON_COM062;?></a></div>
+             
+            </div>
+            <div id="myfolder_list" style="display:none;"></div>
+          </div>
+        </div>
+        <div class="ln-thin ln-c-mid fileLi"><b class="ext1"></b></div>
+        <div class="cnav gSb-sspecial">
+          <ul>
+            <li id="menu_7"> <b class="ico ico-addr"></b><a href="javascript:void(1)" onclick="changeurl('../contact/list',7)" style="color: #005590;"><span><?php echo LANG_CONTACT_C0001;?></span></a> </li>
+          </ul>
+        </div>
+        <div class="ln-thin ln-c-mid"><b class="ext1"></b></div>
+        
+        <div class="cnav gSb-webdiscs">
+          <ul>
+            <li id="menu_8"> <b class="ico ico-webdiscs"></b> <a href="javascript:void(1)" onclick="changeurl('../disk/list',8)" style="color: #005590;"><span><?php echo LANG_DISK_D0007;?></span></a> </li>
+          </ul>
+        </div>
+        <div class="ln-thin ln-c-mid"><b class="ext1"></b></div>
+      </div>
+      <div class="fixed">
+        <div class="sidebar-bottom-bg sidebar-bottom"></div>
+      </div>
+    </div>
+  </div>
+  <!--content Begin-->
+  <div class="content">
+    <div class="content-wrap">
+      <div class="content-wrap-top-c">
+        <div class="content-wrap-top-l">
+          <div class="mainDivList">
+            <iframe src="main" id="frame_content" name="frame_content" width="99%" height="<?php echo $_COOKIE['CLIENT_Y_SCREEN']-68;?>px" frameborder="no" border="0" scrolling=auto></iframe>
+            <!--<iframe src="../index/main" id="frame_content" name="frame_content" width="99%" height="<?php echo $_COOKIE['CLIENT_Y_SCREEN']-70;?>px" frameborder="no" border="0" scrolling=auto></iframe>-->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--content End-->
+  </div>
+  <!--container End-->
+</div>
+<DIV id="divMsg" style="Z-INDEX:99999;LEFT: 0px;VISIBILITY: hidden;POSITION: absolute; TOP: 0px; HEIGHT: 100px; BACKGROUND-COLOR: #eeeeee;">
+  <div>
+  <ol>
+    <li class="mailPopTopLeft"></li>
+    <li class="mailPopTopCenter"><div class="mainPopTitle"><?php echo LANG_COMMON_COM063;?></div><div class="mainPopClose" onclick="closeDiv();"></div></li>
+    <li class="mailPopTopRight"></li>
+  </ol>
+</div>
+<div class="mainPopBody"><a href="javascript:openinbox();" style="text-decoration:none;"><span><?php echo LANG_COMMON_COM064;?><span id="newmailcnt"></span><?php echo LANG_COMMON_COM065;?></span></a></div>
+</DIV>
+<!--outer End-->
+</body>
+</html>
+<script>
+newmailtip(1);
+var tip_timer = window.setInterval("newmailtip(1)",30000);
+</script>

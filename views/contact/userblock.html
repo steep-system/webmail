@@ -1,0 +1,310 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>联系人列表</title>
+<link href="../../style/mail_list.css" type="text/css"  rel="Stylesheet" />
+<link href="../../skin/default/mailList_skin.css"type="text/css"  rel="Stylesheet" />
+<link href="../../style/layout.css" type="text/css"  rel="Stylesheet" />
+<link href="../../skin/default/skin.css" type="text/css"  rel="Stylesheet" />
+<link href="../../style/share_list.css" type="text/css"  rel="Stylesheet" />
+<style type="text/css">
+<!--
+#markOutSelList {
+	position:absolute;
+	width:78px;
+	height:auto;
+	margin-top: 24px;
+	background-color: #F1F1F1;
+	border: 1px solid #C0C0C0;
+}
+-->    
+   html,body {
+	overflow: hidden;
+	min-height: 100%; /* For Modern Browsers */  
+	height: 100% !important; /* For Modern Browsers */  
+	height: 100%; /* For IE */ 
+}
+.heightAuto {
+	min-height: 100%; /* For Modern Browsers */  
+	height: 100% !important; /* For Modern Browsers */  
+	height: 100%; /* For IE */ 
+}
+    .footLine {
+	font-size: 1px;
+	height: 1px;
+	border-top-width: 1px;
+	border-top-style: solid;
+	border-top-color: #6c7f8d;
+	position: absolute;
+	bottom: 0px;
+	width: 100%;
+}
+.tableHeight{
+	height: 80%;/*FF*/
+	*height: 100%; !important;/*IE7*/
+	*height: 100%;/*IE6*/
+}
+.allSelect {
+	position: absolute;
+        width: 100%;
+        top: <?php echo $divTop;?>px;
+}
+</style>
+<script src="../index/lang"></script>
+    <script src="../../js/jquery-1.3.2.min.js"></script>
+    <script src="../../js/jstree/jquery.tree.js"></script>
+    <script src="../../js/dialog/zDrag.js"></script>
+    <script src="../../js/dialog/zDialog.js"></script>
+    <script src="../../js/contact/userlist.js"></script>
+    <script>
+    document.oncontextmenu=new Function("event.returnValue=false;");
+    document.onselectstart=new Function("event.returnValue=false;");
+    $(document).ready( function() {
+    	list(2,2,'root','','','');
+    	showtree();
+		$('#userlist').css('height',(document.getElementById('userlist').offsetHeight)+"px");
+    	$('#selgroup').bind('change',function(){
+    		if(($('#curlist').val()==1)||($('#selgroup').val()=="")){
+    			Dialog.alert(lang.common.COM010);
+    			$('#selgroup').attr('value',"");
+    		}else{
+    			var cid = "";
+    			$("[name='chk']").each(function(){
+    				if($(this).attr('checked')){
+    					cid = cid + $(this).val() + ",";
+    				}
+    			});
+    			if(cid == ""){
+    				Dialog.alert(lang.contact.C0013)
+    				$('#selgroup').attr('value',"");
+    			}else{
+    				Dialog.confirm(lang.contact.C0014,function(){
+    					$.ajax({
+    						type: "post",
+    						url : "addtogroup",
+    						dataType:'html',
+    						data:"cid="+cid+"&gid="+$('#selgroup').val()+"&time="+new Date().getTime(),
+    						success: function(data,textStatus){
+    							if(data){
+    								list($('#curtype').val(),$('#curlist').val(),$('#curctype').val(),$('#curgroup').val(),'','');
+    								$('#selgroup').attr('value',"");
+    							}else{
+    								alert(lang.common.COM008);
+    								$('#selgroup').attr('value',"");
+    							}
+    							
+    						}
+    					});
+    				});
+    			}
+    		}
+    	});
+
+    	$('#btnDelGroup').bind('click',function(){
+    		if(($('#curgroup').val()=="")||($('#curgroup').val()==0)){
+    			Dialog.alert(lang.common.COM010);
+    		}else{
+    			Dialog.confirm(lang.contact.C0015,function(){
+    				$.ajax({
+    					type: "post",
+    					url : "delgroup",
+    					dataType:'html',
+    					data:"gid="+$('#curgroup').val()+"&time="+new Date().getTime(),
+    					success: function(data,textStatus){
+    						if(data){
+    							list($('#curtype').val(),$('#curlist').val(),$('#curctype').val(),$('#curgroup').val(),'','');
+    							showtree();
+    						}else{
+    							alert(lang.common.COM008);
+    						}
+    					}
+    				});
+    			});
+    		}
+    	});
+
+    	$('#btnDel').bind('click',function(){
+    		if($('#curlist').val()==1){
+    			Dialog.alert(lang.common.COM010);
+    		}else{
+    			var cid = "";
+    			$("[name='chk']").each(function(){
+    				if($(this).attr('checked')){
+    					cid = cid + $(this).val() + ",";
+    				}
+    			});
+    			if(cid == ""){
+    				Dialog.alert(lang.contact.C0013)
+    			}else{
+    				Dialog.confirm(lang.contact.C0016,function(){
+    					$.ajax({
+    						type: "post",
+    						url : "delcontact",
+    						dataType:'html',
+    						data:"cid="+cid+"&time="+new Date().getTime(),
+    						success: function(data,textStatus){
+    							if(data){
+    								list($('#curtype').val(),$('#curlist').val(),$('#curctype').val(),$('#curgroup').val(),'','');
+    							}else{
+    								alert(lang.common.COM008);
+    							}
+    						}
+    					});
+    				});
+    			}
+    		}
+    	});
+
+    	$('#btnExport').bind('click',function(){
+    		window.location = "export";
+    	});
+
+    	$('#btnImport').bind('click',function(){
+    		importfile();
+    	});
+    });
+
+    function openedit(){
+    	parent.$('#frame_content').attr('src','../contact/edit');
+    }
+
+    function showtree(){
+    	$("#address_tree").tree({
+    		types : {
+    		"root":{icon:{image : '../../js/jstree/icon.png', position : '-48px 0'}},
+    		"group":{icon :{image : '../../js/jstree/icon.png', position : '-16px 0'}},
+    		"class":{icon :{image : '../../js/jstree/icon.png', position : '-80px 0'}},
+    		"user":{icon :{image : '../../js/jstree/icon.png', position : '-96px 0'}}
+    		},
+    		data : {
+    			draggable	: false,
+    			type : "json",
+    			opts : {
+    				url : "../contact/tree"+"?showuser=1&time="+new Date().getTime()
+    			}
+    		},
+    		callback : {
+    			onchange : function(NODE,TREE_OBJ){
+    				$('#curgroup').val('');
+    				list($('#curtype').val(),$(NODE).attr("list"),$(NODE).attr("ctype"),$(NODE).attr("id"),'','');
+    				$('#curcontact').html($(NODE).attr("name"));
+    				$('#curctype').val($(NODE).attr("ctype"));
+    				$('#curlist').val($(NODE).attr("list"));
+    				if(($(NODE).attr("list")==2)&&($(NODE).attr("ctype")!='root')){
+    					$('#curgroup').val($(NODE).attr("id"));
+    				}
+    			}
+    		}
+    	});
+    }
+
+    function writemail(){
+    	var cid = "";
+    	$("[name='chk']").each(function(){
+    		if($(this).attr('checked')){
+    			cid = cid + $(this).attr('title') + ",";
+    		}
+    	});
+    	if(cid == ""){
+    		Dialog.alert(lang.contact.C0013)
+    	}else{
+    		window.location.href = '../mail/write?oper=contact&user='+cid;
+    	}
+    }
+    </script>
+</head>
+<body>
+<input type="hidden" id="curgroup" value="">
+	<input type="hidden" id="curlist" value="">
+	<input type="hidden" id="curctype" value="">
+	<input type="hidden" id="curtype" value="2">
+	<input type="hidden" id="mode" value="block">
+	<input type="hidden" id="nofocus" value="1">
+	<div id="listdata" style="display:none;"></div>
+<div id="divContactPanel">
+  <table width="100%" border="0" class="tableHeight">
+    <!--<tr height="<?php echo $_COOKIE['CLIENT_Y_SCREEN']-178;?>px;">-->
+    <tr>
+      <td height="<?php echo $tdHeight;?>px;" valign="top" style="width:90%;" id="test"><div id="divLeftPanel">
+        <!--邮件信息-->
+        <div class="divMailInfoFrame">
+          <!--邮件信息-->
+          <div id="divMailInfo"><span class="mailbox" id="curcontact"><?php echo LANG_CONTACT_C0012;?></span><span class="mailbrief"> (<?php echo LANG_COMMON_COM013;?><span class="mailsCnt" id="usercount"></span><?php echo LANG_CONTACT_C0042;?></span>)</div>
+          
+		  <div style="padding-right:10px; padding-left:10px; padding-top:3px; padding-bottom:5px; width: 160px; float:right; position:absolute; right:260px;">
+		  
+			<input id="keyword" type="text" value="<?php echo LANG_CONTACT_C0052;?>" onFocus="this.value='';" onkeydown="if(event.keyCode==13) search(2, $('#keyword').attr('value'));" style="padding-top:2px; height:15px; width: 100px; border: 1px solid #748793; font-size:11px; float:left;">
+			<input name="button" type="submit" value="<?php echo LANG_COMMON_COM089;?>" onClick="search(2, $('#keyword').attr('value'));" style="padding-top:1px; height:19px; width: 46px; font-size:13px; float:right;">
+		  </div>
+		  
+		  <div class="mailList_toptit_r">
+            <ol>
+              <li><img src="../../skin/default/image/list_ico4.gif" width="19" height="19" border="0" title="<?php echo LANG_COMMON_COM002;?>"/></li>
+              <li><a href="####" onclick="closeIframe(1);"><img src="../../skin/default/image/list_ico1.gif" width="19" height="19" border="0" title="<?php echo LANG_COMMON_COM001;?>"/></a></li>
+            </ol>
+          </div>
+        </div>
+        <div id="divHead">
+          <div id="divUpper">
+            <div id="HeadUpper">
+              <div class="headCenter"> <span class="headLeft"></span>
+      			<ol>
+	    			<li style="margin-right:3px;"><input type="button" onclick="openedit();" value="<?php echo LANG_COMMON_COM020;?>"></li>
+	    			<li style="margin-right:3px;"><input type="button" onclick="editgroup('','');" value="<?php echo LANG_CONTACT_C0038;?>"></li>
+	    			<li style="margin-right:3px;"><input type="button" onclick="writemail();" value="<?php echo LANG_MAIL_M0067;?>"></li>
+	    			<li style="margin-right:3px;"><input type="button" id="btnDel" value="<?php echo LANG_DISK_D0004;?>"></li>
+	    			<li style="margin-right:3px;"><input type="button" id="btnDelGroup" value="<?php echo LANG_CONTACT_C0051;?>"></li>
+	    			<li style="margin-top:2px;">
+	    			<select id="selgroup" style="height:24px;">
+                      <option value=""><?php echo LANG_CONTACT_C0041;?>...</option>
+                      <option value="0"><?php echo LANG_CONTACT_C0037;?></option>
+                      <?php echo $optgroup;?>
+                    </select>
+	    			</li>
+	    		</ol>
+			</div>
+            </div>
+          </div>
+        </div>
+        <div id="divContactListPanel">
+          <div class="divContactList">
+              <div class="contactCardsPanel" id="userlist" style="OVERFLOW-Y:auto;OVERFLOW-X:hidden;height:<?php echo $tableHeight-75;?>px;"></div>
+            </div>
+      </div></td>
+      <td height="<?php echo $tdHeight;?>px;" valign="top"><div  style="margin-left:10px;" class="heightAuto">
+          <div class="ContactList">
+            <div class="ContactListTitle"> <span class="fontStyle"><?php echo LANG_CONTACT_C0043;?></span> </div>
+          </div>
+          <div class="ContactListBorder">
+            <div class="ContactLists" style="OVERFLOW:hidden;">
+              <table width="100%" height="50%" border="0" cellpadding="0" cellspacing="0">
+                <tr>
+                  <td valign="top" class="addressTree"><div id="address_tree"></div></td>
+                </tr>
+              </table>
+              <table width="100%" height="50%" border="0" cellpadding="0" cellspacing="0">
+                <tr>
+                  <td valign="top"><div id="divToolBox">
+                      <div style="font:bold 14px 宋体; color:#005590;"><?php echo LANG_CONTACT_C0044;?></div>
+                      <div id="toolSplit"></div>
+                      <div id="divImportContact">
+                        <div id="divImportContactPic"></div>
+                        <span class="exportImport"><a href="javascript:void(1);" id="btnImport" style="text-decoration: none;"><?php echo LANG_CONTACT_C0031;?></a></span> </div>
+                      <div id="divExportContact">
+                        <div id="divExportContactPic"></div>
+                        <span class="exportImport"><a href="javascript:void(1);" id="btnExport" style="text-decoration: none;"><?php echo LANG_CONTACT_C0033;?></a></span> </div>
+                    </div></td>
+                </tr>
+              </table>
+            </div>
+          </div>
+      </div></td>
+    </tr>
+  </table>
+  
+  
+</div>
+<div id="footUpper1" class="allSelect"> <span class="upperPanel"> <span class="f1"><?php echo LANG_MAIL_M0037;?>：</span> <a href="javascript:void(1);" onclick="chkBlockAll();"><span class="f2" id="btn_selall"><?php echo LANG_MAIL_M0038?></span></a><a href="javascript:void(1);" onclick="clrBlockAll();"><span class="f2" id="btn_clrall" style="margin-left:10px;"><?php echo LANG_MAIL_M0039;?></span></a> </span> </div>
+</body>
+</html>

@@ -1,0 +1,128 @@
+﻿/*default*/
+a:link, a:visited{color:#000000;}
+a:hover{color:#666666}
+.fn-bg{ /*background-image:url(image/fnbg_bg01.gif);*/ background-repeat:no-repeat;}
+.main-bg,.ico-act-default,.tip-arr,.tip-rc-l,.tip-rc-r,.g-addr .arr,.g-menu .arr,.btn span,.btn .arr,.gMtable,.core,.core a,.gSidebar .cgSb-sfolder li,.gSb-sfolder li a,.sidebar-b-bg,.sidebar-top-bg,.sidebar-bottom-bg, .theme-sb-top, .shareList-info-toptit,.shareList_top_tab01 .tab01,.shareList_top_tab01 .tab02 ,.shareList_top_tab02 .tab01,.shareList_top_tab02 .tab02,.shareList-ser-bg,plate01,.pager,.shareList-menu,.plate02,.shareList-info-bg ul li a,.gWel-space,.share-upload-bg,.space-graph{background-image:url(image/bg.gif);background-repeat:no-repeat;}
+.sidebar-b-bg{background-repeat:repeat-y;}
+.ico{
+	background-image:url(image/ico.gif);
+	background-repeat:no-repeat;
+}
+.gSidebar .core a:link,.gSidebar .core a:visited,.gSidebar .core a:hover{color:#000000;}
+.ser .g-srch .ipt-t-dft{color:#CCCCCC;}
+.gSidebar .gSb-sfolder li a{
+	color:#516574;
+}
+.gSidebar .gSb-sfolder li a:link,.gSidebar .gSb-sfolder li a:visited{background-position:300px 300px;font: 12px "宋体";}
+.gSidebar .gSb-sfolder li a:hover{
+	font: 12px "宋体";
+	color:#005590;
+	background-color: #e6f0f7;
+}
+/*.gSidebar .gSb-sfolder li a:active{
+	font:bold 12px "宋体";
+	color:#ffffff;
+	background-color: #6392c8;
+}*/
+/*.gSidebar .gSb-sfolder li a:hover{background-position:-872px 0px; font:bold 12px "宋体"; color:#ffffff;}*/
+.gSidebar .gSb-sfolder li .on{font:bold 12px "宋体"; color:#005590;}
+.gSidebar .gSb-sfolder li .over{font:bold 12px "宋体"; color:#005590;}
+
+.content{background:#fff;}
+.content-wrap{background-image:url(image/content_bg_center_l.gif); background-repeat:repeat-y;}
+.content-wrap-top-c{ background-image:url(image/content_bg_top_c.gif); background-repeat:repeat-x;}
+.content-wrap-top-l{ background-image:url(image/content_bg_top_l.gif); background-repeat:no-repeat;}
+
+.shareList-topmenu-plate01-c{background:url(image/content_plate01_t_c.gif) repeat-x center top;}
+.shareList-topmenu-plate01-l{background:url(image/content_plate01_t_l.gif) no-repeat left top;}
+.shareList-topmenu-plate01-r{background:url(image/content_plate01_t_r.gif) no-repeat right top;}
+.shareList-bottommenu-plate01-c{background:url(image/content_plate01_b_c.gif) repeat-x center top;}
+.shareList-bottommenu-plate01-l{background:url(image/content_plate01_b_l.gif) no-repeat left top;}
+.shareList-bottommenu-plate01-r{background:url(image/content_plate01_b_r.gif) no-repeat right top;}
+.shareList-menu2{background:url(image/content_title_bg01.gif) repeat-x center top;}
+.shareList-menu3{background:url(image/content_title_bg02.gif) repeat-x center top;}
+
+.bluelink, .bluelink:link, .bluelink:hover, .bluelink:visited{
+	color: #005590;
+	text-decoration: none;
+	font-family:Verdana, Arial, Helvetica, sans-serif, "微软雅黑", "宋体";
+	font-size: 12px;
+}
+
+.orangelink{
+	color: darkorange;
+	text-decoration: none;
+}
+/*32x32 文件类型图标*/
+.FileClass01{				/*all*/
+	background-image: url(image/ico.gif);
+	background-position: 0px -419px;
+	height: 32px;
+	width: 32px;
+}
+.FileClass02{				/*jpg gif*/
+	background-image: url(image/ico.gif);
+	background-position: -42px -419px;
+	height: 32px;
+	width: 32px;
+}
+.FileClass03{				/*mp3*/
+	background-image: url(image/ico.gif);
+	background-position: -84px -419px;
+	height: 32px;
+	width: 32px;
+}
+.FileClass04{				/*txt*/
+	background-image: url(image/ico.gif);
+	background-position: -126px -419px;
+	height: 32px;
+	width: 32px;
+}
+.FileClass05{				/*rar zip arj*/
+	background-image: url(image/ico.gif);
+	background-position: -168px -419px;
+	height: 32px;
+	width: 32px;
+}
+.FileClass06{				/*xls*/
+	background-image: url(image/ico.gif);
+	background-position: -210px -419px;
+	height: 32px;
+	width: 32px;
+}
+.FileClass07{				/*pdf*/
+	background-image: url(image/ico.gif);
+	background-position: -252px -419px;
+	height: 32px;
+	width: 32px;
+}
+.FileClass08{				/*word*/
+	background-image: url(image/ico.gif);
+	background-position: -294px -419px;
+	height: 32px;
+	width: 32px;
+}
+.FileClass09{				/*html*/
+	background-image: url(image/ico.gif);
+	background-position: -336px -419px;
+	height: 32px;
+	width: 32px;
+}
+.FileClass10{				/*mail*/
+	background-image: url(image/ico.gif);
+	background-position: -378px -419px;
+	height: 32px;
+	width: 32px;
+}
+
+.clearBoth {
+	overflow: hidden;
+	float: left;
+	clear: both;
+	width: 100%;
+}
+
+a{blr:expression(this.onFocus=this.blur());outline:none}
+
+.gSidebar .gSb-sspecial li .on{font:bold 12px "宋体"; color:#005590;}
+

@@ -1,0 +1,503 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title><?php echo LANG_MAIL_M0055;?></title>
+<link href="../../style/mail_list.css" type="text/css"  rel="Stylesheet" />
+<link href="../../skin/default/mailList_skin.css"type="text/css"  rel="Stylesheet" />
+<link href="../../style/layout.css" type="text/css"  rel="Stylesheet" />
+<link href="../../skin/default/skin.css" type="text/css"  rel="Stylesheet" />
+<link href="../../js/jqueryui/jquery-ui-1.8.5.custom.css" type="text/css"  rel="Stylesheet" />
+<script src="../index/getscript?mod=editmail"></script>
+<script src="../../js/jstree/jquery.tree.js"></script>
+<script src="../index/lang"></script>
+<script type="text/javascript" src="../contact/contactcache?+Math.random()"></script> 
+<style>body {background-color: #eeeeee;}</style>
+<script>
+javascript:window.history.forward(1);
+
+CD.IniEditor({
+	id   : ["content"],
+	use  : [true],
+	root : '../../js/editor2.0/'
+});
+
+function split( val ) {
+	return val.split( /;\s*/ );
+}
+
+function extractLast( term ) {
+	return split( term ).pop();
+}
+
+$(document).ready( function() {
+	//getAttachList();
+	var ff = !(document.all);
+
+	$("#to,#cc,#bcc").autocomplete({
+		minLength: 0,
+		source: function( request, response ) {
+			// delegate back to autocomplete, but extract the last term
+			response( $.ui.autocomplete.filter(
+			emails, extractLast( request.term ) ) );
+		},
+		focus: function() {
+			// prevent value inserted on focus
+			return false;
+		},
+		select: function( event, ui ) {
+			var terms = split( this.value );
+			// remove the current input
+			terms.pop();
+			// add the selected item
+			terms.push( ui.item.value );
+			// add placeholder to get the comma-and-space at the end
+			terms.push( "" );
+			this.value = terms.join( "; " );
+			return false;
+		}
+	});
+
+	$('#str_cc').bind('click',function(){
+		if($('#tr_cc').css('display')=='none'){
+			$('#tr_cc').css('display','');
+			$('#str_cc').html('<?php echo LANG_MAIL_M0085;?>');
+		}else{
+			$('#tr_cc').css('display','none');
+			$('#str_cc').html('<?php echo LANG_MAIL_M0070;?>');
+			$('#cc').val('');
+		}
+	});
+
+	$('#str_bcc').bind('click',function(){
+		if($('#tr_bcc').css('display')=='none'){
+			$('#tr_bcc').css('display','');
+			$('#str_bcc').html('<?php echo LANG_MAIL_M0084;?>');
+		}else{
+			$('#tr_bcc').css('display','none');
+			$('#str_bcc').html('<?php echo LANG_MAIL_M0071;?>');
+			$('#bcc').val('');
+		}
+	});
+
+	$(function () {
+		$("#address_tree").tree({
+			types : {
+			"root":{icon:{image : '../../js/jstree/icon.png', position : '-48px 0'}},
+			"group":{icon :{image : '../../js/jstree/icon.png', position : '-16px 0'}},
+			"class":{icon :{image : '../../js/jstree/icon.png', position : '-80px 0'}},
+			"user":{icon :{image : '../../js/jstree/icon.png', position : '-96px 0'}}
+			},
+			data : {
+				draggable	: false,
+				type : "json",
+				opts : {
+					url : "../contact/tree"+"?showuser=0&time="+new Date().getTime()
+				}
+			},
+			callback : {
+				onchange : function(NODE,TREE_OBJ){
+					if($(NODE).attr("ctype")=='user'){
+						var fid = $('#curfocus').val();
+						if(fid==''){
+							$('#to').focus();
+							var strto = $('#to').val();
+							var mark = strto.indexOf($(NODE).attr("email"));
+							if(mark<0){
+								if($(NODE).attr("name")==""){
+									var straddress = $(NODE).attr("email");
+								}else{
+									var straddress = $(NODE).attr("name")+"<"+$(NODE).attr("email")+">";
+								}
+								$('#to').val($('#to').val()+straddress+';');
+							}
+						}else{
+							var strto = $('#'+fid).val();
+							var mark = strto.indexOf($(NODE).attr("email"));
+							if(mark<0){
+								if($(NODE).attr("name")==""){
+									var straddress = $(NODE).attr("email");
+								}else{
+									var straddress = $(NODE).attr("name")+"<"+$(NODE).attr("email")+">";
+								}
+								$('#'+fid).val($('#'+fid).val()+straddress+';');
+							}
+						}
+					}
+				}
+			}
+		});
+	});
+});
+
+function save(){
+	$('#mailform').attr('action','save');
+	CD.func.setData("content");
+	if((checkaddress($('#to').val(),'to'))&&(checkaddress($('#cc').val(),'cc'))&&(checkaddress($('#bcc').val(),'bcc'))){
+		$('form:mailform').submit();
+	}
+}
+
+function send(){
+	$('#mailform').attr('action','send');
+	$('#btnSend').attr('disabled',true);
+	$('#btnSendTime').attr('disabled',true);
+	$('#btnSendRecall').attr('disabled',true);
+	if($('#to').val()==""){
+		$('#btnSend').attr('disabled',false);
+		Dialog.alert('<?php echo LANG_MAIL_M0081;?>');
+		$('#btnSend').attr('disabled',false);
+		$('#btnSendTime').attr('disabled',false);
+		$('#btnSendRecall').attr('disabled',false);
+	}else{
+		CD.func.setData("content");
+		if((checkaddress($('#to').val(),'to'))&&(checkaddress($('#cc').val(),'cc'))&&(checkaddress($('#bcc').val(),'bcc'))){
+			if(top!=window){
+				parent.showtip2("<?php echo LANG_MAIL_M0095;?>...");
+			}
+			$('form:mailform').submit();
+		}
+	}
+}
+
+function sendrecall(){
+	$('#mailform').attr('action','sendrecall');
+	$('#btnSend').attr('disabled',true);
+	$('#btnSendTime').attr('disabled',true);
+	$('#btnSendRecall').attr('disabled',true);
+	if($('#to').val()==""){
+		$('#btnSendRecall').attr('disabled',false);
+		Dialog.alert('<?php echo LANG_MAIL_M0081;?>');
+		$('#btnSend').attr('disabled',false);
+		$('#btnSendTime').attr('disabled',false);
+		$('#btnSendRecall').attr('disabled',false);
+	}else{
+		CD.func.setData("content");
+		if((checkaddress($('#to').val(),'to'))&&(checkaddress($('#cc').val(),'cc'))&&(checkaddress($('#bcc').val(),'bcc'))){
+			if(top!=window){
+				parent.showtip2("<?php echo LANG_MAIL_M0095;?>...");
+			}
+			$('form:mailform').submit();
+		}
+	}
+}
+
+function isemail(str){
+	var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+	return re.test(str);
+}
+
+function checkaddress(str,type){
+	switch(type){
+		case 'to':var msg = "<?php echo LANG_MAIL_M0050;?>";break;
+		case 'cc':var msg = "<?php echo LANG_MAIL_M0072;?>";break;
+		case 'bcc':var msg = "<?php echo LANG_MAIL_M0073;?>";break;
+	}
+	var mark = 1;
+	if(str!=''){
+		var mstr = str.split(";");
+		for(var i=0;i<mstr.length;i++){
+			mstr[i] = mstr[i].replace(/\s+/g,"");
+			if(mstr[i]!=""){
+				var tstr = mstr[i].split("<");
+				var nstr = tstr[1];
+				if(typeof(nstr)=='undefined'){
+					if(!isemail(mstr[i])){
+						alert(msg+'<?php echo LANG_MAIL_M0083;?>！');
+						$('#'+type).empty();
+						$('#btnSend').attr('disabled',false);
+						mark = 0;
+						break;
+					}
+				}else{
+					nstr = nstr.replace(">","");
+					nstr = nstr.replace("<","");
+					if(!isemail(nstr)){
+						alert(msg+'<?php echo LANG_MAIL_M0083;?>！');
+						$('#'+type).empty();
+						$('#btnSend').attr('disabled',false);
+						mark = 0;
+						break;
+					}
+				}
+			}
+		}
+	}
+	return mark;
+}
+
+function uploadattach(){
+	var diag = new Dialog();
+	diag.Title = "<?php echo LANG_MAIL_M0082;?>";
+	diag.URL = "uploadattach?mid="+$('#mid').val();
+	diag.Width = 461;
+	diag.Height = 280;
+	diag.show();
+}
+
+function diskattach(){
+	var diag = new Dialog();
+	diag.Title = "<?php echo LANG_MAIL_M0074;?>";
+	diag.URL = "diskattach?mid="+$('#mid').val();
+	diag.Width = 461;
+	diag.Height = 280;
+	diag.OkButtonText = lang.common.COM009;
+	diag.OKEvent = function(){
+		var doc = diag.innerFrame.contentWindow.document;
+		var selfile = doc.getElementById('selfile').value
+		var fname = doc.getElementById('fname').value
+		if(selfile!=""){
+			$.ajax({
+				type: "post",
+				url : "dodiskattach",
+				dataType:'json',
+				data:'mid='+$('#mid').val()+'&file='+selfile+'&fname='+fname,
+				success: function(data,textStatus){
+					if(data.state == 1){
+						getAttachList();
+						diag.close();
+					}else{
+						alert(data.tip);
+					}
+				}
+			});
+		}
+	};
+	diag.CancelEvent = function(){
+		diag.close();
+	}
+	diag.show();
+}
+
+function uploadnormalattach(){
+	if(top!=window){
+		parent.showtip2(lang.common.COM086+'...');
+	}
+	$.ajaxFileUpload({
+		url:'../fileupload/normalattach?param=<?php echo base64_encode($_COOKIE['SESSION_MARK']);?>|<?php echo $_COOKIE['SESSION_ID'];?>|'+$('#mid').val(),
+		secureuri:false,
+		fileElementId:'fileToUpload',
+		dataType: 'json',
+		success: function (data, status)
+		{
+			if(data.state==1){
+				if(top!=window){
+					parent.showtip(lang.disk.D0050);
+				}
+				getAttachList();
+			}else{
+				if(top!=window){
+					parent.showtip(lang.common.COM024);
+				}
+			}
+		},
+		error: function (data, status, e)
+		{
+			if(top!=window){
+				parent.showtip(lang.common.COM024);
+			}
+		}
+	})
+}
+
+function getAttachList(){
+	$.ajax({
+		type: "post",
+		url : "attachlist",
+		dataType:'json',
+		data: 'mid='+$('#mid').val(),
+		success: function(data,textStatus){
+			if(data){
+				$('#attachlist').css('display','block');
+				$('#attachlist').empty();
+				var strlist = "";
+				for(var i=0;i<data.length;i++){
+					if(data[i].show==1){
+						strlist = strlist + '<div class="oneAttach"> <span class="attachIcon"></span> <span>'+data[i].filename+'</span> <span>('+data[i].size+')</span> <span class="attachDele"><a href="####" onclick="delAttachFile(\''+data[i].file+'\');" style="font-family:Arial;font-weight:bold;text-decoration:none;"><font color="#FF0000">X</font></a></span> </div>';
+					}
+				}
+				$('#attachlist').html(strlist);
+			}else{
+				$('#attachlist').css('display','none');
+				$('#attachlist').empty();
+			}
+		}
+	});
+}
+
+function delAttachFile(file){
+	$.ajax({
+		type: "post",
+		url : "delattach",
+		dataType:'html',
+		data: "file="+file+'&mid='+$('#mid').val(),
+		success: function(data,textStatus){
+			if(data){
+				getAttachList();
+			}else{
+				alert('error');
+			}
+		}
+	});
+}
+
+function sendtime(){
+	if($('#to').val()==""){
+		Dialog.alert('<?php echo LANG_MAIL_M0081;?>');
+	}else{
+		var diag = new Dialog();
+		diag.Title = "<?php echo LANG_MAIL_M0068;?>";
+		diag.URL = "sendtime";
+		diag.Width = 460;
+		diag.Height = 130;
+		diag.OkButtonText="<?php echo LANG_MAIL_M0054;?>";
+		diag.CancelButtonText="<?php echo LANG_COMMON_COM005;?>";
+		diag.OKEvent = function(){
+			var doc = diag.innerFrame.contentWindow.document;
+			var strdate = doc.getElementById('year').value+'-'+doc.getElementById('month').value+'-'+doc.getElementById('day').value+' '+doc.getElementById('hour').value+':'+doc.getElementById('min').value;
+			var curtime = new Date().getTime();
+			var sendtime = new Date(doc.getElementById('year').value,doc.getElementById('month').value-1,doc.getElementById('day').value,doc.getElementById('hour').value,doc.getElementById('min').value);
+			sendtime = sendtime.getTime();
+			$('#timesend').val('');
+			$('#timesenddesc').val('');
+			if(sendtime>curtime){
+				$('#timesend').val(sendtime-curtime);
+				$('#timesenddesc').val(strdate);
+				send();
+			}else{
+				Dialog.alert("<?php echo LANG_MAIL_M0141;?>");
+			}
+			diag.close();
+		};
+		diag.show();
+	}
+}
+
+function setFocus(id){
+	$('#curfocus').val(id);
+}
+
+function closeedit(){
+	if(self==top){
+		window.close();
+	}else{
+		parent.openinbox();
+	}
+}
+</script>
+</head>
+<body style="height:620px;"><div id="msg"></div>
+<input type="hidden" id="curfocus" value="">
+<input type="hidden" id="writemark" name="writemark" value="1">
+<div class="shareList">
+              <div id="divPanel">
+                <div id="divHead">
+                  <div id="HeadUpper">
+                    <div class="headCenter"> <span class="headLeft"></span>
+      			<ol>
+	    			<li style="margin-right:3px;"><input type="button" onclick="send();" id="btnSend" value="<?php echo LANG_MAIL_M0054;?>"></li>
+	    			<li style="margin-right:3px;"><input type="button" onclick="sendtime();" id="btnSendTime" value="<?php echo LANG_MAIL_M0068;?>"></li>
+	    			<li style="margin-right:3px;"><input type="button" onclick="sendrecall();" id="btnSendRecall" value="<?php echo LANG_MAIL_M0149;?>"></li>
+	    			<li style="margin-right:3px;"><input type="button" onclick="save();" value="<?php echo LANG_MAIL_M0069;?>"></li>
+	    			<li style="margin-right:3px;"><input type="button" onclick="closeedit();" value="<?php echo LANG_COMMON_COM022;?>"></li>
+	    		</ol>
+			</div>
+                  </div>
+                </div>
+                <div id="divContent">
+                <form action="save" method="POST" id="mailform" name="mailform">
+                    <input type="hidden" id="mid" name="mid" value="<?php echo $mid;?>">
+                    <input type="hidden" id="mailbox" name="mailbox" value="<?php echo $mailfolder;?>">
+                    <input type="hidden" id="timesend" name="timesend" value="">
+                    <input type="hidden" id="timesenddesc" name="timesenddesc" value="">
+                    <input type="hidden" id="sendtype" name="sendtype" value="<?php echo $sendtype;?>">
+                    <input type="hidden" id="omid" name="omid" value="<?php echo $omid;?>">
+                    <input type="hidden" id="replyinfo" name="replyinfo" value="<?php echo base64_encode($replyinfo);?>">
+                    <input type="hidden" id="isdraft" name="isdraft" value="<?php echo $isdraft;?>">
+                    <input type="hidden" id="istimesend" name="istimesend" value="<?php echo $istimesend;?>">
+                  <table width="99%">
+					<tr>
+                      <td><table width="100%" cellpadding="2px" id="tbWrite">
+                        <tr>
+                          <td class="lbl">&nbsp;</td>
+                        </tr>
+                        <tr>
+                          <td><div class="caption"><?php echo LANG_MAIL_M0033;?></div></td>
+                          <td class="textRight"><select id="sender" name="sender"><?php echo $sender_options;?></select><span style="padding-left:30px;"><a href="javascript:void(0);" id="str_cc" class="bluelink"><?php echo $disp_cc_desc;?></a> - <a href="javascript:void(0);" id="str_bcc" class="bluelink"><?php echo LANG_MAIL_M0071;?></a></span></td>
+                        </tr>
+                        <tr>
+                          <td><div class="caption"><?php echo LANG_MAIL_M0050;?></div></td>
+                          <td class="textRight"><textarea id="to" name="to" class="mailTextarea" onkeydown="if(event.keyCode==13) event.returnValue=false;" onpropertychange="if(this.scrollHeight>18){this.style.posHeight=this.scrollHeight+2}else{this.style.posHeight=18}" onfocus="setFocus('to');"><?php echo strip_tags($maildata['to']);?></textarea>                          </td>
+                        </tr>
+                        <tr id="tr_cc" style="display:<?php echo $disp_cc;?>;">
+                          <td><div class="caption"><?php echo LANG_MAIL_M0072;?></div></td>
+                          <td class="textRight"><textarea id="cc" name="cc" class="mailTextarea" onkeydown="if(event.keyCode==13) event.returnValue=false;" onpropertychange="if(this.scrollHeight>18){this.style.posHeight=this.scrollHeight+2}else{this.style.posHeight=18}" onfocus="setFocus('cc');"><?php echo strip_tags($maildata['cc']);?></textarea></td>
+                        </tr>
+                        <tr id="tr_bcc" style="display:none;">
+                          <td><div class="caption"><?php echo LANG_MAIL_M0073;?></div></td>
+                          <td class="textRight"><textarea id="bcc" name="bcc" class="mailTextarea" onkeydown="if(event.keyCode==13) event.returnValue=false;" onpropertychange="if(this.scrollHeight>18){this.style.posHeight=this.scrollHeight+2}else{this.style.posHeight=18}" onfocus="setFocus('bcc');"><?php echo strip_tags($maildata['bcc']);?></textarea></td>
+                        </tr>
+                        <tr>
+                          <td><div class="caption" ><?php echo LANG_MAIL_M0034;?></div></td>
+                          <td class="textRight"><textarea id="subject" name="subject" class="mailTextarea" onkeydown="if(event.keyCode==13) event.returnValue=false;" onpropertychange="if(this.scrollHeight>18){this.style.posHeight=this.scrollHeight+2}else{this.style.posHeight=18}" ><?php echo strip_tags($maildata['subject']);?></textarea></td>
+                        </tr>
+                        <tr>
+                          <td><div class="caption" ><?php echo LANG_MAIL_M0053;?></div></td>
+                          <td><div class="attachLink">
+                          <span style="display:inline-block;">
+                          <input id="fileToUpload" type="file" size="25" name="Filedata" class="input" onchange="return uploadnormalattach();">
+                          </span>
+                          <span style="display:inline-block;margin-left:10px;"><a href="javascript:void(0);" onclick="diskattach();" style="text-decoration:none;"><?php echo LANG_MAIL_M0075;?></a ></span>
+                          <span style="display:inline-block;margin-left:5px;"><a href="javascript:void(0);" onclick="uploadattach();" style="text-decoration:none;"><?php echo LANG_MAIL_M0074;?></a ></span>
+                          
+                          </div></td>
+                        </tr>
+                        <tr>
+                                        <td><div class="caption">&nbsp;</div></td>
+                                        <td><div class="attachList" id="attachlist" style="display:<?php echo $attach_mark;?>;">
+                                            <?php echo $attach_str;?>
+                                          </div></td>
+                                      </tr>
+                        <tr>
+                          <td  valign="top"><div class="caption"><?php echo LANG_MAIL_M0076;?></div></td>
+                          <td style="vertical-align:top;" class="textRight">
+                          <div class="divEditor"><textarea id="content" name="content" style="width:100%;height:360px;display:none;"><div style="font-size:13px;"><?php echo $maildata['content'];?></div></textarea> </td>
+                        </tr>
+                        <tr>
+                          <td  valign="top">&nbsp;</td>
+                          <td style="vertical-align:top;" class="textRight"><input type="checkbox" value="1" id="notification" name="notification">
+                            <?php echo LANG_MAIL_M0077;?>
+                            <input type="checkbox" value="1" id="istext" name="istext">
+                            <?php echo LANG_MAIL_M0079;?> <?php echo LANG_MAIL_M0080;?>
+                            <select id="x-priority" name="xpriority"><option value="5"><?php echo LANG_MAIL_M0020;?></option><option value="3" selected><?php echo LANG_MAIL_M0078;?></option><option value="1"><?php echo LANG_MAIL_M0019;?></option></select>
+                            </td>
+                        </tr>
+                        <tr><td height="10">&nbsp;</td><td height="10">&nbsp;</td></tr>
+                      </table></td>
+                      <td width="200"  style="vertical-align:top;"><table width="100%" cellpadding="2">
+  <tr>
+    <td height="22">&nbsp;</td>
+  </tr>
+  <tr>
+    <td><div  style="margin-left:10px; float: right;">
+                          <div class="addressList">
+                            <div class="addressListTitle"> <span class="fontStyle"><?php echo LANG_COMMON_COM029;?></span> </div>
+                          </div>
+                          <div class="addressListBorder">
+                          <table width="100%" border="0" cellspacing="0" cellpadding="0" class="addressTree">
+  							<tr>
+    							<td><div id="address_tree" class="addressMails"></div></td>
+  							</tr>
+							</table>
+                          </div>
+                      </div></td>
+  </tr>
+</table></td>
+                    </tr>
+                  </table>
+                  </form>
+                </div>
+                
+            </div>
+</body>
+</html>

@@ -1,0 +1,2348 @@
+﻿/*邮箱列表 皮肤*/
+.headLeft
+{
+
+	background:url(image/content_plate01_t_l.gif) no-repeat left top;
+	width:15px;
+	height:36px;
+	display:block;
+	float:left;
+}
+.markOutSelList {
+	position:absolute;
+	width:78px;
+	height:auto;
+	margin-top: 24px;
+	background-color: #F1F1F1;
+	border: 1px solid #C0C0C0;
+}
+.markOutSelList li {
+	height: 28px;
+	display: block;
+	line-height: 28px;
+	text-align: center;
+}
+.markOutSelList li a{
+	text-decoration:none;
+}
+
+
+.headCenter
+{
+
+	background:url(image/content_plate01_t_c.gif) repeat-x center top;
+	width:100%;
+	height:36px;
+	display:block;
+	
+	overflow:hidden;/*决定给它内部的 mailListBlock1 类的margin-top 在FF中生效*/
+}
+/*
+.headCenter a:visited
+{
+	color:#656565;
+	font-family:宋体;
+	font-size:12px;
+		
+}
+
+.headCenter a:link
+{
+	color:#000000;
+	font-family:宋体;
+	font-size:12px;
+		
+}*/
+
+.headRight
+{
+	
+	background:url(image/content_plate01_t_r.gif) no-repeat right top;
+	width:15px;
+	height:36px;
+	margin-right:0px;
+	
+	display:block;
+
+	
+	float:right;
+}
+
+/*删除*/
+.deleteMail
+{
+	background-image:url(image/bg.gif);
+	margin-top:5px;
+	position:absolute;
+	background-position:-1261px -115px;
+	width:70px;
+	height:24px;
+	margin-left: 68px;
+}
+.deleteMailList
+{
+	background-image:url(image/bg.gif);
+	margin-top:5px;
+	position:absolute;
+	background-position:-1261px -115px;
+	width:70px;
+	height:24px;
+}
+
+/*删除鼠标切换*/
+.deleteMail  .btnFont:hover
+{
+	background-image:url(image/bg.gif);
+	background-position:-1261px -155px;			
+}
+.deleteMailList  .btnFont:hover
+{
+	background-image:url(image/bg.gif);
+	background-position:-1261px -155px;			
+}
+
+/*彻底删除左边分割线*/
+.btnSplit1
+{
+	background-image:url(image/bg.gif);
+	background-position:	 -1379px -115px;
+	margin-top:5px;
+	margin-left:70px;
+	position:absolute;
+	
+	
+	width:3px;
+	height:24px;
+}
+
+/*彻底删除*/
+.deleteMailThoroughly
+{
+	background-image:url(image/bg.gif);
+	margin-top:5px;
+	margin-left:141px;
+	position:absolute;
+	background-position:-1300px -115px;
+	width:70px;
+	height:24px;
+	
+
+}
+.deleteMailThoroughlyList
+{
+	background-image:url(image/bg.gif);
+	margin-top:5px;
+	margin-left:73px;
+	position:absolute;
+	background-position:-1300px -115px;
+	width:70px;
+	height:24px;
+	
+
+}
+/*彻底删除 鼠标切换*/
+.deleteMailThoroughly .btnFont:hover
+{
+	background-image:url(image/bg.gif);
+	background-position:-1300px -155px;		
+}
+.deleteMailThoroughlyList .btnFont:hover
+{
+	background-image:url(image/bg.gif);
+	background-position:-1300px -155px;		
+}
+/*转发左边分割线*/
+.btnSplit2
+{
+	background-image:url(image/bg.gif);
+	background-position:	 -1379px -115px;
+	margin-top:5px;
+	margin-left:140px;
+	position:absolute;
+	
+	
+	width:3px;
+	height:24px;
+}
+
+/*转发*/
+.transferMail
+{
+	background-image:url(image/bg.gif);	
+	margin-top:5px;
+	margin-left:211px;
+	position:absolute;
+	background-position: -1429px -115px;
+	width:70px;
+	height:24px;
+	
+}
+.transferMailList
+{
+	background-image:url(image/bg.gif);	
+	margin-top:5px;
+	margin-left:143px;
+	position:absolute;
+	background-position: -1429px -115px;
+	width:70px;
+	height:24px;
+	
+}
+/*转发 鼠标切换*/
+.transferMail .btnFont:hover
+{
+	background-image:url(image/bg.gif);
+	background-position:-1429px -155px;		
+}
+.transferMailList .btnFont:hover
+{
+	background-image:url(image/bg.gif);
+	background-position:-1429px -155px;		
+}
+/*标记为*/
+.markOut
+{
+	background-image:url(image/bg.gif);
+	margin-top:5px;
+	margin-left:292px;
+	position:absolute;
+	background-position:-1261px -115px;
+	width:80px;
+	height:24px;
+	z-index: 1000;
+}
+.markOutList
+{
+	background-image:url(image/bg.gif);
+	margin-top:5px;
+	margin-left:224px;
+	position:absolute;
+	background-position:-1261px -115px;
+	width:80px;
+	height:24px;
+	z-index: 1000;
+}
+
+/*标记为 鼠标切换*/
+.markOut:hover
+{
+	background-image:url(image/bg.gif);
+	background-position:-1261px -155px;			
+}
+.markOutList:hover
+{
+	background-image:url(image/bg.gif);
+	background-position:-1261px -155px;			
+}
+
+/*标记为 右边分割线*/
+.btnSplit3
+{
+	background-image:url(image/bg.gif);
+	background-position:	 -1379px -115px;
+	margin-top:5px;
+	margin-left:304px;
+	position:absolute;
+	width:3px;
+	height:24px;
+	z-index: 29;
+}
+
+.moveTo
+{
+	background-image:url(image/bg.gif);
+	margin-top:5px;
+	margin-left:375px;
+	position:absolute;
+	background-position:-1419px -115px;
+	width:80px;
+	height:24px;
+	z-index: 1001;
+}
+.moveToList
+{
+	background-image:url(image/bg.gif);
+	margin-top:5px;
+	margin-left:307px;
+	position:absolute;
+	background-position:-1419px -115px;
+	width:80px;
+	height:24px;
+	z-index: 1001;
+}
+
+.moveTo:hover
+{
+	background-image:url(image/bg.gif);	
+	background-position:-1419px -155px;		
+}
+.moveToList:hover
+{
+	background-image:url(image/bg.gif);	
+	background-position:-1419px -155px;		
+}
+
+.btnMoreActionsList
+{
+	width:80px;
+	height:24px;
+	margin-top:5px;
+	position:absolute;
+	margin-left: 415px;
+	z-index: 900;
+}
+*html .btnMoreActionsList
+{
+	margin-left: 400px;
+}
+*+html .btnMoreActionsList
+{
+	
+}
+
+
+.jumpFirst
+{
+	background-image:url(image/bg.gif);		
+	background-position:-520px -344px;
+	margin-left:3px;
+	margin-top:3px;/**/
+	position:absolute;
+	width:18px;
+	height:18px;
+	
+	
+}
+
+.jumpPrev
+{
+	background-image:url(image/bg.gif);	
+	background-position:-551px -344px;
+	margin-left:25px;
+	margin-top:3px;/**/
+	position:absolute;
+	width:18px;
+	height:18px;	
+	
+	
+}
+
+/*上边的页面选择框*/
+.sltBoxPageUpper
+{
+	margin-left:47px;
+
+/*	margin-top:8px;*/
+	position:absolute;
+	
+	
+	display:block;
+	
+	
+}
+
+.headJumpBtn
+{
+	width:150px;
+	right:40px;
+	position:absolute;
+	margin-top:8px;
+	height:24px;
+}
+
+.sltStyle
+{
+	width:65px;	
+	height:20px;
+	vertical-align:middle;
+	text-align:center;
+}
+
+.jumpNext
+{
+	background-image:url(image/bg.gif);	
+	background-position:-545px -368px;
+	margin-left:115px;
+	margin-top:3px;/**/
+	position:absolute;
+	width:18px;
+	height:18px;	
+	
+	
+}
+
+
+
+.jumpLast
+{
+	background-image:url(image/bg.gif);		
+	background-position:-520px -368px;
+	margin-left:138px;
+	margin-top:3px;/**/
+	position:absolute;
+	width:18px;
+	height:18px;
+	
+	
+}
+
+.headBelow
+{
+	background-color:#d6dbe0;
+	height:24px;
+	width:100%;
+	display:block;
+/*	line-height:19px;*/
+	
+	float:left;
+}
+
+
+
+.headBlow_panel
+{
+	width:100%;/*38px;*/
+	border-bottom: solid 1px #adbcc6;
+	border-top: solid 1px #adbcc6;
+	border-right: solid 1px #adbcc6;
+	
+	
+	height:22px;
+	display:block;
+
+
+	
+}
+
+
+/*****全选checkbox******/
+.sltBoxAll_Border
+{
+	width:38px;
+	border-bottom: solid 1px #adbcc6;
+
+	border-right: solid 1px #adbcc6;
+	
+	
+	height:22px;
+	display:block;
+	
+	float:left;
+}
+
+
+.sltBoxAll_middle
+{
+	position:absolute;
+	margin-top:1px;	
+	margin-left:12px;
+	
+
+
+	/*border:solid 1px yellow;*/
+}
+
+/*****邮件图标****/
+.mailIco_Border
+{
+	width:38px;	
+	height:22px;
+	line-height:22px;
+	display:block;
+	
+	
+	border-right: solid 1px #adbcc6;
+	/*margin-left:38px;*/
+	
+	position:relative;
+	
+	float:left;
+}
+
+.mailIco_middle
+{
+	position:absolute;
+	margin-top:2px;	
+	margin-left:3px;
+	
+	line-height:16px;
+	height:16px;
+	
+	/*border:solid 1px red;*/
+}
+
+
+.mailIcon
+{
+	background-image:url(image/ico.gif);	
+	background-position: -90px -222px;
+	width:16px;
+	height:16px;
+	display:block;
+	
+	
+
+	position:absolute;
+	margin-top:3px;
+	
+	margin-left: 8px;/**/
+	
+}
+
+
+
+
+/*******发件人*********/
+.sender_Border
+{
+	width:238px;	
+	height:22px;
+	line-height:22px;
+	display:block;
+	
+	
+	border-right: solid 1px #adbcc6;
+	/*margin-left:38px;*/
+	
+	float:left;
+}
+
+.sender_middle
+{
+	position:absolute;
+	margin-top:2px;	
+	margin-left:3px;
+	
+	line-height:16px;
+	height:16px;
+	
+	/*border:solid 1px red;*/
+}
+
+
+.sender
+{
+
+
+	display:block;
+	
+	width:338px;
+
+	position:absolute;
+	margin-top:3px;
+	
+	margin-left: 8px;/**/
+	
+	font-family:宋体;
+	font-size:12px;
+	color:#70818d;
+	font-weight:600;
+	
+}
+
+
+
+
+
+/**********主题*************/
+.subject_Border
+{
+	width:64%;	
+	height:22px;
+	line-height:22px;
+	display:block;
+	
+	
+	border-right: solid 1px #adbcc6;
+	/*margin-left:38px;*/
+	
+	
+	
+	
+	float:left;
+}
+
+.subject_middle
+{
+	position:absolute;
+	margin-top:2px;	
+	margin-left:3px;
+	
+	line-height:16px;
+	height:16px;
+	
+	/*border:solid 1px red;*/
+}
+
+
+.subject
+{
+
+
+	display:block;
+	
+	width:338px;
+
+	position:absolute;
+	margin-top:3px;
+	
+	margin-left: 8px;/**/
+	
+	font-family:宋体;
+	font-size:12px;
+	color:#70818d;
+	font-weight:600;
+	
+}
+
+
+
+/********时间　排序*******/
+.timeSort_Border
+{
+	width:100px;	
+	height:22px;
+	line-height:22px;
+	display:block;
+	
+	
+	
+	/*margin-left:38px;*/
+	
+	
+	
+	
+	float:left;
+}
+
+.timeSortmiddle
+{
+	position:absolute;
+	margin-top:2px;	
+	margin-left:3px;
+	
+	line-height:16px;
+	height:16px;
+	
+	/*border:solid 1px red;*/
+}
+
+
+.timeSort
+{
+
+
+	display:block;
+	
+	width:88px;
+
+	position:absolute;
+	margin-top:3px;
+	
+	margin-left: 8px;/**/
+	
+	font-family:宋体;
+	font-size:12px;
+	color:#70818d;
+	font-weight:600;
+	
+}
+
+
+
+
+/****更早与昨天　的邮件******/
+
+.mailListBlock1_panel
+{
+/*	position:absolute;
+	margin:0px; 不加这个　就跟着前一个DIV后面
+	
+	border:solid 3px red;	*/
+	width:100%;
+	
+	height:120px;/**/
+	
+	
+	overflow:hidden;/*子div包在里面了*/
+	
+	position:relative;
+	
+}
+
+.mailListBlock2_panel
+{
+	/*border:solid 1px blue;	*/
+	position:absolute;
+	margin:0px;
+	
+	width:100%;
+	
+	height:199px;
+	position:relative;
+	
+	overflow:hidden;/*子div包在里面了*/	
+}
+
+/****邮件列表　第一块　昨天　邮件列表****/
+.mailListBlock1
+{
+	border-bottom: solid 3px #adbcc6;
+	
+
+	left:0px;
+	position:absolute;
+	width:100%;
+	height:25px;
+
+	
+	margin-top:5px;
+/*	
+	display:inline;????????//*/
+
+
+
+}
+
+
+/****邮件时间文字：　如　昨天　今天****/
+.fontCSS
+{
+	font-family:宋体;
+	font-weight:bold;	
+
+	margin-top:6px;
+	position:absolute;
+	margin-left:23px;
+}
+
+/**展开邮件**/
+.extendList
+{
+	margin-top:6px;
+	left:10px;
+	position:absolute;	
+	cursor:pointer;
+}
+
+/***新邮件数量****/
+.newMailCount
+{
+	color:Red;
+	padding:0px 4px 0px 4px;
+	
+}
+
+/*邮件　列表块*/
+.mailListDetails
+{
+/*	border-bottom:solid 2px #cdcdcd;	*/
+	margin-top:30px;
+	position:absolute;
+	width:100%;
+	height:20px;
+	
+	
+}
+
+
+/*一行邮件　的左边checkbox*/
+.sltOneMail_Border
+{
+	width:38px;
+
+	
+	
+	height:22px;
+	display:block;
+	
+	float:left;
+}
+
+
+/*一行邮件　邮件小图标外面的边框*/
+.OneMail_Border
+{
+	width:38px;	
+	height:22px;
+	line-height:22px;
+	display:block;
+	
+	
+	
+	position:relative;
+	
+	float:left;	
+}
+
+
+.OneSender_Border
+{
+	width:238px;	
+	height:22px;
+	line-height:22px;
+	display:block;
+	
+	
+	
+	
+	float:left;
+}
+
+.OneSender
+{
+	display:block;
+	
+	width:338px;
+
+	position:absolute;
+	margin-top:3px;
+	
+	margin-left: 8px;/**/
+	
+	font-family:宋体;
+	font-size:12px;
+	color:#000;
+	font-weight:bold;
+	
+}
+
+
+.OneSubject_Border
+{
+	width:64%;	
+	height:22px;
+	line-height:22px;
+	display:block;
+	
+
+	
+	float:left;	
+}
+
+
+.OneSubject
+{
+	
+	display:block;
+	
+	width:338px;
+
+	position:absolute;
+	margin-top:3px;
+	
+	margin-left: 8px;/**/
+	
+	font-family:宋体;
+	font-size:12px;
+	color:#000;
+	font-weight:bold;
+}
+
+
+
+.TimeBorder
+{
+	width:100px;	
+	height:22px;
+	line-height:22px;
+	display:block;
+	
+
+	
+	float:left;
+}
+
+
+
+.MailTime
+{
+	
+
+	display:block;
+	
+	width:88px;
+
+	position:absolute;
+	margin-top:3px;
+	
+	margin-left: 8px;/**/
+	
+	font-family:宋体;
+	font-size:12px;
+	color:#000;
+	font-weight:bold;
+}
+
+
+/*****邮件列表　　第二块******/
+.mailListBlock2
+{
+	
+	border-bottom: solid 3px #adbcc6;
+	
+
+	margin-top:6px;
+	left:0px;
+	position:absolute;
+	width:100%;
+	height:25px;
+	 
+
+
+}
+
+.OneRowMail
+{
+	left:0px;
+	position:absolute;
+	width:100%;
+	border-bottom:solid 1px #cdcdcd;
+	
+
+	display:block;
+	
+	
+}
+
+.OneRowMail:hover
+{
+
+	background-color:#e8f0f9;	
+}
+
+
+.footCenter
+{
+	background:url(image/content_plate01_t_c.gif) repeat-x center top;
+	width:100%;
+	height:36px;
+	display:block;
+	
+	overflow:auto;/*决定给它内部的 mailListBlock1 类的margin-top 在FF中生效*/
+}
+
+.footCenter a:visited
+{
+	color:#656565;
+	font-family:宋体;
+	font-size:12px;
+		
+}
+.footCenter a:link
+{
+	color:#000000;
+	font-family:宋体;
+	font-size:12px;
+		
+}
+
+.footLeft
+{
+	background:url(image/content_plate01_b_l.gif) no-repeat left bottom;
+	width:15px;
+	height:36px;
+	display:block;
+	float:left;
+}
+
+
+.footRight
+{ 
+	                     
+	background:url(image/content_plate01_b_r.gif) no-repeat right bottom;
+	width:15px;
+	height:36px;
+	margin-right:0px;
+	
+	display:block;
+	float:right;
+}
+
+
+
+
+#footUpper
+{
+	height:24px;
+	display:block;	
+	background-color:#d6dbe0;
+}
+
+#footUpper1
+{
+	height:28px;
+	display:block;	
+	background-color:#d6dbe0;
+	z-index:15;
+}
+
+.upperPanel
+{
+	position:absolute;
+	margin-top:5px;	
+	margin-left:15px;
+	display:block;
+	height:24px;
+	font-size:12px;
+}
+
+.upperPanel .f1
+{
+	color:#70818d;	
+}
+
+
+.upperPanel .f2
+{
+	color:#377ba8;
+	font-weight:bold;
+    font-family:宋体;
+    cursor:pointer;
+	text-decoration:none;	
+}
+
+.upperPanel .f3
+{
+	color:#377ba8;
+	font-weight:bold;
+    font-family:宋体;
+    cursor:pointer;
+	text-decoration:none;	
+}
+
+
+
+.footJumpBtn
+{
+	width:150px;
+	right:40px;
+	position:absolute;
+	margin-top:8px;
+	height:24px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*************Mail_Write.html**************/
+.sendMail
+{
+	background-image:url(image/bg.gif);
+	margin-top:5px;
+	margin-left:5px;
+	position:absolute;
+	background-position:-1261px -115px;
+	width:70px;
+	height:24px;
+}
+
+.sendMail .btnFont:hover
+{
+	background-image:url(image/bg.gif);
+	background-position:-1261px -155px;		
+}
+
+.sendSplit1
+{
+	background-image:url(image/bg.gif);
+	background-position:	 -1379px -115px;
+	margin-top:5px;
+	margin-left:75px;
+	position:absolute;
+	
+	
+	width:3px;
+	height:24px;	
+}
+
+
+.saveDraft
+{
+	background-image:url(image/bg.gif);
+	margin-top:5px;
+	margin-left:148px;
+	position:absolute;
+	background-position:-1300px -115px;
+	width:70px;
+	height:24px;
+}
+
+.saveDraft .btnFont:hover
+{
+	background-image:url(image/bg.gif);
+	background-position:-1300px -155px;			
+}
+
+.sendMailT
+{
+	background-image:url(image/bg.gif);
+	margin-top:5px;
+	margin-left:78px;
+	position:absolute;
+	background-position:-1300px -115px;
+	width:70px;
+	height:24px;
+}
+
+.sendMailT .btnFont:hover
+{
+	background-image:url(image/bg.gif);
+	background-position:-1300px -155px;			
+}
+
+
+.sendSplit2
+{
+	background-image:url(image/bg.gif);
+	background-position:	 -1379px -115px;
+	margin-top:5px;
+	margin-left:218px;
+	position:absolute;
+	
+	
+	width:3px;
+	height:24px;	
+}
+.sendSplit3
+{
+	background-image:url(image/bg.gif);
+	background-position:	 -1379px -115px;
+	margin-top:5px;
+	margin-left:148px;
+	position:absolute;
+	
+	
+	width:3px;
+	height:24px;	
+}
+
+.closeMail
+{
+	background-image:url(image/bg.gif);	
+	margin-top:5px;
+	margin-left:221px;
+	position:absolute;
+	background-position: -1429px -115px;
+	width:70px;
+	height:24px;	
+}
+
+.closeMail .btnFont:hover
+{
+	background-image:url(image/bg.gif);	
+	background-position:-1429px -155px;	
+}
+
+
+.attachLink
+{
+	/*color:#377ba8;*/
+	font-family:宋体;
+	font-size:12px;	
+	font-weight:600;
+	line-height:19px;
+}
+
+.attachLink a:link
+{
+	color:#377ba8;
+	text-decoration:underline;
+}
+
+.attachLink:a:visited
+{
+	color:#377ba8;	
+}
+
+.attachLink:a:hover
+{
+	color:#377ba8;	
+}
+
+.attachLink .split
+{
+	font-weight:normal;	
+}
+.mailSendSelectBox
+{
+	margin-left:4px; 
+	height:12px; 
+	border:solid 1px white; margin-top:2px;
+}
+.mailSendSelectBtnPic
+{
+	height:22px;
+	width:21px;
+	cursor:pointer;
+	background-image:url(image/bg.gif);
+	background-position:-466px -360px;
+	float: left;
+	
+}
+
+.mailSendSelectBtnPic:hover
+{
+	height:22px;
+	width:21px;
+}
+/***附件列表***/
+.attachList
+{
+	width:99%;
+	background-color:#e8f0f9;
+	display:inline-block;/**/
+	color:#768795;
+	border:solid 1px #e8f0f9;
+}
+
+/*****附件ICON***/
+.attachIcon
+{
+	background-image:url(image/ico.gif);
+	background-position:0px -359px;
+	height: 16px;
+	width: 16px;
+	display:block;
+	
+	
+	
+	height:20px;
+	float:left;
+	
+}
+
+/****一行附件***/
+.oneAttach
+{
+	margin:7px;
+
+	
+}
+
+
+/******附件删除****/
+.attachDele
+{
+	color:#377ba8;/**/
+	font-family:宋体;
+	font-size:12px;	
+	font-weight:600;
+	line-height:19px;
+	
+	margin-left:5px;
+	text-decoration:underline;
+	cursor:pointer;
+}
+
+.addressList
+{
+	background-image:url(image/bg.gif);
+	width:195px; 
+	height:30px; 
+	background-position:-520px 0px;	
+}
+
+.addressListBorder
+{
+	border-left:solid 1px #93a6b6; 
+	border-right:solid 1px #93a6b6; 
+	border-bottom:solid 1px #93a6b6; 	
+	
+	
+	min-height:463px!important; /*FF*/
+	/*height:auto !important;
+	height:500px;*/ 
+	width:193px;
+	overflow:hidden;
+	background-color:#fff;
+	
+}
+
+.addressListTitle
+{
+	position:absolute;
+	margin: 10px 17px auto 21px;	
+/*	border: solid 1px red;*/
+	width:60px;
+	overflow:hidden;
+	height:15px;
+	position:absolute;
+	
+	
+}
+
+.addressListTitle .fontStyle
+{
+	color:#377ba8;	
+	font-family:宋体;
+	font-size:12px;	
+	font-weight:600;
+}
+
+
+
+.searchNetDisk
+{
+	/*border:solid 1px red;*/
+	height:20px;
+	width:180px;	
+	
+margin-top:10px;/*	*/
+	
+	margin-left:4px;
+	
+}
+
+
+.searchBoxBG
+{
+	background-image:url(image/bg.gif);
+	background-position: -312px -360px;
+	height:22px;
+	width:175px;
+	display:block;
+		
+	position:absolute;	/**/
+}
+
+
+
+.searchBox
+{
+	width:120px; 
+	margin-left:27px; 
+	height:13px; 
+	border:solid 1px white; margin-top:2px;
+}
+
+.aBtnPic
+{
+	height:22px;
+	width:21px;
+	
+
+	margin-left:155px;
+
+	
+	position:absolute;
+	cursor:pointer;
+	
+}
+
+.aBtnPic:hover
+{
+	background-image:url(image/bg.gif);
+	background-position:-466px -360px;
+	height:22px;
+	width:21px;
+}
+/*
+.searchBtn
+{
+	background-image:url(image/bg.gif);
+	background-position:-466px -360px;
+	height:22px;
+	width:21px;
+	
+
+	margin-left:155px;
+
+	
+	position:absolute;
+	cursor:pointer;
+}*/
+
+.addressMails
+{
+	margin:6px;
+	font-family:宋体;
+	font-size:12px;
+	
+	overflow:auto;
+/*	border:solid 2px yellow;*/
+	
+	height:450px;
+}
+
+
+.oneList
+{
+	line-height:20px;
+	height:20px;
+	margin:3px;
+/*	border:solid 1px blue;	*/
+}
+
+
+
+.oneManIcon
+{
+	background-image:url(image/ico.gif);
+	background-position:0px -359px;
+	height: 16px;
+	width: 16px;
+	display:block;
+	
+	
+	
+	height:20px;
+	float:left;
+}
+
+
+.addressDetails
+{
+	margin:9px;	
+	
+/*border:solid 1px red;*/
+	
+	
+}
+
+
+
+.spandIcon
+{
+	background-image:url(image/bg.gif);
+	background-position: -1548px -72px;
+	
+	width:8px;
+	height:5px;
+	display:block;
+	
+	float:left;
+		
+	margin-top:3px;
+	cursor:pointer;
+	
+}
+
+
+
+/*****mail_read部分*****/
+.btnMenuDownArrow
+{
+	background-image:url(image/bg.gif);
+	background-position:-1548px -72px;
+	width:8px;
+	height:5px; 
+	display:block;
+	
+	position:absolute;
+	margin-left:55px;
+	margin-top:9px;
+}
+
+.btnMenuDownArrow2
+{
+	background-image:url(image/bg.gif);
+	background-position:-1548px -72px;
+	width:8px;
+	height:5px; 
+	display:block;
+	
+	position:absolute;
+	margin-left:67px;
+	margin-top:9px;
+}
+
+
+/*左半按钮*/
+.btn_L
+{
+	background-image:url(image/bg.gif);
+	background-position:-1261px -115px;
+	width:70px;
+	height:24px; 
+	
+	display:block;
+}
+
+.btn_L .btnFont:hover
+{
+	background-image:url(image/bg.gif);
+	background-position:-1261px -155px;			
+}
+
+
+/*按钮分割条*/
+.split_Pic	
+{
+	background-image:url(image/bg.gif);
+	background-position:-1379px -115px;
+	display:block;
+	width:3px;
+	height:24px;
+	
+/**/
+}
+
+/*按钮当中部分*/
+.btn_C
+{
+	background-image:url(image/bg.gif);
+	background-position:-1300px -115px;
+	width:70px;
+	height:24px;
+	
+	display:block;
+}
+
+.btn_C .btnFont:hover
+{
+	background-image:url(image/bg.gif);
+	background-position:-1300px -155px;			
+}
+
+
+/*右半按钮*/
+.btn_R
+{
+	background-image:url(image/bg.gif);
+	background-position:-1429px -115px;
+	width:80px;
+	height:24px;
+	
+	display:block;
+}
+
+.btn_R .btnFont:hover
+{
+	background-image:url(image/bg.gif);	
+	background-position:-1429px -155px;	
+}
+
+
+.btn_One
+{
+	background-image:url(image/bg.gif);
+	background-position:-1516px -115px;
+	width:80px;
+	height:24px;		
+	
+	
+	display:block;
+}
+
+.btn_One .btnFont:hover
+{
+	background-image:url(image/bg.gif);
+	background-position:-1516px -155px;	
+}
+
+
+
+.lnkBtn
+{
+	/*此标记不删除 为下面lnkBtn .p样式 作用*/	
+	
+}
+.lnkBtn .p:link{color:White;text-decoration: none;}
+.lnkBtn .p:hover{color:Red;}
+.lnkBtn .p:visited{color:White;}
+
+
+#divDown
+{
+	background-color:#eeeeee;	
+	border-bottom:solid 1px #94a7b7;
+}
+
+
+
+.sendor
+{
+	color:#858585;	
+	width:60px;
+	display:block;
+	float:left;
+}
+
+
+
+
+
+.divBottom1
+{
+	background-color:#d1d7dc;		
+	border-top:solid 1px #94a7b7;
+	border-bottom:solid 1px #94a7b7;
+}
+
+
+.divBottom2
+{
+	background-color:#eeeeee;	
+}
+
+
+
+.bottomCenter
+{
+	background:url(image/content_plate01_t_c.gif) repeat-x center top;
+	
+}
+
+
+
+.bottomLeft
+{
+	background:url(image/content_plate01_b_l.gif) no-repeat left bottom;
+
+
+}
+
+.ReplyAtOnce
+{
+	background-image:url(image/bg.gif);
+	background-position: -1606px -115px;
+	width:80px;
+	height:50px;
+	
+}
+
+
+.bottomRight
+{
+	background:url(image/content_plate01_b_r.gif) no-repeat right bottom;
+
+}
+
+
+
+.adPic
+{
+	background-image:url(image/ad.jpg);	
+}
+
+
+
+
+
+
+
+
+
+
+
+/*********mail_list01用table布局样式 *********/
+
+
+    
+.closeIframebtn
+{
+	
+	 background-image:url(image/bg.gif);	
+	 background-position: -1442px -35px;
+	 width:28px;
+	 height:19px;
+	 display:block;
+	 cursor:pointer;
+
+
+}
+
+ .icoMail
+    {
+	    background-image:url(image/ico.gif);	
+	    background-position: -90px -222px;
+	    width:16px;
+	    height:16px;
+	    float:left;
+    }
+    
+    .icoMailTitle
+    {
+	    background-image:url(image/ico.gif);	
+	    background-position: -90px -222px;
+	    width:16px;
+	    height:16px;
+	    float:left;
+	    margin-top:4px;
+    }
+	
+ .icoRead
+    {
+	    background-image:url(image/ico.gif);	
+	    background-position: -126px -222px;
+	    width:16px;
+	    height:16px;
+	    margin:3px auto 1px auto;
+	    float:left;
+    }
+	
+ .icoFile
+    {
+	background-image:url(image/ico.gif);
+	background-position: -126px -256px;
+	width:16px;
+	height:16px;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+	margin-left: 3px;
+	float: left;
+    }
+   
+    .icoMailListFile
+    {
+	background-image:url(image/ico.gif);
+	background-position: -126px -256px;
+	width:16px;
+	height:16px;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+	margin-left: 3px;
+	float: left;
+	display: block;
+	position: relative;
+	top: 3px;
+    }
+
+    
+ .icoFile_iframe
+    {
+	    background-image:url(image/ico.gif);	
+	    background-position: -126px -256px;
+	    width:16px;
+	    height:16px;
+	    margin:0px 0px 0px 3px;
+	    float:left;
+    }
+	
+ .icoReplied
+    {
+	    background-image:url(image/ico.gif);	
+	    background-position: -126px -290px;
+	    width:16px;
+	    height:16px;
+	    margin:3px auto 1px auto;
+	    float:left;
+    }
+  
+  .icoRorwarded{
+  background-image: url(image/ico.gif);
+	background-position: -126px -320px;
+	height: 16px;
+	width: 16px;
+	float:left;
+	margin:3px auto 1px auto;
+  }
+    
+ .icoJobContent
+    {
+	    background-image:url(image/ico.gif);	
+	    background-position: -164px -222px;
+	    width:16px;
+	    height:16px;
+	    float:left;
+    }
+	
+ .icoJob
+    {
+	    background-image:url(image/ico.gif);	
+	    background-position: -164px -222px;
+	    width:16px;
+	    height:16px;
+	    float:left;
+    }
+
+ .icoJobClear
+    {
+	    background-image:url(image/ico.gif);	
+	    background-position: -164px -256px;
+	    width:16px;
+	    height:16px;
+	    float:left;
+    }
+	
+	 .icoMailTime
+    {
+	    background-image:url(image/ico.gif);	
+	    background-position: -162px -289px;
+	    width:16px;
+	    height:16px;
+	    float:left;
+    }
+	
+	 .icoMailTimeLapse
+    {
+	    background-image:url(image/ico.gif);	
+	    background-position: -196px -222px;
+	    width:16px;
+	    height:16px;
+	    float:left;
+    }
+    
+ .icoArrow
+    {
+    	color:#0000ff;
+    	margin:0px -20px 0px 5px;
+    	float:left;
+    	position: relative;
+		top: 2px;
+    }
+ .icoEmp
+    {
+    	color:red;
+    	margin:0px -20px 0px 5px;
+    	float:left;
+    	position: relative;
+		top: 5px;
+    }
+
+    .mailPopTopLeft {
+background-image: url(image/bg.gif);
+display: block;
+height: 27px;
+width: 4px;
+float: left;
+background-position: -872px -304px;
+}
+
+.mailPopTopCenter {
+background-image: url(image/bg.gif);
+display: block;
+height: 27px;
+width: 242px;
+float: left;
+background-position: -876px -304px;
+line-height: 27px;
+color: #FFFFFF;
+}
+
+
+.mailPopTopRight {
+background-image: url(image/bg.gif);
+display: block;
+height: 27px;
+width: 4px;
+float: left;
+background-position: -1328px -304px;
+}
+.mainPopTitle {
+float: left;
+width: 190px;
+padding-left: 10px;
+}
+.mainPopClose {
+background-image: url(image/bg.gif);
+height: 12px;
+width: 12px;
+background-position: -1492px -39px;
+float: right;
+overflow: hidden;
+margin-top: 7px;
+margin-right: 4px;
+}
+.mainPopBody {
+clear: left;
+width: 248px;
+height: 120px;
+border-right-width: 1px;
+border-bottom-width: 1px;
+border-left-width: 1px;
+border-right-style: solid;
+border-bottom-style: solid;
+border-left-style: solid;
+border-right-color: #6392c8;
+border-bottom-color: #6392c8;
+border-left-color: #6392c8;
+line-height: 24px;
+padding-top:25px;
+text-align: center;
+}
+/*******mail done页***/
+.okIcon
+{
+	background-image: url(image/bg.gif);
+	background-repeat:no-repeat;
+	background-position: -1383px -26px;
+	width:38px;
+	height:38px;
+}
+.mailDone_btn
+{
+	background-image: url(image/bg.gif);
+	background-repeat:no-repeat;
+	background-position: -872px -348px;
+	width:86px;
+	height:24px;	
+}
+.mailTextarea {
+	font-family: Verdana, Arial, Helvetica, sans-serif, "宋体";
+	font-size: 12px;
+	width:100%;
+	overflow:hidden;
+	height:18px;
+	border: 1px solid #93a6b6;
+	margin-top: 2px;
+	margin-bottom: 2px;
+}
+.mailSendSelect {
+	font-family: Verdana, Arial, Helvetica, sans-serif, "宋体";
+	font-size: 12px;
+	overflow:hidden;
+	height:20px;
+	border: 1px solid #93a6b6;
+	float: left;
+}
+.mailSendName {
+	float: left;
+	padding-right: 4px;
+	padding-top: 6px;
+}
+.mailSendOl {
+	float: right;
+}
+.textRight {
+	padding-right: 10px;
+}
+.textSendRight {
+	padding-right: 8px;
+	*padding-right: 3px !important;
+	*padding-right: 3px;
+}
+    
+
+
+
+
+.ContactList
+{
+	background-image:url(image/bg.gif);
+	width:195px; 
+	height:30px; 
+	background-position:-520px 0px;	
+}
+
+
+
+
+
+#divImportContactPic
+{
+	background-image:url(image/ico.gif);
+	width:32px; 
+	height:32px; 
+	background-position:-1058px 0px;	
+}
+
+
+#divExportContactPic
+{
+	background-image:url(image/ico.gif);
+	width:32px; 
+	height:32px; 
+	background-position:-1100px 0px;		
+
+}
+
+
+.manHeadIco
+{
+	background-image:url(image/ico.gif);
+	width:16px; 
+	height:16px; 
+	background-position: -367px -360px;		
+	display:block;
+	float:left;
+}
+
+
+.contactCardPic
+{
+	background-image:url("image/bg.gif");	
+	width:255px;
+	height:164px;
+	background-position:-1384px -212px;
+
+}
+
+.contactCardHead
+{
+	background-image:url("image/ico.gif");	
+	width:48px;
+	height:48px;
+	background-position:-1058px -42px;
+}
+
+
+.arrowPointRight
+{
+	background-image:url(image/bg.gif);
+	width:5px; 
+	height:8px; 
+	background-position: -1624px -72px;		
+	margin-right:10px;
+	display:block;
+	float:left;
+
+	margin-top:5px;
+}
+
+
+
+
+.contactShowByList
+{
+	background-image:url(image/list_ico1.gif);	
+	width:19px;
+	height:19px;
+	display:block;
+	float:left;
+}
+
+
+.contactShowByCard
+{
+	background-image:url(image/list_ico4.gif);
+	width:19px;
+	height:19px;
+	display:block;
+	float:left;
+	
+	margin-left:5px;
+}
+/**********登录页面开始*****************/
+#divLogo
+{
+	 background-image:url(../../image/index/eepostlogo.gif);
+	 width:229px;
+	 height:58px;
+}
+
+
+#arrowDown
+{
+	background-image:url(image/ico.gif);
+	width:24px;
+	height:24px;
+	background-position: 0px -56px;
+	float:left;
+	margin-top: 10px;
+	margin-right: auto;
+	margin-bottom: auto;
+	margin-left: 32px;
+}
+
+#divLeftPic
+{
+	 background-image:url(../../image/index/login_pic.jpg);	
+	 width:410px;
+	 height:205px;
+
+
+
+}
+
+
+#divRightLoginTitle
+{
+		background-image:url(image/bg.gif);
+		width:374px;
+		height:42px;
+		background-position: -252px -462px;
+		
+	/*	margin-left:410px;
+		position:absolute;*/
+}
+
+.titleSelect1
+{
+		background-image:url(image/bg.gif);
+		width:125px;
+		height:42px;
+		background-position: -252px -410px;
+		float:left;
+}
+
+#divRightPicPanel
+{
+	
+	height:	387px;
+	width:374px;
+	overflow:hidden;
+}
+
+#divRightLoginArea
+{
+	background-image:url(image/bg.gif);
+	width:374px;
+	height:328px;
+    background-position: -252px -514px;
+/*/* 	border:solid 3px red;*/	
+
+	/*	margin-top:42px;
+		margin-left:410px;
+		position:absolute;*/
+
+}
+
+#divRightLoginBottom
+{
+		background-image:url(image/bg.gif);
+		width:374px;
+		height:8px;
+		background-position: -252px -852px;
+		
+	/*	margin-top:365px;
+		margin-left:410px;
+		position:absolute;*/
+}
+
+
+
+
+
+#divUserName
+{
+		background-image:url(image/bg.gif);
+		width:194px;
+		height:30px;
+		background-position: -649px -410px;
+}
+
+
+#divBottomLogo
+{
+	background-image:url(../../image/index/copyright_logo.jpg);	
+	width:79px;
+	height:50px;
+	margin:-20px 0 0 220px;
+	float:left;
+}
+
+
+
+
+
+.btn_yellow {
+border: 1px solid #002D96;
+	PADDING-RIGHT: 2px; 	PADDING-LEFT: 2px; 	FONT-SIZE: 12px; 	FILTER: progid:DXImageTransform.Microsoft.Gradient(GradientType=0, StartColorStr=#FFFFFF, EndColorStr=#f9f6ce); 	CURSOR: hand; 	COLOR: black; 	PADDING-TOP: 2px; 	height: 25px;
+}
+
+#btnLogin
+{
+		background-image:url(image/bg.gif);
+		width:79px;
+		height:29px;
+		background-position: -636px -450px;
+		
+		margin-left:auto;
+		margin-right:auto;
+}
+
+
+#mailTabBg #mailTab:hover
+{
+
+		background-image:url(image/bg.gif);
+		width:125px;
+		height:42px;
+		background-position: -252px -410px;
+}
+
+
+.tabSelected
+{
+		background-image:url(image/bg.gif);
+		width:125px;
+		height:42px;
+		background-position: -252px -410px;
+}
+
+#groupTabBg #groupTab:hover
+{
+	
+		background-image:url(image/bg.gif);
+		width:126px;
+		height:42px;
+		background-position: -499px -410px;
+		
+		
+}
+
+#depTabBg #depTab:hover
+{
+	
+		background-image:url(image/bg.gif);
+		width:126px;
+		height:42px;
+		background-position: -376px -410px;
+		
+		
+}
+
+/***********登录页面结束****************/
+
+ /***************/
+
+#spanAnnTabBg_Left
+{
+	background-image:url(image/bg.gif);
+
+	background-position:-636px -410px;
+	width:3px;
+	height:30px;
+
+	display:block;
+	
+	float:left;
+}
+
+#divAnnTabBg
+{
+	 background-image:url(image/mainbox_title_bg.gif);/*924px;*/
+	 height:30px;
+
+}
+
+
+#spanAnnTabBg_Right
+{
+	background-image:url(image/bg.gif);
+
+	background-position:-1057px -410px;
+	width:3px;
+	height:30px;
+	
+
+	/*margin-left:81%;701px;
+	position:absolute;*/
+	display:block;
+	margin-right:0px;
+	float:right;
+	
+
+
+}
+
+
+#spanAnnTab
+{
+/*	background-image:url(image/bg.gif);
+
+	background-position:-649px -410px;
+	width:194px;#005590
+	height:30px;*/
+
+	margin-left:13px;
+	display:block;
+	float:left;
+	
+ 
+	font-size:12px;
+}
+
+
+#spanAnnTab:hover
+{
+	 
+	
+	background-image:url(image/bg.gif);
+
+	background-position:-649px -410px;
+	width:194px;
+	height:30px;
+}
+
+
+.TabSelected
+{
+	background-image:url(image/bg.gif);
+
+	background-position:-649px -410px;
+	width:194px;
+	height:30px;
+}
+
+
+#spanAnnTab:link
+{
+	color:#005590;	
+	text-decoration:none;
+}
+
+#spanAnnTab:visited
+{
+	color:#005590;	
+	text-decoration:none;
+}
+
+#divAnnTab
+{/*
+	background-image:url(image/bg.gif);
+
+	background-position:-649px -410px;
+	width:194px;
+	height:30px;
+
+	margin-left:13px;
+	display:block;
+	float:left;
+	
+	border:solid 1px red;*/
+}
+
+
+#spanLabelTab
+{
+	background-image:url(image/bg.gif);
+
+	background-position:-853px -410px;
+	width:194px;
+	height:30px;
+
+	display:block;/**/
+	
+	margin-left:219px;
+}
+
+
+#spanLabelTab:hover
+{
+	
+	background-image:url(image/bg.gif);
+
+	background-position:-649px -410px;
+	width:194px;
+	height:30px;
+}
+
+#spanLabelTab:link
+{
+	color:#005590;	
+	text-decoration:none;
+}
+
+#spanLabelTab:visited
+{
+	color:#005590;	
+	text-decoration:none;
+}
+
+#picSun
+{
+	background-image:url(image/weather/06.gif);
+	width:64px;
+	height:64px;
+	display:block;
+	
+	float:left;
+}

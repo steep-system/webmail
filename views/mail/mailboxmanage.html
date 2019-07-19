@@ -1,0 +1,256 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title><?php echo LANG_MAIL_M0143;?></title>
+    <link href="../../style/mail_list.css" type="text/css"  rel="Stylesheet" />
+    <link href="../../skin/default/mailList_skin.css"type="text/css"  rel="Stylesheet" />
+    
+    <link href="../../style/layout.css" type="text/css"  rel="Stylesheet" />
+    <link href="../../skin/default/skin.css" type="text/css"  rel="Stylesheet" />
+    <link href="../../style/share_list.css" type="text/css"  rel="Stylesheet" />
+    
+    
+    <script src="../../js/jquery-1.3.2.min.js"></script>
+    <script src="../index/lang"></script>
+    <script src="../../js/dialog/zDrag.js"></script>
+    <script src="../../js/dialog/zDialog.js"></script>
+    <script src="../../js/jquery.hotkeys-0.7.9.min.js"></script>
+    <script src="../../js/disk/base.js"></script>
+    <script>
+	
+	function stringToJson(stringValue) { 
+		eval("var theJsonValue = "+stringValue); 
+		return theJsonValue; 
+	}
+	
+    document.oncontextmenu=new Function("event.returnValue=false;");
+    document.onselectstart=new Function("event.returnValue=false;");
+	
+	var nline;
+	
+	function listItemfolder(fdata, depth) {
+		var strfolder = '';
+		
+		var showid;
+		var titile;
+		var oper;
+		for (var k in fdata) {
+			var trclass = "tr1";
+			if (nline%2==1) {
+				trclass = "tr2";
+			}
+			
+			if(fdata[k].path == "inbox" || fdata[k].path == "draft" || fdata[k].path == "sent" || fdata[k].path == "trash" || fdata[k].path == "junk") {
+				if(fdata[k].path=='inbox'){
+					title = '<a href="javascript:void(1)" onclick="parent.getinfo();parent.newmailtip(0);parent.openinbox();" style="text-decoration:none;"><font color="#005590" style="font-weight:200;">'+ fdata[k].name + "</font></a>";
+				} else {
+					switch (fdata[k].path){
+					case 'draft':
+						showid = 2;
+						break;
+					case 'sent':
+						showid = 3;
+						break;
+					case 'trash':
+						showid = 4;
+						break;
+					case 'junk':
+						showid = 5;
+						break;
+					}
+					title = '<a href="javascript:void(1)" onclick="parent.openmailbox(\'' + fdata[k].path + '\',' + showid + ');" style="text-decoration:none;"><font color="#005590" style="font-weight:200;">' + fdata[k].name + '</font></a>';
+				}
+				oper = '<font color="#005590" style="font-weight:200;">[&nbsp;<a href="javascript:void(1)" onclick="clearMailbox(\'' + fdata[k].path + 
+						'\')" style="text-decoration:none;"><font color="#005590" style="font-weight:200;">' + lang.mail.M0057 + '</font></a>&nbsp;]</font>';
+			} else {
+				title = '<a href="javascript:void(1)" onclick="parent.intofolder(\'' + fdata[k].path + '\',\'' + fdata[k].title + '\');" style="text-decoration:none;"><font color="#005590" style="font-weight:200;">' + fdata[k].name + "</font></a>";
+				oper = '<font color="#005590" style="font-weight:200;">[&nbsp;<a href="javascript:void(1)" onclick="clearMailbox(\'' + fdata[k].path + '\')" style="text-decoration:none;"><font color="#005590" style="font-weight:200;">' + 
+						lang.mail.M0057 + '</font></a>&nbsp;]&nbsp;&nbsp;[&nbsp;<a href="javascript:void(1)" onclick="renameFolder(\'' + fdata[k].path + '\')" style="text-decoration:none;"><font color="#005590" style="font-weight:200;">' + lang.disk.D0006 + 
+						'</font></a>&nbsp]&nbsp;&nbsp;[&nbsp;<a href="javascript:void(1)" onclick="delFolder(\'' + fdata[k].path + '\')" style="text-decoration:none;"><font color="#005590" style="font-weight:200;">' + lang.mail.M0014 + '</font></a>&nbsp]</font>';
+			}
+
+			strfolder = strfolder + '<tr class="' + trclass + '"><td width="20%" class="tdf" style="padding-left:' + (100 + 15*depth) +  'px">' + title +
+						'</td><td width="15%" class="tdm"><font color="red" style="font-weight:600;">' +
+						fdata[k].unread + '</font></td><td width="15%" class="tdm">' + fdata[k].total +
+						'</td><td width="10%" class="tdm">' + fdata[k].size + '</td><td width="40%" class="tdm">' + 
+						oper + '</td></tr>';
+			
+			nline++;
+			if (typeof(fdata[k].sub) != "undefined") {
+				strfolder = strfolder + listItemfolder(fdata[k].sub, depth + 1);
+			}
+			
+		
+		}
+		
+		return strfolder;
+	}
+	
+    $(document).ready( function() {
+		var fdata = stringToJson($('#listdata').html());
+		
+		var strfolder = '<table id="maillist" border= "0" cellpadding="1" bordercolor="#EEEEEE" bgcolor="#EEEEEE" class="tbOneRowMail">';
+		nline = 0;
+		strfolder = strfolder + listItemfolder(fdata, 0);
+		
+		strfolder = strfolder + '</table>';
+		$('#managetable').html(strfolder);
+    });
+
+    function setSelect(){}
+
+    function clearMailbox(folder){
+    	Dialog.confirm(lang.mail.M0110,function(){
+    		$.ajax({
+    			type: "post",
+    			url : "../mail/clearmailbox",
+    			dataType:'html',
+    			data:"f="+folder+"&time="+new Date().getTime(),
+    			success: function(data,textStatus){
+    				if(data){
+    					parent.getinfo();
+    					window.location.reload();
+    				}
+    			}
+    		});
+    	});
+    }
+
+    function createFolder(){
+    	var diag = new Dialog();
+    	diag.Title = lang.disk.D0002;
+    	diag.URL = "../mail/createfolder?time="+new Date().getTime(),
+    	diag.Width = 461;
+    	diag.Height = 150;
+    	diag.OKEvent = function(){
+    		var doc=diag.innerFrame.contentWindow.document;
+    		var fname = doc.getElementById('fname').value;
+			var ppath = doc.getElementById('ppath').value;
+    		if(fname!=""){
+    			$.ajax({
+    				type: "post",
+    				url : "../mail/savefolder",
+    				dataType:'html',
+    				data:"fname="+fname+"&ppath="+ppath,
+    				success: function(data,textStatus){
+    					if(data == 1){
+    						parent.listFolder();
+    						window.location.reload();
+    						diag.close();
+    					}else if(data == 2){
+    						Dialog.alert(lang.tip.D1002);
+    					}else{
+    						Dialog.alert(lang.common.COM021);
+    					}
+    				}
+    			});
+    		}else{
+    			Dialog.alert(lang.disk.D0031);
+    		}
+    	};
+    	diag.CancelEvent = function(){
+    		diag.close();
+    	}
+    	diag.show();
+    }
+
+    function delFolder(folder){
+    	Dialog.confirm(lang.mail.M0130,function(){
+    		$.ajax({
+    			type: "post",
+    			url : "../mail/delfolder?time="+new Date().getTime(),
+    			dataType:'html',
+    			data:"folder="+folder,
+    			success: function(data,textStatus){
+    				if(data){
+    					parent.listFolder();
+    					window.location.reload();
+    				}else{
+    					Dialog.alert(lang.common.COM021);
+    				}
+    			}
+    		});
+    	});
+    }
+    
+    function renameFolder(path){
+    	var diag = new Dialog();
+    	diag.Title = lang.disk.D0006;
+    	diag.URL = "../mail/editfolder?path="+path+"&time="+new Date().getTime(),
+    	diag.Width = 461;
+    	diag.Height = 150;
+    	diag.OKEvent = function(){
+    		var doc=diag.innerFrame.contentWindow.document;
+    		var fname = doc.getElementById('fname').value;
+    		var ppath = doc.getElementById('ppath').value;
+    		if(fname!=""){
+    			$.ajax({
+    				type: "post",
+    				url : "../mail/savefolder",
+    				dataType:'html',
+    				data:"path="+path+"&ppath="+ppath+"&fname="+fname,
+    				success: function(data,textStatus){
+    					if(data == 1){
+    						parent.listFolder();
+    						window.location.reload();
+    						diag.close();
+    					}else if(data == 2){
+    						Dialog.alert(lang.tip.D1002);
+    					}else{
+    						Dialog.alert(lang.common.COM021);
+    					}
+    				}
+    			});
+    		}else{
+    			Dialog.alert(lang.disk.D0031);
+    		}
+    	};
+    	diag.CancelEvent = function(){
+    		diag.close();
+    	}
+    	diag.show();
+    }
+    </script>
+</head>
+<body>
+    <div id="divPanel">
+  <!--邮件信息-->
+  <div class="divMailInfoFrame">
+
+  <div id="divMailInfo"><a href="####" id="pagemark"></a><span class="mailbox"><?php echo LANG_MAIL_M0143;?></span></div>
+    </div>
+  <div id="divHead">
+            <div id="HeadUpper">
+            <div class="headCenter"> <span class="headLeft"></span>
+      			<ol>
+	    			<li style="margin-right:3px;"><input type="button" id="btnMov" value="<?php echo LANG_DISK_D0002;?>" onclick="createFolder()"></li>
+	    			<li><div class="headJumpBtn" id="pagelist" style="margin-top:2px;"></div></li>
+	    		</ol>
+			</div>
+    </div>
+  </div>
+  <div id="divMailList" style="height:100%">
+    <table class="tbList" border= "0">
+      <thead>
+        <tr> 
+          <td width="20%" style="padding-left:100px;"><a href="javascript:void(0);" style="text-decoration:none;" title=""><?php echo LANG_MAIL_M0144;?></a></td>
+          <td width="15%" style="text-align:center;"><a href="javascript:void(0);" style="text-decoration:none;" title=""><?php echo LANG_MAIL_M0145;?></a></td>
+          <td width="15%" style="text-align:center;"><a href="javascript:void(0);" style="text-decoration:none;" title=""><?php echo LANG_MAIL_M0146;?></a></td>
+          <td width="10%" style="text-align:center;"><a href="javascript:void(0);" style="text-decoration:none;" title=""><?php echo LANG_MAIL_M0147;?></a></td>
+          <td width="40%" style="text-align:center;"><a href="javascript:void(0);" style="text-decoration:none;text-align:right;" title=""><?php echo LANG_MAIL_M0143;?></a></td>
+        </tr>
+      </thead>
+    </table>
+    <div class="divMailList2">
+      <div id="managetable">
+        
+      </div>
+    </div>
+    
+  </div>
+    <div id="footUpper"></div>
+</div><br>
+<div id="listdata" style="display:none;"><?php echo $strlist;?></div>
+</body>
+</html>

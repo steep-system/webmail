@@ -1,0 +1,126 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+    <title><?php echo LANG_MAIL_M0034;?>:<?php echo $maildata['subject'];?></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link href="../../style/mail_list.css" type="text/css"  rel="Stylesheet" />
+    <link href="../../skin/default/mailList_skin.css" type="text/css"  rel="Stylesheet" />
+    
+    <link rel="stylesheet" type="text/css" href="../../js/lightbox/jquery.lightbox.packed.css" />
+    <link href="../../skin/default/skin.css" type="text/css"  rel="Stylesheet" />
+    <script src="../index/getscript?mod=readmail"></script>
+    <script src="../index/lang"></script>
+	<script src="../../js/lightbox/jquery.lightbox.js?show_helper_text=false"></script>
+	<script src="../../js/mail/readmail.js"></script>
+    <script>
+    //document.oncontextmenu=new Function("event.returnValue=false;");
+    //document.onselectstart=new Function("event.returnValue=false;");
+    var timer = null;
+    $(document).ready( function() {
+    	$('#btnPrint').bind('click',function(){
+    		var url = "print?mid=<?php echo base64_encode($mid);?>&f=<?php echo $folder;?>&p=<?php echo $offset;?>&showimg="+$('#showimg').val();
+    		window.open(url);
+    	})
+    	
+    });
+
+    function showimg(){
+    	$.ajax({
+    		type: "post",
+    		url : "setshowimg",
+    		dataType:'html',
+    		data:"f="+parent.$('#folder').val()+"&mid="+$('#mid').val()+"&val=1&time="+new Date().getTime(),
+    		success: function(data,textStatus){
+    			if(data){
+    				$('#showimg').val(1);
+    				$('#showimgtip').empty();
+    				showcontent();
+    			}else{
+    				Dialog.alert(lang.common.COM008);
+    			}
+    		}
+    	});
+    }
+
+    function showcontent(){
+    	var url = "readmail?mid=<?php echo base64_encode($mid);?>&f=<?php echo $folder;?>&showimg=" + $('#showimg').val();
+    	window.location.href = url;
+    }
+
+    function changeCharset(){
+    	var url = "readmail?mid=<?php echo base64_encode($mid);?>&f=<?php echo $folder;?>&p=<?php echo $offset;?>&charset="+$('#charset').val()+"&showimg=" + $('#showimg').val();
+    	window.location.href = url;
+    }
+
+    function openeml(param){
+    	window.open("reademl?param="+param);
+    }
+
+    
+        
+    </script>
+    <style>
+    html{ overflow-x: hidden; overflow-y: auto; }
+    #div_L_Receivor span{font-size:11px;}
+    .mailFileOl{font-size:11px;}
+    .divBottom1{font-size:11px;}
+    </style>
+</head>
+<input type="hidden" id="mid" value="<?php echo base64_encode($mid);?>">
+<input type="hidden" id="folder" value="<?php echo $folder;?>">
+<input type="hidden" id="curplayer" value="">
+<input type="hidden" id="showimg" value="<?php echo $isshowimg;?>">
+<input type="hidden" id="tid" value="<?php echo $tid;?>">
+<div id="msg"></div>
+<body>
+    <div id="divPanel">
+        
+          <div id="divDown">
+                <div id="divLeftWords">
+                    <div id="div_L_Subject" style="margin-left: -40px;">
+					<ol>
+					<li><?php echo LANG_MAIL_M0034;?>：<?php echo $maildata['subject'];?></li>
+					<!--<li><?php echo $showimg;?></li>-->
+					</ol>
+					</div>
+					<div id="div_L_Sendor">
+                        <span class="sendor"><?php echo LANG_MAIL_M0033;?>：</span>
+                        <span><?php echo $maildata['from'];?></span>
+                    </div>
+                    <div id="div_L_Sendor">
+                        <span class="sendor"><?php echo LANG_MAIL_M0087;?>：</span>
+                        <span><?php echo $maildata['date'];?></span>
+                    </div>
+                    <div id="div_L_Sendor">
+                        <span class="sendor"><?php echo LANG_MAIL_M0050;?>：</span>
+                        <span><?php echo $maildata['to'];?></span>
+                    </div>
+                   	<?php echo $mail_cc;?>
+                    <?php echo $attach_tip;?>
+                    <div id="div_L_Receivor">
+                    	<span><a href="maildownload?param=<?php echo base64_encode($mid);?>" class="bluelink"><?php echo LANG_MAIL_M0052;?></a></span><span style="padding:0px 5px 0px 5px;">|</span>
+                         <?php echo $str_sque;?>
+                       <?php echo $opt_recall;?>
+                        <select id="charset" onchange="changeCharset()" style="font-size:12px;font-family:Verdana, Arial, Helvetica, sans-serif, '微软雅黑', '宋体';">
+                        	<?php echo $charset_option;?>
+                        </select>
+                        
+                        <span><?php echo $showimg;?></span>
+                    </div>
+                </div>
+          </div>
+        </div>
+        <div style="background-color:#FFFFFF;min-height:150px;">
+        <div id="mailcontent" style="width:98%;margin:5px 5px 5px 5px;word-break:break-all;word-wrap:break-word;overflow:hidden;font-family:Arial,'Times New Roman','微软雅黑', '宋体';overflow-x:auto;"><?php echo $content;?></div>
+        </div>
+        <div id="divBottom1" class="divBottom1" style="display:<?php echo $showattach;?>;">
+          <div id="divAvertise">
+            <span><div class="icoFile">&nbsp;</div>　<?php echo LANG_MAIL_M0053;?>(<?php echo $attach_count;?><?php echo LANG_COMMON_COM034;?>)</span></div>
+        </div>
+      <div id="divBottom2" class="divBottom2" style="display:<?php echo $showattach;?>;">
+   <ol class="mailFileOl" id="attachlist" name="attachlist" style="margin-left:-10px;"><?php echo $attachlist;?></ol>
+  </div><br>
+</div>
+</body>
+<style>body{width:100%;}</style>
+</html>

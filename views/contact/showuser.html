@@ -1,0 +1,140 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+    <title>联系人编辑</title>
+    <link href="../../style/mail_list.css" type="text/css"  rel="Stylesheet" />
+    <link href="../../style/layout.css" type="text/css"  rel="Stylesheet" />
+    <link href="../../skin/default/skin.css" type="text/css"  rel="Stylesheet" />
+    <script src="../index/lang"></script>
+    <script src="../../js/jquery-1.3.2.min.js"></script>
+    <script src="../../js/dialog/zDrag.js"></script>
+    <script src="../../js/dialog/zDialog.js"></script>
+    <script>
+    $(document).ready( function() {
+    	
+    });
+
+    function setSelect(){}
+
+    function doEdit(){
+    	if($('#type').val()){
+    		Dialog.alert(lang.common.COM010);
+    	}else{
+    		window.location.href = '../contact/edit?id='+$('#cid').val()+'&mode='+$('#mode').val();
+    	}
+    }
+
+    function doDel(){
+    	if($('#type').val()){
+    		Dialog.alert(lang.common.COM010);
+    	}else{
+    		Dialog.confirm(lang.contact.C0016,function(){
+    			$.ajax({
+    				type: "post",
+    				url : "delcontact",
+    				dataType:'html',
+    				data:"cid="+$('#cid').val()+",&time="+new Date().getTime(),
+    				success: function(data,textStatus){
+    					if(data){
+    						window.location.href = '../contact/list';
+    					}else{
+    						alert(lang.common.COM008);
+    					}
+    				}
+    			});
+    		});
+    	}
+    }
+
+    function doBack(){
+    	if($('#mode').val()=='block'){
+    		window.location.href = '../contact/list?type=2';
+    	}else{
+    		window.location.href = '../contact/list';
+    	}
+    }
+    </script>
+    
+</head>
+<body style="background-color:#eeeeee;">
+	<input type="hidden" id="mode" value="<?php echo $_REQUEST['mode'];?>">
+    <div id="divPanel">
+          <div id="divTop">
+            <div id="divUpper">
+            <div id="divHead">
+            <div id="HeadUpper">
+            <div class="headCenter"> <span class="headLeft"></span>
+      			<ol>
+	    			<li style="margin-right:3px;"><input type="button" onclick="doEdit();" id="btnEdit" value="<?php echo LANG_MAIL_M0055;?>"></li>
+	    			<li style="margin-right:3px;"><input type="button" onclick="doDel();" id="btnDel" value="<?php echo LANG_DISK_D0004;?>"></li>
+	    			<li style="margin-right:3px;"><input type="button" onclick="doBack();" id="btnBack" value="<?php echo LANG_COMMON_COM025;?>"></li>
+	    		</ol>
+			</div>
+    </div>
+  </div>
+               
+            </div>
+        </div>
+        <div id="divMiddlePanel">
+            <div id="divTitle">
+                <span id="newContact"><?php echo $udata['realname'];?></span>
+            </div>
+            <div id="divContacter">
+            <input type="hidden" id="cid" value="<?php echo $udata['id'];?>">
+            <input type="hidden" id="type" value="<?php echo $_REQUEST['type'];?>">
+                <table id="tbContactor">
+                    <tr>
+                        <td class="rightTDLabel"><?php echo LANG_CONTACT_C0018;?>：</td>
+                        <td><?php echo $udata['email'];?></td>
+                        <td class="redFont">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td class="rightTDLabel"><?php echo LANG_CONTACT_C0019;?>：</td>
+                        <td><?php echo $udata['cell'];?></td>
+                        <td>&nbsp;</td>
+                    </tr>
+                     <tr>
+                        <td class="rightTDLabel"><?php echo LANG_CONTACT_C0020;?>：</td>
+                        <td><?php echo $udata['tel'];?></td>
+                        <td>&nbsp;</td>
+                    </tr>        
+                    <tr>
+                        <td class="rightTDLabel"><?php echo LANG_CONTACT_C0021;?>：</td>
+                        <td><?php echo $udata['nickname'];?></td>
+                        <td>&nbsp;</td>
+                    </tr>   
+                    <tr>
+                        <td class="rightTDLabel"><?php echo LANG_CONTACT_C0022;?>：</td>
+                        <td><?php echo $udata['birthday'];?></td>
+                        <td>&nbsp;</td>
+                    </tr>    
+                    <tr>
+                        <td class="rightTDLabel"><?php echo LANG_CONTACT_C0023;?>：</td>
+                        <td><?php echo $udata['address'];?></td>
+                        <td>&nbsp;</td>
+                    </tr>       
+                    <tr>
+                        <td class="rightTDLabel"><?php echo LANG_CONTACT_C0024;?>：</td>
+                        <td><?php echo $udata['company'];?></td>
+                        <td>&nbsp;</td>
+                    </tr>    
+                    <tr>
+                        <td class="rightTDLabel"><?php echo LANG_CONTACT_C0025;?>：</td>
+                        <td><?php echo $udata['memo'];?></td>
+                        <td>&nbsp;</td>
+                    </tr>     
+                    <!--<tr>
+                        <td class="rightTDLabel">联系人组：</td>
+                        <td>&nbsp;
+                            
+                        </td>
+                        <td>&nbsp;</td>
+                    </tr>-->                                                                                               
+                </table>
+            </div>
+        </div>
+                
+        </div>
+    </div>
+</body>
+</html>

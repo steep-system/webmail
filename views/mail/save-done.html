@@ -1,0 +1,56 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+    <title>邮件保存成功</title>
+    <link href="../../style/mail_list.css" type="text/css" rel="Stylesheet"/>
+    <link href="../../skin/default/mailList_skin.css" type="text/css" rel="Stylesheet" />
+    <script src="../../js/jquery-1.3.2.min.js"></script>
+    <script src="../index/lang"></script>
+    <script>
+    $(document).ready( function() {
+    	if(top==window){
+    		$('#btn_draft').html('<a href="javascript:window.close();" class="mailDoneLink">'+lang.common.COM022+'</a>');
+    	}else{
+    		parent.getinfo();
+    		$('#btn_draft').html('<a href="javascript:opendraft();" class="mailDoneLink">'+lang.mail.M0131+'</a>');
+    	}
+    });
+    
+    function opendraft(){
+    	parent.openmailbox('draft');
+    }
+    </script>
+</head>
+<body>
+    <div id="divPanel_mail_done">
+        <div>
+            <table class="tbMailDone" >
+                <tr>
+                    <td class="okIconTd" rowspan="6"  valign="top">
+                        <div id="okIcoDone" class="okIcon"></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="mailSent"><?php echo $tip1;?></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="mailSentDetails"><?php echo $tip2;?></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td id="btn_draft">
+                        
+                    </td>
+                </tr>
+            </table>
+            
+                     
+        </div>
+    </div>
+    
+
+</body>
+</html>

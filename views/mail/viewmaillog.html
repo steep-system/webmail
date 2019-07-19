@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style>
+body {
+    font-family: Verdana,Arial,sans-serif;
+}
+
+body,p,blockquote,li,th,td {
+    font-size: 10pt;
+}
+
+code {
+    font-size: 1.1em;
+}
+
+/* Design 2 */
+table.Design2 {
+    border-spacing: 0px;
+    border-collapse: collapse;
+    border: 1px solid #666666;
+}
+table.Design2 th {
+    border-bottom: 1px solid #666666;
+    text-align: left;
+    font-weight: normal;
+    padding: 0.1em 0.5em;
+}
+table.Design2 td {
+    text-align: right;
+    border-bottom: 1px solid #666666;
+    padding: 0.1em 0.5em;
+}
+table.Design2 thead th {
+    background-color: #E5E5E5;
+    text-align: center;
+}
+table.Design2 th.Corner {
+    text-align: left;
+}
+</style>
+</head>
+
+<body>
+<table cellspacing='0' class="Design2" width="100%">
+
+<thead>
+<tr>
+<th class="Corner">接收人</th>
+<th>接收人IP</th>
+<th>查看时间</th>
+</tr>
+</thead>
+
+<tbody>
+<?php echo $strlist;?>
+</tbody>
+</table>
+</body>
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>主页</title>
+<link href="../../style/layout.css" type="text/css" rel="stylesheet" />
+<link href="../../skin/default/skin.css" type="text/css" rel="stylesheet" />
+<link href="../../style/share_list.css" type="text/css" rel="stylesheet" />
+<script src="../../js/jquery-1.3.2.min.js"></script>
+<script src="../index/lang"></script>
+<style type="text/css">
+<!--
+.timeSendDiv {
+	text-align: left;
+	padding-top: 20px;
+	padding-right: 30px;
+	padding-bottom: 20px;
+	padding-left: 30px;
+}
+.timeSendDiv div {
+	line-height: 30px;
+}
+-->
+</style>
+<script>
+$(document).ready( function() {
+	var settime = new Date();
+	var curtime = addMinutes(settime,3);
+	var optyear = optmonth = optday = opthour = optmin = "";
+
+	var curtime_year = curtime.getFullYear();
+	var curtime_month = curtime.getMonth();
+	var curtime_day = curtime.getDate();
+	var curtime_hour = curtime.getHours();
+	var curtime_min = curtime.getMinutes();
+
+	for(var i = curtime_year;i<curtime_year+5;i++){
+		if(i==curtime_year){
+			optyear = "<option value='"+i+"' selected>"+i+"</option>";
+		}else{
+			optyear = "<option value='"+i+"'>"+i+"</option>";
+		}
+		$("#year").append(optyear);
+	}
+
+	for(var i = 1;i<=12;i++){
+		if(i==(curtime_month+1)){
+			optmonth = "<option value='"+i+"' selected>"+i+"</option>";
+		}else{
+			optmonth = "<option value='"+i+"'>"+i+"</option>";
+		}
+		$("#month").append(optmonth);
+	}
+
+	for(var i = 1;i<=31;i++){
+		if(i==curtime_day){
+			optday = "<option value='"+i+"' selected>"+i+"</option>";
+		}else{
+			optday = "<option value='"+i+"'>"+i+"</option>";
+		}
+		$("#day").append(optday);
+	}
+
+	for(var i = 0;i<=23;i++){
+		if(i==curtime_hour){
+			opthour = "<option value='"+i+"' selected>"+i+"</option>";
+		}else{
+			opthour = "<option value='"+i+"'>"+i+"</option>";
+		}
+		$("#hour").append(opthour);
+	}
+
+	for(var i = 0;i<=59;i++){
+		if(i==curtime_min){
+			optmin = "<option value='"+i+"' selected>"+i+"</option>";
+		}else{
+			optmin = "<option value='"+i+"'>"+i+"</option>";
+		}
+		$("#min").append(optmin);
+	}
+	
+	getdate();
+	$('#year,#month,#day,#hour,#min').bind('change',function(){getdate()});
+});
+
+function getdate(){
+	var strdate = $('#year').val()+'-'+$('#month').val()+'-'+$('#day').val()+' '+$('#hour').val()+':'+$('#min').val();
+	$('#desc').html(strdate);
+}
+
+function addMinutes(date,minutes){
+	minutes = parseInt(minutes);
+	var interTimes = minutes*60*1000;
+	interTimes = parseInt(interTimes);
+	return new Date(Date.parse(date)+interTimes);
+}
+</script>
+</head>
+<body>
+<div class="share-upload">
+  <div class="share-upload-content">
+    <div class="timeSendDiv">
+		<div class="timeRow"><?php echo LANG_MAIL_M0100;?>：<!--（<input name="" type="radio" value="" />公历<input name="" type="radio" value="" />农历）--></div>
+		<div class="timeRow">
+		<span style="padding-right:2px;"><select id="year"></select></span>
+		<span style="padding-right:2px;"><?php echo LANG_COMMON_COM035;?></span>
+		<span style="padding-right:2px;"><select id="month"></select></span>
+		<span style="padding-right:2px;"><?php echo LANG_COMMON_COM036;?></span>
+		<span style="padding-right:2px;"><select id="day"></select></span>
+		<span style="padding-right:2px;"><?php echo LANG_COMMON_COM037;?></span>
+		<span style="padding-right:2px;"><select id="hour"></select></span>
+		<span style="padding-right:2px;"><?php echo LANG_COMMON_COM038;?></span>
+		<span style="padding-right:2px;"><select id="min"></select></span>
+		<span><?php echo LANG_COMMON_COM032;?></span>
+		</div>
+		<div class="timeRow"><?php echo LANG_MAIL_M0101;?> <strong id="desc"></strong>&nbsp; <?php echo LANG_MAIL_M0102;?></div>
+	</div>
+    <div class="clear"></div>
+  </div>
+</div>
+</body>
+</html>

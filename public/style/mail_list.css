@@ -1,0 +1,3427 @@
+/*邮箱列表布局*/
+.mailList{height:100%;}
+
+.mailbox
+{
+	 font-family:宋体;
+	 font-size:14px;
+	 font-weight:bold;
+	 padding-left:15px;
+	 padding-right:2px;
+}
+
+.mailbrief
+{
+	font-size:13px;
+}
+
+.mailsCnt
+{
+	 font-weight:bold;
+	 margin:0px 3px 0px 3px;	
+}
+
+.mailsunreadCnt
+{
+	 color:red;
+	 font-weight:bold;
+	 margin-right:5px;	
+}
+
+.unRead
+{
+    font-family:宋体;
+    cursor:pointer;
+	font-size:12px;
+}
+
+.unReadCnt
+{
+	color:Red;
+	font-weight:bold;	
+	font-size:14px;
+	margin:0px 4px 0px 2px;
+}
+
+#divHead
+{
+	height:36px;
+	width:100%;
+	margin-top:8px;
+	background-color:#eee;/*#d6dbe0;	*/
+	
+	
+	
+}
+
+.backTo
+{
+	color:#dee0e2;/*#6c7f8d;*/
+	font-family:宋体;
+	margin-top:10px;
+	position:absolute;/**/
+	font-size:14px;
+	text-decoration:none;
+	font-weight:600;
+	
+	
+}
+
+
+.deleteBtn
+{
+	position:absolute;
+	margin-left:14px;
+	margin-top:5px;
+}
+
+
+.btnFont
+{
+	color:#8f8f8f;
+	font-family:宋体;
+	font-weight:bold;
+	font-size:12px;
+
+	
+	cursor:pointer;
+	
+	width:70px;
+	height:24px;
+
+	line-height:25px;
+	
+	display:block;
+	text-align:center;
+	text-decoration:none;
+/*	*line-height:38px;*/
+}
+
+.btnFont:link{color:#000000;}
+.btnFont:hover{color:#000000;}
+.btnFont:visited{color:#000000;}/*656565*/
+
+.btnSelFont
+{
+	color:#8f8f8f;
+	font-family:宋体;
+	font-weight:bold;
+	font-size:12px;
+
+	
+	cursor:pointer;
+	
+	width:64px;
+	height:24px;
+
+	line-height:25px;
+	
+	display:block;
+	text-align:center;
+	text-decoration:none;
+/*	*line-height:38px;*/
+}
+.btnSelList {
+	background-image: url(../skin/default/image/bg.gif);
+	background-repeat: no-repeat;
+	height: 5px;
+	width: 8px;
+	background-position: -1548px -72px;
+}
+
+.btnSelListLink {
+	height: 14px;
+	width: 14px;
+	margin-top: -24px;
+	margin-left: 60px;
+	padding-top: 10px;
+	padding-left: 4px;
+	cursor: pointer;
+}
+
+#divMailList
+{
+	border:solid 1px #6c7f8d;/**/
+	display:block;/**/
+	background-color: #EEEEEE;
+    
+	
+	/*overflow:auto;决定给它内部的 mailListBlock1 类的margin-top 在FF中生效*/
+	
+
+}
+
+.divMailList2
+{
+	height:100%;
+}
+
+
+#divFoot
+{
+	font-size:12px;
+	color:#a5b0b8;
+	position:absolute;
+	height:60px;
+	width:924px;
+	padding-top: 20px;
+}
+
+#divFoot2
+{
+	height:24px;
+	width:100%;
+	margin-top:0px;
+	background-color:#eeeeee;/*#d6dbe0;	*/
+	
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*******mail_write.html部分*******/
+#divPanel
+{
+	background-color: #eeeeee;
+	/*border:solid 4px green;*/
+	overflow:hidden;
+	width:100%;
+}
+
+#divContent
+{
+	/*border:solid 1px blue;*/
+	width:100%;
+	padding-top: 4px;
+	padding-bottom: 4px;
+	
+}
+
+
+
+.div_C_Left
+{
+	margin:1px;
+	width:91%;
+	
+	
+	float:left;
+	
+	height:60%;
+	min-height:100%;
+	
+/*	display:block;*/
+	position:absolute;
+	
+	
+	
+}
+
+.div_C_Right
+{
+	
+	/*width:17%;
+	border:solid 1px yellow;	*/
+/*	float:right;*/
+	border:solid 1px yellow;
+	margin:0px auto auto 75%;
+	
+	height:98%;
+/*	right:55px;*/
+	
+	position:absolute;
+	
+	
+	
+	
+}
+
+
+
+.caption
+{
+	font-family:宋体;
+	font-size:13px;
+	width:72px;
+	text-align:right;
+	float:left;
+	/*border:solid 1px red;*/
+	line-height:18px;
+	margin-top:3px;
+	padding-right: 8px;
+}
+
+
+.caption:link
+{
+	text-decoration:underline;
+	color:red;
+	font-family:"宋体";
+	font-size:13px;
+	width:80px;
+	text-align:right;
+	float:left;
+	/*border:solid 1px red;*/
+	line-height:18px;
+}
+
+
+.divRow
+{
+	
+	margin-top:5px;	
+	line-height:22px;
+	/*border:solid 2px black;
+	overflow:hidden;*/
+	
+	display:block;
+	
+}
+
+.divReceiver
+{
+	background-color:#fff;	/**/
+	width:99%;
+	line-height:18px;
+	height:22px;
+	display:inline-block;
+	
+	
+	
+}
+
+.spanSubject
+{
+	display:inline-block;
+	border:solid 1px #93a6b6;	
+	background-color:#fff;	/**/
+	width:99%;
+	
+	height:22px;
+	
+	
+}
+
+
+
+
+
+
+.divEditor
+{
+	min-height:360px!important;
+	width:100%;
+	border-style: none;
+}
+
+
+
+#tbWrite
+{
+	width:100%; 
+	height:550px;
+	
+	
+	
+	/*
+	border-collapse: separate;border-collapse和border-spacing一起为FF设置
+    border-spacing: 5px; */
+    
+}
+/*
+#tbWrite td
+{
+	height:15px;	
+	line-height:10px;
+	
+}*/
+
+#tbWrite .lbl
+{
+	width:80px;	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/**************mail_read部分******************/
+#divUpperButtons
+{
+	width:600px;
+	height:30px;
+	/*border:solid 2px yellow;	*/
+	
+	margin-top:3px;
+	margin-left:0px;
+	display:inline-block;
+	
+}
+
+#btnUpperReply
+{
+	width:70px;
+	height:24px;
+	margin-left:10px;	
+	margin-top:3px;
+	
+/*	border:solid 1px red;	*/
+	float:left;
+	
+	position:absolute;
+}
+
+
+#btn_Read_Split1
+{
+	
+
+	margin-top:3px;
+	margin-left:80px;
+	position:absolute;
+	
+	width:3px;
+	height:24px;
+	
+	float:left;/**/
+}
+
+#btnUpperTransfer
+{
+	width:70px;
+	height:24px;
+	margin-left:83px;	
+	margin-top:3px;
+	
+/*	border:solid 1px red;*/	
+	float:left;	
+	
+	position:absolute;
+}
+
+#btn_Read_Split2
+{
+	margin-top:3px;
+	margin-left:153px;
+	position:absolute;
+	
+	width:3px;
+	height:24px;
+}/**/
+
+
+#btnUpperDelete
+{
+	margin-top:3px;
+	margin-left:156px;
+	position:absolute;
+	
+	width:3px;
+	height:24px;
+}
+
+
+#btnUpperSplit3
+{
+	margin-top:3px;
+	margin-left:226px;
+	position:absolute;
+	
+	width:3px;
+	height:24px;	
+}
+
+
+#btnUpperDeleteThoroughly
+{
+	margin-top:3px;
+	margin-left:229px;
+	position:absolute;
+	
+	width:70px;
+	height:24px;		
+}
+
+
+/*标记为**/
+#btnMarkOut
+{
+	width:70px;
+	height:24px;
+	margin-left:310px;	
+	margin-top:3px;
+	
+
+	
+	position:absolute;	
+	
+	float:left;
+}
+
+
+
+#btnUpperSplit4
+{
+	margin-top:3px;
+	margin-left:380px;
+	position:absolute;
+	
+	width:3px;
+	height:24px;		
+}
+
+
+#btnUpperSplit5
+{
+	margin-top:3px;
+	margin-left:389px;
+	position:absolute;
+	
+	width:3px;
+	height:24px;	
+}
+
+
+#btnMoveTo
+{
+	width:70px;
+	height:24px;
+	margin-left:383px;	
+	margin-top:3px;
+
+	position:absolute;	
+	
+
+}
+
+
+
+
+
+#btnMoreActions
+{
+	width:80px;
+	height:24px;
+	margin-left:463px;	
+	margin-top:3px;
+
+	position:absolute;		
+}
+
+
+#PrevNext
+{
+	width:150px;	
+	right:0px;
+	position:absolute;
+	margin-top:8px;
+	height:24px;
+	float:right;
+	
+	
+	
+}
+	
+
+
+
+.divDown
+{
+	
+	width:100%;
+	overflow:visible;
+}
+
+#divLeftWords
+{
+	/*	border:solid 1px blue;*/
+	width:100%;
+	height:100%;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #94a7b7;
+	padding-bottom: 4px;
+}
+
+
+#divRightPic
+{
+	border-left:solid 1px #94a7b7;
+	width:150px;
+	height:100px;	
+	right:15px;
+	position:absolute;
+   
+}
+
+
+#div_L_Subject
+{
+	font-family:Arial,"Times New Roman","微软雅黑", "宋体";
+	font-size:14px;
+	font-weight:600;
+	overflow: hidden;
+	line-height: 22px;
+	min-height:22px;
+	padding-top: 10px;
+	padding-left: 10px;
+	color: #000000;
+}
+
+#div_L_Subject li {
+	float: left;
+	padding-right: 4px;
+	line-height: 22px;
+	height: 22px;
+	overflow: hidden;
+}
+
+
+#div_L_Sendor
+{
+	padding-left: 10px;
+	width: 100%;
+	min-height: 20px;
+	line-height: 20px;
+	font-family:Arial,"Times New Roman","微软雅黑", "宋体";
+	font-size: 12px;
+	color: #000000;
+	font-weight: normal;
+	text-align:left;
+}
+
+
+#div_L_SendedTime
+{
+	padding-left: 10px;
+	float: left;
+	width: 100%;
+}
+
+
+#div_L_Receivor
+{
+	overflow: hidden;
+	padding-left: 10px;
+	width: 100%;
+	font-family:Arial,"Times New Roman","微软雅黑", "宋体";
+	font-size: 12px;
+	color: #000000;
+	font-weight: normal;
+	text-align:left;
+}
+
+#divMiddle
+{
+	width:100%;
+	height:350px;	
+	overflow:visible;
+	/*border:solid 1px red;*/
+}
+
+.BottomBackTo
+{
+	color:#dee0e2;/*#6c7f8d;*/
+	font-family:宋体;
+	margin-top:10px;
+	margin-left:10px;
+	position:absolute;/**/
+	font-size:14px;
+	text-decoration:underline;
+	font-weight:600;
+}
+
+#divBottom1
+{
+	width:100%;
+	height:25px;
+	
+}
+
+
+
+#divAvertise
+{
+	margin-left:20px;
+	margin-top:3px;
+	
+}
+
+#moreAdvertise
+{
+	right:18px;
+	position:absolute;
+}
+
+
+#divBottom2
+{
+	width:100%;
+	overflow: hidden;
+}
+
+
+#divBottom3
+{
+	width:100%;
+	height:36px;
+	
+}
+
+#spanFootCenter
+{
+	width:100%;
+	height:36px;
+	display:inline-block;
+	
+	/*overflow:auto;决定给它内部的 mailListBlock1 类的margin-top 在FF中生效*/	
+}
+
+
+
+
+
+#spanFootLeft
+{
+	width:15px;
+	height:36px;
+	display:block;
+	float:left;	
+	position:absolute;
+}
+
+
+#spanFootRight
+{
+	width:15px;
+	height:36px;
+	right:0px;
+	
+	display:block;
+	/*float:right;*/
+	position:absolute;
+}
+
+
+
+#divBottomButtons
+{
+	width:600px;
+	height:30px;
+/*	border:solid 2px yellow;	*/
+
+	margin-top:2px;
+	margin-left:0px;
+	*margin-left:15px; !important;
+	*margin-left:15px; 
+	display:inline-block;
+}
+
+
+#btnBottomReply
+{
+	width:70px;
+	height:24px;
+	margin-left:10px;	
+	margin-top:3px;
+	
+/*	border:solid 1px red;	*/
+	float:left;
+	
+	position:absolute;
+}
+
+
+
+#btn_B_Read_Split1
+{
+	
+
+	margin-top:3px;
+	margin-left:80px;
+	position:absolute;
+	
+	width:3px;
+	height:24px;
+	
+	float:left;/**/
+}
+
+
+#btnBottomTransfer
+{
+	width:70px;
+	height:24px;
+	margin-left:83px;	
+	margin-top:3px;
+	
+/*	border:solid 1px red;*/	
+	float:left;	
+	
+	position:absolute;
+}
+
+
+#btn_B_Read_Split2
+{
+	margin-top:3px;
+	margin-left:153px;
+	position:absolute;
+	
+	width:3px;
+	height:24px;
+}/**/
+
+
+
+#btnBottomDelete
+{
+	margin-top:3px;
+	margin-left:156px;
+	position:absolute;
+	
+	width:3px;
+	height:24px;
+}
+
+
+
+
+#btnBottomSplit3
+{
+	margin-top:3px;
+	margin-left:226px;
+	position:absolute;
+	
+	width:3px;
+	height:24px;	
+}
+
+
+
+#btnBottomDeleteThoroughly
+{
+	margin-top:3px;
+	margin-left:229px;
+	position:absolute;
+	
+	width:70px;
+	height:24px;		
+}
+
+
+/*标记为**/
+#btnBottomMarkOut
+{
+	width:70px;
+	height:24px;
+	margin-left:310px;	
+	margin-top:3px;
+	
+
+	
+	position:absolute;	
+	
+	float:left;
+}
+
+
+#btnBottomSplit4
+{
+	margin-top:3px;
+	margin-left:380px;
+	position:absolute;
+	
+	width:3px;
+	height:24px;		
+}
+
+
+
+#btnBottomSplit5
+{
+	margin-top:3px;
+	margin-left:389px;
+	position:absolute;
+	
+	width:3px;
+	height:24px;	
+}
+
+
+
+#btnBottomMoveTo
+{
+	width:70px;
+	height:24px;
+	margin-left:383px;	
+	margin-top:3px;
+
+	position:absolute;	
+	
+
+}
+
+#btnBottomMoreActions
+{
+	width:80px;
+	height:24px;
+	margin-left:463px;	
+	margin-top:3px;
+
+	position:absolute;		
+}
+
+#BottomPrevNext
+{
+	width:150px;	
+	right:0px;
+	position:absolute;
+	margin-top:8px;
+	height:24px;
+	float:right;
+	
+	
+	
+}
+
+
+
+
+
+#divReplyAtOnce
+{
+	background-color:#fff;
+	border:solid 1px #b0c5d4;
+	width:400px;
+	height:62px;
+	margin:4px auto 8px 10px;
+}
+
+#divReplyTitle
+{
+	font-family:宋体;
+	font-weight:600;	
+	margin:7px auto 2px 10px;
+	
+}
+
+
+#txtReplyAtOnce
+{
+	 margin:0px;
+	 position:absolute;
+	 height:58px;
+	 width:309px;	
+	 border:solid 0px #fff;
+	 overflow:auto 
+}
+
+#btnReplyAtOnce
+{
+	position:absolute;
+	
+	margin:7px auto auto 315px;
+	cursor:pointer;
+}
+
+#btnRepyText
+{
+	font-size:13px;
+	font-weight:600;
+	display:block;
+	margin: 18px auto;
+	width:30px;
+}
+
+/*
+#btnOne_L
+{
+	width:30px;
+	height:24px;
+	margin-left:0px;
+	margin-top:0px;
+	overflow:hidden;
+	border:solid 1px blue;
+}
+
+#btnOne_C
+{
+	width:15	
+}*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*********mail_list01用table布局样式 *********/
+    .tbList
+    {
+        width: 100%;
+        border-collapse: collapse;
+     /*   float:left;	*/
+    }
+    
+    .tbList thead
+    {
+        padding:2px 5px;
+        text-align:left;
+
+        background-color: #d6dbe0;/**/
+        border-collapse:collapse;	/**/
+    }
+    
+    .tbList thead td
+    {
+		height:24px;	
+		font-family:宋体;
+		font-size:12px;
+		color:#70818d;
+		font-weight:600;
+		text-align:left;
+    }
+    
+    .chkSlt
+    {
+			margin-left:10px;	
+    }
+
+
+.divMailList1
+{
+	width:100%;	
+	border-top:solid 1px #9aacbb;
+/*	border-bottom:solid 1px #f00;*/
+	
+	margin:4px auto 2px auto;
+}
+
+
+.divMailList_spand1Bar
+{
+	width:100%;
+	/*border:solid 1px #adbcc6;	*/
+	border-bottom:solid 2px #9aacbb;
+	margin-top:5px;
+}
+
+
+.divMailList_spand1Bar .redFont
+{
+	color:Red;	
+	margin:0px 5px 0px 3px;
+	font-weight:bold;
+}
+
+
+
+.tbOneRowMail
+{
+		width: 100%;
+        border-collapse: collapse;
+        table-layout:fixed;
+}
+
+    .tbOneRowMail  .td1
+    {
+		height:26px;	
+		font-family: Arial, "Times New Roman" !important;
+		font-size:12px;
+		color:#000000;
+		font-weight:bold;
+		text-align:left;
+		text-overflow:ellipsis; /* for IE */    
+    	-moz-text-overflow: ellipsis; /* for Firefox,mozilla */    
+   	 	overflow:hidden;   
+    	white-space: nowrap;
+    }
+    
+    .tbOneRowMail  .td2
+    {
+		height:26px;	
+		font-family: Arial, "Times New Roman" !important;
+		font-size:12px;
+		color:#000000;
+		font-weight:400;
+		text-align:left;
+		text-overflow:ellipsis; /* for IE */    
+    	-moz-text-overflow: ellipsis; /* for Firefox,mozilla */    
+   	 	overflow:hidden;   
+    	white-space: nowrap;  
+    }
+    
+    .tbOneRowMail  .tdm
+    {
+		height:26px;	
+		font-family: Arial, "Times New Roman" !important;
+		font-size:12px;
+		color:#000000;
+		font-weight:bold;
+		text-align:center;
+		text-overflow:ellipsis; /* for IE */    
+    	-moz-text-overflow: ellipsis; /* for Firefox,mozilla */    
+   	 	overflow:hidden;   
+    	white-space: nowrap;
+    }
+    
+	    .tbOneRowMail  .tdf
+    {
+		height:26px;	
+		font-family: Arial, "Times New Roman" !important;
+		font-size:12px;
+		color:#000000;
+		font-weight:bold;
+		text-overflow:ellipsis; /* for IE */    
+    	-moz-text-overflow: ellipsis; /* for Firefox,mozilla */    
+   	 	overflow:hidden;   
+    	white-space: nowrap;
+    }
+	
+    .tbOneRowMail .tr1
+    {
+    	 background-color: #eeeeee;/**/
+    }
+    
+    .tbOneRowMail .tr2
+    {
+    	 background-color: #ffffff;/**/
+    }
+    
+    .tbOneRowMail .tr3
+    {
+    	 background-color: #eeeeee;/**/
+    }
+    
+    .tbOneRowMail .tr4
+    {
+    	 background-color: #ffffff;/**/
+    }
+	
+#closeIframebtnPos
+{
+	margin-top:4px;
+	margin-bottom:0px;
+	width:28px;
+	height:19px;
+	position:absolute;
+	right: 0px;
+}
+
+
+
+#divFrmPanel
+{
+	height:100%;
+	width:100%;
+	
+	
+}
+.mailList_toptit_r{
+	float:right;
+	width:20%;
+	padding:3px 0px 0px 0px;
+}
+#divMailInfo {
+	width: 80%;
+	float: left;
+	padding:7px 0px 0px 0px;
+}
+.divMailInfoFrame {
+	overflow: hidden;
+	height: 22px;
+	background-color: #eeeeee;
+}
+.mailList_toptit_r li {
+	float: right;
+	height: 19px;
+	width: 19px;
+	padding-right: 5px;
+	padding-left: 0px;
+}
+
+.mailFileOl {
+	padding-top: 10px;
+	padding-right: 30px;
+	padding-bottom: 10px;
+	padding-left: 30px;
+}
+.mailFileOl li {
+	display: block;
+	padding-bottom: 5px;
+	overflow: hidden;
+	float: left;
+	clear: left;
+}
+.mailFileOl li div {
+	float: left;
+}
+.mailFileName {
+	padding-left: 14px;
+}
+/*******mail done页***/
+
+
+#divPanel_mail_done
+{
+	width:100%;
+	height:400px;
+
+	background-color:White;
+}
+
+
+
+.tbMailDone
+{
+	
+	width:600px; 
+	
+	height:80px;
+	
+}
+
+
+.tbMailDone .okIconTd
+{
+	width:42px;
+	
+}
+
+#okIcoDone
+{
+	margin-top:7px;
+}
+
+
+#GoMail_Index
+{
+	text-align:center;
+	
+
+	float:left;
+}
+
+
+.mailDone_btn .btnText
+{
+	font-size:13px;	
+	color:White;
+	cursor:pointer;
+	
+}
+
+
+
+.mailDone_btn_pnl
+{
+	margin-left:43px; width:180px; margin-top:16px;
+}
+
+
+.mailSent
+{
+	color:#2f73a4;
+	font-weight:600;
+	font-size:16px;	
+}
+
+
+
+.mailSentDetails
+{
+	color:#a6afbb;
+	font-size:13px;
+	
+	
+}
+
+.mailHasSent
+{
+	color:#a6afbb;
+	font-size:13px;
+	margin-left:10px;
+	margin-top:10px;
+}
+
+
+#wirteAgain
+{
+	text-align:center;
+		
+	margin-left:10px;
+	
+}
+
+
+#splitSpace
+{
+	width:20px; 
+	float:left; 
+	
+}
+
+.mailDoneLink
+{
+	color:#708a9d;
+	font-size:13px;	
+}
+
+
+#mailSentWhere
+{
+	margin-left:42px;
+	margin-top:50px;
+	width:500px;
+	border:solid 1px #b0cbe5;
+	
+	height:80px;
+
+	
+	background-color:#eff5fb;
+}
+
+
+.sentWhere
+{
+	font-size:13px;	
+}
+
+.f_red
+{
+	color:red;
+}
+
+#newContact
+{
+	font-size:13px;
+	font-weight:600;
+	margin:15px auto 3px 16px;
+	position:absolute;
+}
+
+#divContacter
+{
+	margin-left:58px;	
+	width:100%;
+}
+
+.rightTDLabel
+{
+	text-align:right;
+}
+
+.redFont
+{
+	color:Red;	
+}
+
+/********contact_edit.html页*******/
+.btnSave
+{
+	width:70px;
+	height:24px;
+	margin-left:10px;	
+	margin-top:3px;
+	
+/*	border:solid 1px red;	*/
+	float:left;
+	
+	position:absolute;
+}
+
+.btnBack
+{
+	width:70px;
+	height:24px;
+	margin-left:156px;	
+	margin-top:3px;
+	float:left;
+	position:absolute;
+}
+
+.btnEdit
+{
+	width:70px;
+	height:24px;
+	margin-left:10px;
+	margin-top:3px;
+	position:absolute;	
+}
+
+.btnCancel
+{
+	width:70px;
+	height:24px;
+	margin-left:83px;	
+	margin-top:3px;
+
+	position:absolute;	
+	
+
+}
+
+.btn_Contact_Split4
+{
+	margin-top:3px;
+	margin-left:153px;
+	position:absolute;
+	
+	width:3px;
+	height:24px;
+	
+	float:left;/**/
+}
+
+#tbContactor
+{
+  height:300px;
+}
+
+#divTitle
+{
+	border-bottom:solid 2px #aac9ea;
+	width:100%;
+	height:35px;	
+
+}
+
+
+#newContact
+{
+	font-size:13px;
+	font-weight:600;
+	margin:15px auto 3px 16px;
+	position:absolute;
+}
+
+
+#divContacter
+{
+	margin-left:58px;	
+	width:100%;
+}
+
+.rightTDLabel
+{
+	text-align:right;
+}
+
+.redFont
+{
+	color:Red;	
+}
+
+
+
+
+
+#contactCaption
+{
+
+	margin-top:6px;
+
+}
+
+
+
+.btnNewContact
+{
+	width:70px;
+	height:24px;
+	margin-left:10px;	
+	margin-top:3px;
+	
+/*	border:solid 1px red;	*/
+	float:left;
+	
+	position:absolute;
+}
+
+.btnEditContact
+{
+	margin-top:3px;
+	margin-left:83px;
+	position:absolute;
+	
+	width:70px;
+	height:24px;		
+}
+
+
+
+
+.btn_Contact_Split1
+{
+	
+
+	margin-top:3px;
+	margin-left:80px;
+	position:absolute;
+	
+	width:3px;
+	height:24px;
+	
+	float:left;/**/
+}
+
+
+.btnWriteMailInContact
+{
+	margin-top:3px;
+	margin-left:163px;
+	position:absolute;
+	
+	width:70px;
+	height:24px;		
+}
+
+
+
+.btn_Contact_Split2
+{
+	
+
+	margin-top:3px;
+	margin-left:233px;
+	position:absolute;
+	
+	width:3px;
+	height:24px;
+	
+	float:left;/**/
+}
+
+.btnContactDelete
+{
+	margin-top:3px;
+	margin-left:236px;
+	position:absolute;
+	
+	width:70px;
+	height:24px;		
+}
+
+
+.btn_Contact_Split3
+{
+	margin-top:3px;
+	margin-left:303px;
+	position:absolute;
+	
+	width:3px;
+	height:24px;
+	
+	float:left;/**/
+}
+
+
+
+.btnDeleteContactGroup
+{
+	margin-top:3px;
+	margin-left:306px;
+	position:absolute;
+	
+	width:3px;
+	height:24px;
+	
+	float:left;/**/
+}
+
+.sltAddToGroup
+{
+	margin-top:5px;
+	margin-left:338px;
+	position:absolute;
+	
+	width:3px;
+	height:24px;
+	
+	float:left;/**/
+}
+
+
+.divContactCount
+{
+	margin-top:10px;
+	right:208px;
+	position:absolute;
+	
+	width:220px;
+	height:24px;
+	
+	float:left;/**/
+	color:White;
+	font-weight:600;
+}
+
+
+
+
+
+
+
+/************/
+
+
+    .tbContactList
+    {
+        width: 100%;
+        border: 1px #adbcc6 solid;
+        border-collapse: collapse;
+     /*   float:left;	*/
+    }
+    
+    .tbContactList thead
+    {
+        padding:2px 5px;
+        text-align:left;
+
+        background-color: #d6dbe0;/**/
+        border-collapse:collapse;	/**/
+    }
+    
+    .tbContactList thead td
+    {
+		height:24px;	
+		font-family:Arial,"Times New Roman";
+		font-size:12px;
+		color:#000000;
+		font-weight:600;
+		text-align:left;
+    }
+    
+    .tbContactList thead .td1
+    {
+    	width:7%;	
+    }
+    
+    .tbContactList thead .td2
+    {
+    	width:20%;	
+    }
+    
+    .tbContactList thead .td3
+    {
+    	width:30%;	
+    }
+    
+    .tbContactList thead .td4
+    {
+    	width:15%;	
+    }
+    
+    .tbContactList thead .td5
+    {
+    	width:25%;	
+    }
+    
+    .tbContactList thead .td6
+    {
+    	width:3%;	
+    }
+  
+ .tbOneRowContact
+{
+		width: 100%;
+        border-collapse: collapse;
+        table-layout:fixed;
+        font-family:Arial,"Times New Roman";
+}
+
+.tbOneRowContact tr .td1
+    {
+    	width:7%	
+    }
+    
+    .tbOneRowContact tr .td2
+    {
+    	width:20%;	
+    }
+    
+    .tbOneRowContact tr .td3
+    {
+    	width:30%;	
+    }
+    
+    .tbOneRowContact tr .td4
+    {
+    	width:15%;	
+    }
+    
+    .tbOneRowContact tr .td5
+    {
+    	width:25%;	
+    }
+    
+     .tbOneRowContact tr .td6
+    {
+    	width:3%;	
+    }
+    
+    .tbOneRowContact  .td1
+    {
+		height:26px;	
+		font-family: Arial, "Times New Roman" !important;
+		font-size:12px;
+		color:#000000;
+		font-weight:bold;
+		text-align:left;
+		text-overflow:ellipsis; /* for IE */    
+    	-moz-text-overflow: ellipsis; /* for Firefox,mozilla */    
+   	 	overflow:hidden;   
+    	white-space: nowrap;
+    }
+    
+    .tbOneRowContact  .td2
+    {
+		height:26px;	
+		font-family: Arial, "Times New Roman" !important;
+		font-size:12px;
+		color:#000000;
+		font-weight:400;
+		text-align:left;
+		text-overflow:ellipsis; /* for IE */    
+    	-moz-text-overflow: ellipsis; /* for Firefox,mozilla */    
+   	 	overflow:hidden;   
+    	white-space: nowrap;  
+    }
+    
+    .tbOneRowContact .tr1
+    {
+    	 background-color: #eeeeee;/**/
+    }
+    
+    .tbOneRowContact .tr2
+    {
+    	 background-color: #ffffff;/**/
+    }
+    
+    .tbOneRowContact .tr3
+    {
+    	 background-color: #eeeeee;/**/
+    }
+    
+    .tbOneRowContact .tr4
+    {
+    	 background-color: #ffffff;/**/
+    }
+    
+    .tbOneRowContact tr:hover{
+	background-color: #6392C8;
+}
+	
+    
+    
+.divContactList
+{
+	height:100%;
+}
+
+
+
+#divContactPanel
+{
+	height:100%;
+	background-color: #eeeeee;
+	/*border:solid 4px green;*/
+	overflow:hidden;
+	width:100%;
+}
+
+#divLeftPanel
+{
+	height:100%;
+	width:100%;	
+	float:left;
+}
+
+.ContactListTitle
+{
+	position:absolute;
+	margin: 10px 17px auto 21px;	
+/*	border: solid 1px red;*/
+	width:80px;
+	overflow:hidden;
+	height:15px;
+	position:absolute;
+	
+	
+}
+
+.ContactListTitle .fontStyle
+{
+	color:#377ba8;	
+	font-family:宋体;
+	font-size:12px;	
+	font-weight:600;
+}
+
+
+.ContactListBorder
+{
+	border-left:solid 1px #93a6b6;
+	border-right:solid 1px #93a6b6;
+	border-bottom:solid 1px #93a6b6;
+	min-height: 100%; /* For Modern Browsers */
+	height: 100% !important; /* For Modern Browsers */
+	height: 100%; /* For IE */
+	/*height:auto !important;
+	height:500px;*/ 
+	
+	width:193px;
+	overflow:hidden;
+	background-color:#fff;
+	padding-bottom: 37px;
+	
+}
+
+
+.searchGroup
+{
+	/*border:solid 1px red;*/
+	height:20px;
+	width:180px;	
+	
+margin-top:10px;/*	*/
+	
+	margin-left:4px;
+	
+}
+
+
+.ContactLists
+{
+	margin:6px;
+	font-family:宋体;
+	font-size:12px;
+	overflow-y:auto;
+	overflow-x:hidden;
+	height: 100%;
+/*	border:solid 2px yellow;
+	
+	height:450px;*/
+}
+
+
+.ContactListDetails
+{
+	margin:9px;	
+	
+/*border:solid 1px red;*/
+	
+	
+}
+
+
+
+
+
+#divContactListPanel
+{
+	min-height: 100%; /* For Modern Browsers */  
+	height: 100% !important; /* For Modern Browsers */  
+	height: 100% /* For IE */ 
+	/*border:solid 1px blue;#6c7f8d;*/
+	
+    display:block;/**/
+	border: 1px solid #6c7f8d;
+    
+	
+	/*overflow:auto;决定给它内部的 mailListBlock1 类的margin-top 在FF中生效*/
+	
+
+}
+
+
+
+#divToolBox
+{
+	margin-top:30px;	
+font-size:12px;
+font-weight:600;
+}
+
+
+
+
+
+
+
+
+#divImportContact
+{
+	margin-left:20px;	
+	margin-top:20px;
+	height:32px;
+
+
+	
+      
+}
+
+#divImportContact #divImportContactPic
+{
+	float:left;
+}
+
+
+
+#divExportContact
+{
+	margin-left:20px;	
+	margin-top:10px;	
+	height:32px;
+	
+}
+
+#divExportContact #divExportContactPic
+{
+	float:left;	
+}
+
+.exportImport
+{
+	margin-left:10px;
+margin-top:7px;
+position:absolute;
+font-weight: normal;
+font-family: Arial, "Times New Roman","宋体";
+}
+
+
+
+.exportWndPanel
+{
+	width:400px;
+
+}
+
+
+
+.exportWnd-explain
+{
+	margin-left:4px;
+
+	text-align:left;
+	margin-top:18px;
+	margin-bottom:18px;
+	font-size:14px;
+}
+
+
+.exportWndTablePanel
+{
+	text-align:center;
+}
+
+
+.exportTB
+{
+	width:358px;
+}
+
+.exportTB .lbl
+{
+	text-align:right;	
+	font-weight:700;
+	color:Black;
+}
+
+.exportTB .content
+{
+	text-align:left;	
+}
+
+
+
+
+/***contact_list2********/
+
+.contactCard
+{
+	width:255px;
+	height:184px;
+	float:left;
+	margin:9px;	
+}
+
+
+.contactCard .fontTitleStyle
+{
+	color:#516574;	
+	font-family:宋体;
+	font-size:15px;	
+	font-weight:600;
+	
+}
+
+.tbl
+{
+	margin: 10px auto auto 14px;
+	width:90%;	
+	height:90px;
+}
+
+.tbl .tdLeft
+{
+	width:65px;
+}
+
+.tbl .boldName
+{
+	font-weight:700;
+	font-size:14px;	
+}
+
+.contactCard .contactMail
+{
+	margin:10px auto auto 18px;
+	width:100%;
+	font-size:13px;
+	font-weight:bold;
+	color:#6397bb;	
+	text-decoration:underline;
+}
+
+.contactCardsPanel
+{
+
+	height:450px;	
+	overflow-y:scroll;
+}
+
+#contactShowType
+{
+
+	height:20px;
+	width:100px;
+
+	display:inline-block;
+	
+	top:8px;
+	right:200px;
+	position:absolute;
+	
+	
+}
+
+
+#contactShowType .fontStyle
+{
+	color:#377ba8;	
+	font-family:宋体;
+	font-size:12px;	
+	font-weight:600;
+	
+
+	float:left;
+	margin-top:3px;
+	
+}
+
+.myContacts
+{
+	 font-family:宋体;
+	 font-size:14px;
+	 font-weight:bold;
+	/* float:left;	*/
+	
+}
+
+
+#toolSplit
+{
+	height:1px;
+	border-bottom:solid 3px #d4e0ec;
+	width:100%;	
+}
+.contactEditInput{
+	border: 1px solid #93a6b6;
+	font-size: 12px;
+	margin-top: 3px;
+	margin-bottom: 2px;
+
+}
+.contactListCheckBox{
+	padding-right: 4px;
+	padding-left: 4px;
+}
+/******main页开始******/
+#tbAnnounce
+{
+	height:95%;	
+}
+
+#divHello
+{
+	font-size:18px;
+	border-bottom:solid 1px #a5b0b8;	
+	font-weight:bold;
+	height:40px;
+}
+
+#spanHello
+{
+	margin: 8px auto 8px 0px;
+
+	 
+	width:500px;
+	display:block;
+}
+
+#divMailBrief
+{
+	margin-top:15px;
+	font-size:14px;
+	
+
+}
+
+#spanMailsNum
+{
+	letter-spacing:1px; 
+	color:Red; font-weight:600;	
+}
+
+
+.linkedStyle:link
+{
+	color:	#005590;
+	font-size:14px;
+	text-decoration:none;
+}
+.linkedStyle:visited
+{
+	color: #005590;
+	font-size:14px;
+}
+
+
+
+#spanIcoMail
+{
+	margin-top:2px;
+}
+
+
+
+#divMailLink
+{
+	margin-top:10px;
+	font-size:16px;
+}
+
+
+
+.linkedStyle2:link
+{
+	color: #005590;
+	font-weight:bold;
+	text-decoration:none;
+}
+
+.linkedStyle2:visited
+{
+	color: #005590;
+ 
+	font-weight:bold;
+}
+
+
+
+#divAnnBody
+{
+	margin-top:30px;	
+	
+	
+ 
+ 
+ 
+	
+}
+
+
+
+#spanAnnTabTxt
+{
+	margin-top:11px;
+	margin-left:79px;	
+	position:absolute;
+}
+
+#spanLabelTabTxt
+{
+	margin-top:11px;
+	margin-left:79px;	
+	position:absolute;
+}
+
+#spanLabelTab
+{
+	/*margin-top:12px;
+	margin-left:70px;	
+	position:absolute;
+	color:#005590;
+	font-size:12px;*/
+
+}
+
+
+#divTabContent
+{
+	color:	#516574;
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+	border-left-width: 1px;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-left-style: solid;
+	border-right-color: #93a6b6;
+	border-bottom-color: #93a6b6;
+	border-left-color: #93a6b6;
+	min-height: 300px;
+	height:auto;
+} 
+
+
+#AnnContent
+{
+	margin-left:auto;
+	margin-right:auto;
+	
+}
+
+.AnnRow
+{
+	padding: 10px;
+}
+
+
+
+#divFoot
+{
+	font-size:12px;
+	color:#a5b0b8;
+	position:absolute;
+	height:60px;
+	width:800px;
+}
+
+.spanCopyright
+{
+	
+	margin-left:24px;	
+}
+
+.splitLink
+{
+	color:#516574;
+	margin-left:10px;
+	margin-right:7px;
+}
+
+#divFootLinkPnl
+{
+	margin-bottom:10px;
+	margin-left:24px;	
+	 
+
+}
+
+.divFootLink:link
+{
+	color:#a5b0b8;
+}
+
+.divFootLink:visited
+{
+	color:#516574;
+}
+
+
+#divWeather
+{
+	margin-top:25px;
+	position:absolute;	
+	 
+	width:200px;
+	height:200px;
+}
+
+#capa_main
+{
+	margin-top:131px;
+	position:absolute;
+	width:200px;
+	height:200px;
+	overflow: hidden;
+}
+.capa_shareList{width:195px;}
+
+
+#WeathLoc
+{
+	color:#005590;	
+	font-weight:bold;
+	margin-top:14px;
+	margin-left:6px;
+	position:absolute;
+	font-size:14px;
+}
+
+
+
+.weaDetails
+{
+
+	margin-top:6px;	
+}
+
+.weaNextDetails
+{
+	margin-top:6px;	
+	margin-left:50px;
+	position:absolute;
+	color:#005590;
+}
+
+.redDay
+{
+	color:Red;
+	font-weight:bold;
+	}
+
+.bigWeath
+{
+	font-size:17px;
+	font-weight:600;
+	margin-bottom:10px;
+	
+}
+.tdLeftWeight {
+	padding-right: 20px;
+}
+
+/*****main页结束*******/
+
+
+
+
+/**********登录页面开始*****************/
+
+#divBody
+{
+	border:solid 1px white;/*这个不加 FF中 位子就跑到下面去了*/
+	width:800px;	
+
+	margin-left: auto; margin-right: auto; /*	整体居中 position:absolute; 此时不能加*/
+	
+}
+
+#divLogo
+{
+	float:left;
+	position:absolute;
+}
+
+#divTopSpace
+{
+	width:490px;
+	height:58px;
+
+	float:left;
+	
+
+margin-left:300px;
+	position:absolute;
+}
+
+#divTopLink
+{
+	
+	position:absolute;	
+	right:10px;
+	top:20px;
+	color:#516574;
+/*			*/
+
+}
+
+.spanLink
+{
+	 text-decoration:underline;
+}
+
+
+#divMiddle
+{
+	margin-top:80px;
+	height: 400px;
+	
+	/*border:solid 1px red;*/
+}
+
+
+#divRightLoginArea
+{
+	width:374px;
+	height:328px;
+
+
+}
+
+#divLeftPicPanel
+{
+	height:374px;
+	width:410px;
+
+	float:left;
+
+
+
+}
+
+
+
+#divLeftLable
+{
+	margin-top:10px;	
+	margin-left:90px;
+	font-size:14px;
+	font-family:宋体;
+	font-weight:600;
+	color:#3f3f3f;
+}
+
+#divRightLoginTitle
+{
+		
+}
+
+
+
+.inputArea
+{
+   	height:220px;
+	margin-left:32px;
+}
+
+
+.blackBold
+{
+	 font-weight:bold;
+	font-size:12px;	
+	font-family:宋体;
+}
+
+.txtC
+{
+	width:130px;
+	height:18px;
+	border: solid 1px #838383;
+	line-height: 18px;
+}
+
+.txtUsername
+{
+	width:130px;
+	height:18px;
+	border: solid 1px #838383;
+	line-height: 18px;
+}
+
+.txtDomain
+{
+	width:110px;
+	height:18px;
+	border: solid 1px #838383;
+	line-height: 18px;
+}
+
+.rememberCode
+{
+		font-size:14px;
+		font-family:黑体;
+		
+		/*border: solid 1px black;position:absolute;
+		margin:3px auto auto 3px;*/
+}
+
+
+.linkAdAtInput
+{
+	color:#848585;
+	margin-top:	-5px;
+	margin-left:80px;
+	position:absolute;
+}
+
+
+#mailTab
+{
+	font-weight:600;
+	font-size:14px;	
+	margin:0px;
+	position:absolute;
+	
+	width:125px;
+	height:42px;
+	text-decoration:none;
+}
+
+
+
+.txtTitleTxt
+{
+	font-size:14px;
+	margin:15px auto auto 8px;
+	position:absolute;
+
+}
+.txtTitleTxt2
+{
+	font-size:14px;
+	margin:15px auto auto 37px;
+	position:absolute;
+}
+
+.txtTitleTxt3
+{
+	font-size:14px;
+	position:absolute;
+	margin-top: 15px;
+	margin-right: auto;
+	margin-bottom: auto;
+	margin-left: 33px;
+}
+
+#groupTab
+{
+	font-weight:600;
+	font-size:14px;	
+	margin:0px auto auto 247px;
+	position:absolute;
+	
+		width:125px;
+	height:42px;
+	text-decoration:none;
+}
+
+
+
+
+#depTab
+{
+	font-weight:600;
+	font-size:14px;	
+	margin:0px auto auto 123px;
+	position:absolute;
+	width:125px;
+	height:42px;
+	text-decoration:none;
+}
+
+
+#divBottomSpace
+{
+	width:150px;
+	height:58px;
+	
+	float:left;
+}
+
+
+#divFoot
+{
+	position:absolute;
+	height:58px;
+	background-color:White;
+	width:800px;
+}
+
+
+#spanbtnText
+{
+	margin-top:9px;
+	position:absolute;	
+	
+	margin-left:24px;
+
+}
+
+
+#divCopyright
+{
+	font-size:12px; 
+	color:#a5b0b8
+}
+/*
+**********登录页面结束****************/
+
+
+
+.addressTree{border-collapse:separate;border-spacing:0}
+.upperPanel a {
+	text-decoration: none;
+}
+
+.contactToolBox {
+font-family: Verdana, Arial, Helvetica, sans-serif, "宋体", "微软雅黑";
+font-size: 12px;
+font-weight: bold;
+color: #005590;
+}
+
+/******main页开始******/
+#tbAnnounce
+{
+	height:95%;	
+}
+
+#divHello
+{
+	font-size:18px;
+	border-bottom:solid 1px #a5b0b8;	
+	font-weight:bold;
+	height:40px;
+}
+
+#spanHello
+{
+	margin: 8px auto 8px 0px;
+
+	 
+	width:500px;
+	display:block;
+}
+
+#divMailBrief
+{
+	margin-top:15px;
+	font-size:14px;
+	
+
+}
+
+#spanMailsNum
+{
+	letter-spacing:1px; 
+	color:Red; font-weight:600;	
+}
+
+
+.linkedStyle:link
+{
+	color:	#005590;
+	font-size:14px;
+	text-decoration:none;
+}
+.linkedStyle:visited
+{
+	color: #005590;
+	font-size:14px;
+}
+
+
+
+#spanIcoMail
+{
+	margin-top:2px;
+}
+
+
+
+#divMailLink
+{
+	margin-top:10px;
+	font-size:16px;
+}
+
+
+
+.linkedStyle2:link
+{
+	color: #005590;
+	font-weight:bold;
+	text-decoration:none;
+}
+
+.linkedStyle2:visited
+{
+	color: #005590;
+ 
+	font-weight:bold;
+}
+
+
+
+#divAnnBody
+{
+	margin-top:30px;	
+	
+	
+ 
+ 
+ 
+	
+}
+
+
+
+#spanAnnTabTxt
+{
+	margin-top:11px;
+	margin-left:79px;	
+	position:absolute;
+}
+
+#spanLabelTabTxt
+{
+	margin-top:11px;
+	margin-left:79px;	
+	position:absolute;
+}
+
+#spanLabelTab
+{
+	/*margin-top:12px;
+	margin-left:70px;	
+	position:absolute;
+	color:#005590;
+	font-size:12px;*/
+
+}
+
+
+#divTabContent
+{
+	color:	#516574;
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+	border-left-width: 1px;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-left-style: solid;
+	border-right-color: #93a6b6;
+	border-bottom-color: #93a6b6;
+	border-left-color: #93a6b6;
+	min-height: 300px;
+	height:auto;
+} 
+
+
+#AnnContent
+{
+	margin-left:auto;
+	margin-right:auto;
+	
+}
+
+.AnnRow
+{
+	padding: 10px;
+}
+
+
+
+#divFoot
+{
+	margin-top:20px;	
+	font-size:12px; 
+	color:#a5b0b8;
+	
+	 
+	position:absolute;
+		height:60px;
+	width:924px;
+}
+
+.spanCopyright
+{
+	
+	margin-left:24px;	
+}
+
+.splitLink
+{
+	color:#516574;
+	margin-left:10px;
+	margin-right:7px;
+}
+
+#divFootLinkPnl
+{
+	margin-bottom:10px;
+	margin-left:24px;	
+	 
+
+}
+
+.divFootLink:link
+{
+	color:#a5b0b8;
+}
+
+.divFootLink:visited
+{
+	color:#516574;
+}
+
+
+#divWeather
+{
+	margin-top:25px;
+	position:absolute;	
+	 
+	width:200px;
+	height:200px;
+}
+
+#capa_main
+{
+	margin-top:10px;
+	position:absolute;
+	width:200px;
+	height:400px;
+	overflow: hidden;
+}
+.capa_shareList{width:195px;}
+
+
+#WeathLoc
+{
+	color:#005590;	
+	font-weight:bold;
+	margin-top:14px;
+	margin-left:6px;
+	position:absolute;
+	font-size:14px;
+}
+
+
+
+.weaDetails
+{
+
+	margin-top:6px;	
+}
+
+.weaNextDetails
+{
+	margin-top:6px;	
+	margin-left:50px;
+	position:absolute;
+	color:#005590;
+}
+
+.redDay
+{
+	color:Red;
+	font-weight:bold;
+	}
+
+.bigWeath
+{
+	font-size:17px;
+	font-weight:600;
+	margin-bottom:10px;
+	
+}
+.tdLeftWeight {
+	padding-right: 20px;
+}
+
+/*****main页结束*******/
+
+/*****工具栏开始*******/
+.headCenter ol {
+	display: block;
+	overflow: hidden;
+	padding-top: 5px;
+}
+
+.headCenter ol li {
+	display: block;
+	float: left;
+}
+.headCenter ol li input {
+	height: 26px;
+	padding-right: 4px;
+	padding-left: 4px;
+	font-family: Verdana, Arial, Helvetica, sans-serif, "宋体", "微软雅黑";
+}
+.headCenter ol li select {
+	font-family: Verdana, Arial, Helvetica, sans-serif, "宋体", "微软雅黑";
+}
+.input_spacing {
+	overflow: hidden;
+	width: 12px;
+}
+/*****工具栏结束*******/
+
+/*****setup1页开始*******/
+
+
+#divSetupPage
+{
+	height:100%;
+	width:100%;
+     
+    
+     
+}
+
+#boldCaptionBG
+{
+	width:100%;
+	height:35px;	
+	 
+	background-color:white;
+
+ 
+}
+
+
+.boldCaption
+{
+	font-weight:bold;
+	font-size:13px;	
+	margin:10px auto 5px 10px;/**/
+	
+	
+}
+
+
+#divTabPanel
+{
+	height:90%;/*100%;*/
+	width:100%;
+	background-color:#eee;
+/*	border:solid 1px blue;	*/
+
+}
+
+
+#divTabBG
+{
+	height:36px;
+	width:100%;
+	background-color:#cbd2d8;
+/*		border-bottom:solid 1px #eee;cbd2d8
+ 
+	padding-left:20px;*/
+}
+
+
+
+#divSetupTabContent
+{
+	height:100%;
+	width:99%;
+		
+	/*margin-bottom:0px;*/
+	
+	 
+}
+
+#spanTab1
+{
+	margin-left:10px;	
+/*	position:absolute;*/
+	
+	width:54px;
+	height:23px;
+	margin-top:1px;
+	
+    display:block;
+	float:left;
+}
+.tabSelect
+{
+	background-color:#eeeeee;	
+	
+	
+	border:solid 1px #9cadbc;
+    border-bottom: solid 0px #cbd2d8;
+    
+    float:left;
+    
+    
+}
+
+#tabUsualTab
+{
+	
+	margin-top:5px;
+	width:75px;/**/
+	height:23px;
+	display:block;	
+	text-align:center;
+	
+	
+   padding: 6px 4px 0px 10px;/* */
+ 
+}
+
+
+#spanUsualTabTxt
+{
+/*	margin-left:12px;
+	margin-top:4px;	
+	position:fixed;*/
+ 
+}
+#tabUsualTab:link
+{
+	text-decoration:none;
+	color:black;	
+	font-size:13px;
+	font-weight:bold;
+}
+
+#tabUsualTab:visited
+{
+	text-decoration:none;
+	color:black;	
+	font-size:13px;
+	font-weight:bold;
+}
+
+#tabUsualTab:hover
+{
+	background-color:#eeeeee;	
+	
+	
+	border:solid 1px #9cadbc;
+    border-bottom: solid 0px #cbd2d8;
+   
+}
+ 
+
+
+
+
+
+#spanTab2
+{
+	 
+	left:120px;
+	position:absolute;
+/*	margin-left:75px;	
+	width:54px;
+	height:23px;
+	margin-top:1px;*/
+	width:54px;
+	height:23px;
+	margin-top:1px;
+	
+    display:block;
+    
+    
+	
+	 
+}
+
+#tabAccountTab
+{
+	/*margin-top:5px;
+ 
+	width:54px;
+	height:23px;
+	display:block;	*/
+	
+	
+	
+/*	
+	margin-top:5px;
+	height:23px;
+	display:block;		
+    padding: 6px 5px 0px 12px;*/
+    
+    
+    
+	margin-top:5px;
+	width:75px;/**/
+	height:23px;
+	display:block;	
+	padding: 6px 4px 0px 10px;/* */
+	text-align:center;
+ 
+
+}
+
+   
+#spanAccountTabTxt
+{
+/*	margin-left:12px;
+	margin-top:5px;	
+	position:absolute;
+	color:#516574;*/
+}
+#tabAccountTab:link
+{
+	text-decoration:none;
+	color:black;	
+	font-size:13px;
+	font-weight:bold;
+}
+
+#tabAccountTab:visited
+{
+	text-decoration:none;
+	color:black;	
+	font-size:13px;
+	font-weight:bold;
+}
+
+
+#tabAccountTab:hover
+{
+	background-color:#eeeeee;	
+	
+	
+	border:solid 1px #9cadbc;
+    border-bottom: solid 0px #cbd2d8;
+   
+}
+
+
+
+#tbUsualSetup
+{
+	width:100%;
+	background-color:#eee;
+	 
+}
+
+
+#divPsnlName
+{
+	width:95%;
+	height:20px;
+	border-bottom:solid 2px #c7d6e6;
+	margin-left:20px;
+	
+	padding-top:20px;
+}
+
+
+.boldLabel
+{
+	/*position:absolute;
+	margin:10px auto 0px 0px;	*/
+	
+	
+ 
+	
+    font-weight:bold;
+	
+}
+
+#signStyle
+{
+	margin-top:10px;
+	margin-left:20px;
+	font-size:13px;
+	height:35px;
+ 
+	width:95%;
+	/*	border-bottom:solid 2px #c7d6e6;	
+	*/
+	
+}
+
+
+#signStyleIt
+{
+	margin-left:80px;	
+}
+
+#spanAddPsnlName
+{
+	color:#6999b9;
+	cursor:pointer;
+	margin:4px auto auto 4px;
+	font-weight:bold;
+}
+
+
+#divShowStyle
+{
+	width:95%;
+	height:20px;
+	border-bottom:solid 2px #c7d6e6;
+	margin-left:20px;
+	
+	 
+}
+
+
+.divSummarySize
+{
+	width:200px;
+	height:75px;
+/*	border:solid 1px red;	*/
+	margin-left:100px;
+	margin-top:20px;
+	
+}
+
+
+
+.spanSummary
+{
+	/*margin-top:6px; position:absolute;	*/
+    padding: 10px auto 1px 1px;
+ 
+     vertical-align:bottom;
+}
+
+.spanSize
+{
+	/*margin-top:6px; position:absolute;	*/
+	padding: 10px auto 1px 1px;
+	vertical-align:bottom;
+}
+
+
+.divLine
+{
+	width:95%;
+	height:2px;
+	border-bottom:solid 1px #c7d6e6;
+	margin-left:20px;
+}
+
+#divAutoReply
+{
+	width:95%;
+	height:20px;
+	border-bottom:solid 2px #c7d6e6;
+	margin-left:20px;	
+}
+
+.divAutoReplyOption
+{
+	width:390px;
+	height:28px;
+ 
+	margin-left:100px;
+	margin-top:10px;
+}
+#divEditor
+{
+	width:390px;
+	height:170px;	
+	margin-left:100px;
+}
+
+#whatIsAutoReply
+{
+	color:#6999b9;
+	cursor:pointer;
+	
+	font-weight:bold;	
+    margin-left:230px;
+ 
+    text-decoration:none;
+}
+
+#divButtons
+{
+	height:40px;
+	width:100%;
+	background-color:	#cbd2d8;
+	
+
+/*
+    *position:absolute;
+	display:block; position:absolute; bottom:0px;*/
+	
+}
+
+#divButton
+{
+	margin:9px auto auto 15px;	
+}
+
+
+
+#bottomDiv{ /*Code for Moz, Opera, etc.*/
+height:50px;
+width:100%;
+background:#9bb;
+position:fixed;
+bottom:0;
+margin-top:30px;
+}
+
+
+/* 此代码　在页面中HACK   
+    <!--[if IE]>
+    
+    #bottomDiv{
+    position:absolute;
+    top:expression(offsetParent.scrollTop + (document.getElementById("scaleDiv").offsetHeight-50));
+    }
+    <![endif]-->
+ */
+
+/*****setup1页结束*******/ 
+
+
+
+
+
+
+
+/****setup2页面**#cbd2d8;****/
+#divMailNick
+{
+	padding-top:20px;
+	padding-left:80px;
+	width:95%;
+	height:60px;
+	 
+
+
+}
+
+
+#divAccountInfo
+{
+	width:95%;
+	height:20px;
+	border-bottom:solid 2px #c7d6e6;
+	margin-left:20px;
+	
+	padding-top:20px;
+}
+
+
+
+
+.lbl
+{
+	color:#6999b9;
+	cursor:pointer;
+	margin:4px auto auto 4px;
+	font-size:12px;
+	
+	
+}
+
+
+.selectStyle
+{
+	width:80px;	
+}
+
+
+
+#divPsnlInfo
+{
+	padding-top:20px;
+	padding-left:100px;
+	width:95%;
+	height:100%;
+}
+
+
+.divPadding
+{
+	padding-top:10px;	
+}
+
+
+
+#divAlterpwd
+{
+	width:95%;
+	height:20px;
+	border-bottom:solid 2px #c7d6e6;
+	margin-left:20px;
+	
+	padding-top:20px;
+}
+
+#divAlterPwdInfo
+{
+	padding-top:20px;
+	padding-left:100px;
+	width:95%;
+	height:100%;
+}
+
+
+
+#divTimeZone
+{
+	width:95%;
+	height:20px;
+	border-bottom:solid 2px #c7d6e6;
+	margin-left:20px;
+	
+	padding-top:20px;
+}
+
+
+
+#divTimeZoneInfo
+{
+	padding-top:20px;
+	padding-left:100px;
+	width:95%;
+	height:100%;
+}
+
+
+#divDelySend
+{
+	width:95%;
+	height:20px;
+	border-bottom:solid 2px #c7d6e6;
+	margin-left:20px;
+	
+	padding-top:20px;
+}
+
+
+#divdelySendInfo
+{
+	padding-top:20px;
+	padding-left:100px;
+	width:95%;
+	height:100%;
+}
+/**********/

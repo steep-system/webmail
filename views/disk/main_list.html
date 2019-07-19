@@ -1,0 +1,150 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<title>主页</title>
+<link href="../../style/layout.css" type="text/css" rel="stylesheet" />
+<link href="../../skin/default/skin.css" type="text/css" rel="stylesheet" />
+<link href="../../style/share_list.css" type="text/css" rel="stylesheet" />
+<link rel="../../stylesheet" type="text/css" href="js/lightbox/jquery.lightbox.packed.css" />
+<script src="../../js/jquery-1.3.2.min.js"></script>
+<script src="../index/lang"></script>
+<script src="../../js/dialog/zDrag.js"></script>
+<script src="../../js/dialog/zDialog.js"></script>
+<script src="../../js/jwplayer/swfobject.js"></script>
+<script src="../../js/disk/base.js"></script>
+<script src="../../js/disk/list.js"></script>
+
+<script src="../../js/lightbox/jquery.lightbox.js?show_helper_text=false"></script>
+<script src="../../js/jquery.hotkeys-0.7.9.min.js"></script>
+<script src="../../js/progressbar/jquery.progressbar.min.js"></script>
+<script>
+document.oncontextmenu=new Function("event.returnValue=false;");
+document.onselectstart=new Function("event.returnValue=false;");
+function setSelect(){}
+</script>
+
+<style type="text/css">
+.shareList-topmenu-plate01-r ol {
+	display: block;
+	overflow: hidden;
+	padding-left: 10px;
+}
+
+.shareList-topmenu-plate01-r ol li {
+	display: block;
+	float: left;
+}
+.shareList-topmenu-plate01-r ol li input {
+	height: 26px;
+	padding-right: 4px;
+	padding-left: 4px;
+	font-family: Verdana, Arial, Helvetica, sans-serif, "宋体", "微软雅黑";
+}
+.input_spacing {
+	overflow: hidden;
+	width: 12px;
+}
+</style>
+</head>
+
+<body>
+<!--outer Begin-->
+<div class="shareList">
+              
+			  
+            <div class="shareList-r">
+	<div class="shareList-info" >
+	  <div class="shareList-info-toptit shareList-info-top">
+	   <span><?php echo LANG_DISK_D0009;?></span>	   
+	  </div>
+	  <div class="shareList-info-content">
+		<div class="shareList-info-space"> 
+			<h3><span style="text-decoration:none;"><?php echo LANG_DISK_D0010;?></span></h3>
+			<div align="center"><span class="progressBar" id="sizeplan"></span></div>
+			
+			<div class="shareList-info-space-con">
+				<span class="shareList-info-space-used"><?php echo LANG_DISK_D0011;?>：<span id="info_size"></span> (<span id="info_sizerate"></span> %)</span></span><br />
+				<span class="shareList-info-space-remain"><?php echo LANG_DISK_D0013;?>：<span id="info_maxsize"><?php echo $maxsize;?></span> MB</span></span>
+			</div>
+		</div>
+		<div class="shareList-info-bg shareList-info-list">
+		  <ul>
+			<?php echo $this->infomenu;?>
+		  </ul>
+		</div>
+		
+	  </div>
+	</div>
+	<Br>
+	  <div id="musicplayer" style="display:block;">
+	  
+	  </div>
+ </div>
+            
+              <div class="shareList-l">
+                <div class="shareList_toptit">
+					<div class="shareList_toptit_r">
+				 <span class="shareList_top_tab01"><a href="javascript:void(0)" class="tab01" title="<?php echo LANG_COMMON_COM001;?>"></a><a href="list?type=1"  class="tab02" title="<?php echo LANG_COMMON_COM003;?>"></a></span>
+				 <span class="shareList_top_tab02" style="display:none"><a href="list?type=2" class="tab01" ></a><a href="javascript:void(0)" class="tab02"></a></span>
+				 <!--<div class="shareList-ser-bg shareList-ser ">
+				 <input class="shareList-ser-text" type="text" /><input type="button" value="" class="shareList-ser-bg shareList-ser-btn" />
+				 </div>-->
+			      </div>
+                 	<div class="shareList_toptit_l"><a href="####" id="pagemark"></a><strong><a href="javascript:void(0)" style='text-decoration:none;' onclick='jumptodir("",0)'><?php echo LANG_DISK_D0007;?></a></strong></div>
+                </div>
+                <div class="shareList-main" style="cursor:default;">
+						<div class="shareList-menu">
+						                <div class="plate01 shareList-topmenu-plate01-c">
+                  <div class="plate01 shareList-topmenu-plate01-l">
+                    <div class="plate01 shareList-topmenu-plate01-r">
+                      <ol>
+                        <li style="margin-right:3px;"><input type="button" id="btnUpload" value="<?php echo LANG_DISK_D0001;?>"/></li>
+<li style="margin-right:3px;"><input type="button" id="btnNewfolder" value="<?php echo LANG_DISK_D0002;?>"/></li>
+<li style="margin-right:3px;"><input type="button" id="btnDownload" value="<?php echo LANG_DISK_D0003;?>"/></li>
+<li style="margin-right:3px;"><input type="button" id="btnDel" value="<?php echo LANG_DISK_D0004;?>"/></li>
+<li style="margin-right:3px;"><input type="button" id="btnMov" value="<?php echo LANG_DISK_D0005;?>"/></li>
+                      </ol>
+                    </div>
+                  </div>
+                </div>
+
+						</div>
+						<div class="clear"></div>
+						
+						
+						<div class="plate02 shareList-menu2" id="dirdesc"><a href="javascript:void(0)" style="text-decoration:none;" onclick="jumptodir('',0)"><?php echo LANG_DISK_D0008;?></a></div>
+						
+						<div class="plate02 shareList-menu2">
+  <ul>
+    <div class="list_rightbox3"><a href="####" id="btn_selall" style="text-decoration:none;"><?php echo LANG_DISK_D0016;?></a></div>
+    <div class="list_rightbox2">
+      <li class="li01"><span class="select01">
+       <input name="" type="checkbox" value="" id="chkall" style="display:none;"/>
+        </span></li>
+    </div>
+  </ul>
+</div>
+	<div class="clear"></div>
+
+						
+						<!--<br class="clear" />-->
+						<div id="list"></div>
+						<div class="clear"></div>
+						
+						
+				</div>
+  </div>
+</div>
+<!--outer End-->
+</body>
+<input type="hidden" id="folder" name="folder" value="">
+<input type="hidden" id="disk" name="disk" value="">
+<input type="hidden" id="diskid" name="diskid" value="">
+<input type="hidden" id="curpage" value="1">
+<input type="hidden" id="maxpage" value="">
+<input type="hidden" id="curplay" value="">
+<input type="hidden" id="loadstate" value="0">
+<input type="hidden" id="type" value="<?php echo $type;?>">
+</html>

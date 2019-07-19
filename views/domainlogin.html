@@ -1,0 +1,131 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+    <title><?php echo $title;?></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link href="../../style/layout.css" type="text/css" rel="stylesheet" />
+    <link href="../../skin/default/skin.css" type="text/css" rel="stylesheet" />
+    <link href="../../style/share_list.css" type="text/css" rel="stylesheet" />
+    
+    <link href="../../skin/default/mailList_skin.css" type="text/css" rel="Stylesheet" />
+    <link href="../../style/mail_list.css" type="text/css" rel="Stylesheet" />
+	<script src="../../js/jquery-1.3.2.min.js"></script>
+	<script src="../../js/dialog/zDrag.js"></script>
+	<script src="../../js/dialog/zDialog.js"></script>
+	<script src="../../js/jquery.hotkeys-0.7.9.min.js"></script>
+<script>
+$(document).ready( function() {
+	$(document).bind('keydown', 'return', function(){
+		login();
+	});
+
+	$('#btnLogin').bind('click',function(){
+		login();
+	});
+});
+
+function login(){
+	if($('#domain').val()!=""){
+		document.forms[0].submit();
+	}else{
+		Dialog.alert('<?php echo LANG_COMMON_COM079;?>');
+		return false;
+	}
+}
+
+function getlang(){
+	if (navigator.language) {
+		var language = navigator.language;
+	}
+	else {
+		var language = navigator.browserLanguage;
+	}
+	return language;
+}
+</script>
+<style>
+html { overflow-x: hidden; overflow-y: hidden; }
+</style>
+</head>
+<body>
+    <div id="divBody">
+        <div>
+            
+            <div id="divTopSpace">
+                 <div id="divTopLink">
+                    <span class="spanLink"><?php echo LANG_COMMON_COM045;?></span>
+                </div>
+            </div>
+           
+        </div>
+        <div id="divMiddle">
+            <div id="divLeftPicPanel">
+                <div id="divLeftPic">
+                </div>
+                 <div id="divLeftLable">
+                        <?php echo LANG_COMMON_COM046;?>
+                    </div>
+            </div>
+            <div id="divRightPicPanel">
+                <div id="divRightLoginTitle">
+                    <span id="mailTabBg">
+                        <a id="mailTab" href="login">
+                            <!--<div id="arrowDown"></div>-->
+                            <span  class="txtTitleTxt2" style="cursor:hand;padding-left:10px;"><?php echo LANG_COMMON_COM047;?></span>
+                        </a>
+                     </span> 
+                    <span id="groupTabBg"><a id="groupTab" href="javascript:void(1);" class="tabSelected" style="cursor:hand;"><span  class="txtTitleTxt2"><?php echo LANG_COMMON_COM048;?></span></a> </span> 
+                    <span id="depTabBg"><a id="depTab" href="grouplogin" style="cursor:hand;"><span  class="txtTitleTxt3"><?php echo LANG_COMMON_COM049;?></span></a> </span> 
+                </div>
+                <div id="divRightLoginArea">
+                <form id="form1" name="form1" method="POST" action="../../cgi-bin/domain_main">
+                    <table class="inputArea"  align="center">
+                        <tr>
+                            <td><?php echo LANG_COMMON_COM078;?>：</td>
+                            <td>
+                               <input type="text" id="domain" name="domain" class="txtUsername" value="<?php echo $_COOKIE['USED_DOMAIN'];?>"/>
+                               <input type="text"  class="txtUsername" style="visibility:hidden;">
+                                <span class="blackBold"></span>
+                            </td>
+                        </tr>        
+                        <tr>
+                            <td><?php echo LANG_COMMON_COM051;?>：</td>
+                            <td>
+                                <input type="password" id="password" name="password" class="txtC"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" align="center">
+                               <input type="button" value="<?php echo LANG_COMMON_COM054;?>" id="btnLogin">
+                                
+                              <!-- <a href="javascript:void(1);" style="cursor:hand;text-decoration: none;"><div id="btnLogin"><span id="spanbtnText"><?php echo LANG_COMMON_COM054;?></span></div></a>-->
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                            <hr  style="border: solid 1px #dcdcdc;"/>
+                            </td>
+                        </tr>
+                    </table>
+                    </form>
+                    <div class="linkAdAtInput">
+                            <ul style="list-style-type:circle; ">
+                                    <li style="margin-top:4px;"><?php echo LANG_COMMON_COM067;?></li>
+                                    <li style="margin-top:4px;">SMTP: smtp.ee-post.com</li>
+                                    <li style="margin-top:4px;">POP3: pop.ee-post.com</li>
+                                    <li style="margin-top:4px;"><?php echo LANG_COMMON_COM068;?></li>
+                                </ul>
+                    </div>         
+                </div>
+                <div id="divRightLoginBottom"></div>
+            </div>
+        </div>
+        <div id="divFoot">
+            <div id="divBottomLogo"></div>
+            <div id="divBottomSpace"></div>
+            <div id="divCopyright"> <?php echo LANG_COMMON_COM069;?><br>Powered by gridware information technology co.,ltd © 2010 all right reserved</div>
+        </div>
+    </div>
+
+</body>
+</html>

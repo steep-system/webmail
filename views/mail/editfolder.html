@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<title>主页</title>
+<link href="../../style/layout.css" type="text/css" rel="stylesheet" />
+<link href="../../skin/default/skin.css" type="text/css" rel="stylesheet" />
+<link href="../../style/share_list.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="../../js/jquery-1.3.2.min.js"></script>
+<script src="../index/lang"></script>
+<script src="../../js/jquery.hotkeys-0.7.9.min.js"></script>
+<script src="../../js/mail/mailbox.js"></script>
+
+<script>
+
+
+
+
+$(document).ready(function() {
+	var fdata = stringToJson($('#listdata').html());	
+	var strfolder = folderSelect(0, 'ppath', fdata, '<?php echo $path;?>', '<?php echo $ppath;?>');
+	$('#foldertree').html(strfolder);
+})
+</script>
+</head>
+
+<body>
+<div class="share-upload">
+	<div class="share-upload-content">
+		<div class="share-upload-inputname">
+		<strong><?php echo LANG_MAIL_M0094;?>:</strong><div style="display:inline;" id="foldertree" /></div>
+		<br><br>
+		<strong><?php echo LANG_MAIL_M0086;?>:</strong><input type="text" id="fname" class="input01" style="font-size:14px;width:280px;" value="<?php echo $fname;?>" />
+		</div>
+		<div class="clear"></div>
+		<input type="hidden" id="path" value="<?php echo $path;?>">
+	</div>
+	<!--<div class="share-upload-bg share-upload-bottom"></div>-->
+</div>
+<div id="listdata" style="display:none;"><?php echo $strlist;?></div>
+</body>
+</html>

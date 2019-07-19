@@ -1,0 +1,91 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<title><?php echo LANG_DISK_D0007;?></title>
+<link href="../../style/layout.css" type="text/css" rel="stylesheet" />
+<link href="../../skin/default/skin.css" type="text/css" rel="stylesheet" />
+<link href="../../style/share_list.css" type="text/css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="../../js/thickbox/thickbox.css" />
+<link rel="stylesheet" type="text/css" href="../../js/lightbox/jquery.lightbox.packed.css" />
+
+<script src="../../js/jquery-1.3.2.min.js"></script>
+<script src="../index/lang"></script>
+<script src="../../js/disk/grouplist.js"></script>
+<script src="../../js/disk/base.js"></script>
+
+<script>var tb_pathToImage = "../../js/thickbox/loadingAnimation.gif";</script>
+<script language="javascript" src="../../js/thickbox/thickbox-disk.js"></script>
+<script src="../../js/lightbox/jquery.lightbox.js?show_helper_text=false"></script>
+<script src="../../js/progressbar/jquery.progressbar.min.js"></script>
+<script src="../../js/jquery.hotkeys-0.7.9.min.js"></script>
+<script>
+document.oncontextmenu=new Function("event.returnValue=false;");
+document.onselectstart=new Function("event.returnValue=false;");
+</script>
+</head>
+
+<body>
+            <div class="shareList">
+              
+			  
+			  <div class="shareList-r">
+	<div class="shareList-info" >
+	  <div class="shareList-info-toptit shareList-info-top">
+	   <span><?php echo LANG_DISK_D0009;?></span>	   
+	  </div>
+	  <div class="shareList-info-content">
+		<div class="shareList-info-space"> 
+			<h3><span style="text-decoration:none;"><?php echo LANG_DISK_D0010;?></span></h3>
+			<div align="center"><span class="progressBar" id="sizeplan"></span></div>
+			<div class="shareList-info-space-con">
+				<span class="shareList-info-space-used"><?php echo LANG_DISK_D0011;?>：<span id="info_size"></span> (<span id="info_sizerate"></span> %)</span></span><br />
+				<span class="shareList-info-space-remain"><?php echo LANG_DISK_D0013;?>：<span id="info_maxsize"><?php echo $maxsize;?></span> MB</span></span>
+			</div>
+		</div>
+		<div class="shareList-info-bg shareList-info-list">
+		  <ul>
+			<?php echo $this->infomenu;?>
+		  </ul>
+		</div>
+	  </div>
+	  <Br>
+	  <div id="musicplayer" style="display:block;"></div>
+	</div>
+ </div>
+ 
+              <div class="shareList-l">
+                <div class="shareList_toptit">
+					<div class="shareList_toptit_r">
+				 <span class="shareList_top_tab01"><a href="javascript:void(0)" class="tab01" title="<?php echo LANG_COMMON_COM001;?>"></a><a href="grouplist?type=1&user=<?php echo $user;?>&title=<?php echo $_REQUEST['title'];?>" title="<?php echo LANG_COMMON_COM003;?>" class="tab02"></a></span>
+				 <span class="shareList_top_tab02" style="display:none"><a href="grouplist?type=2&user=<?php echo $user;?>&title=<?php echo $_REQUEST['title'];?>" class="tab01" ></a><a href="javascript:void(0)" class="tab02"></a></span>
+				 <!--<div class="shareList-ser-bg shareList-ser ">
+				 <input class="shareList-ser-text" type="text" /><input type="button" value="" class="shareList-ser-bg shareList-ser-btn" />
+				 </div>-->
+			      </div>
+                 	<div class="shareList_toptit_l"><a href="####" id="pagemark"></a><strong><?php echo LANG_DISK_D0007;?></strong></div>
+                </div>
+                <div class="shareList-main">
+						
+						<div class="plate02 shareList-menu2" id="dirdesc"><a href="group" style="text-decoration:none;"><?php echo LANG_DISK_D0014;?></a> >> <?php echo $title;?></div>
+						
+						<div id="list"></div>
+						<div class="clear"></div>
+						
+						
+				</div>
+				</div>
+              </div>
+<!--outer End-->
+</body>
+<input type="hidden" id="folder" name="folder" value="">
+<input type="hidden" id="disk" name="disk" value="">
+<input type="hidden" id="diskid" name="diskid" value="">
+<input type="hidden" id="curpage" value="1">
+<input type="hidden" id="user" value="<?php echo $user;?>">
+<input type="hidden" id="updir" name="updir" value="1">
+<input type="hidden" id="maxpage" value="">
+<input type="hidden" id="curplay" value="">
+<input type="hidden" id="sharetype" value="group">
+</html>

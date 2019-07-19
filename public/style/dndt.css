@@ -1,0 +1,200 @@
+﻿BODY {
+	FONT-SIZE: 9pt; COLOR: #333333; LINE-HEIGHT: 16pt
+}
+.menu1 {
+	FONT-SIZE: 10pt;
+	COLOR: #117C97;
+	TEXT-DECORATION: none;
+	border-top-style: none;
+	border-right-style: none;
+	border-bottom-style: none;
+	border-left-style: none;
+
+
+}
+A.menu1 {
+	FONT-SIZE: 10pt; COLOR: #117C97; TEXT-DECORATION: none
+}
+A.menu1:link {
+	FONT-SIZE: 10pt; COLOR: #727746; TEXT-DECORATION: none
+}
+A.menu1:visited {
+	FONT-SIZE: 10pt; COLOR: #727746; TEXT-DECORATION: none
+}
+A.menu1:active {
+	FONT-SIZE: 10pt; COLOR: #444444; TEXT-DECORATION: none
+}
+A.menu1:hover {
+	FONT-SIZE: 10pt; COLOR: #006666
+}
+.menu2 {
+	FONT-SIZE: 10pt;
+	COLOR: #117C97;
+	font-weight: normal;
+	font-family: "\5fae\8f6f\96c5\9ed1";
+
+}
+A.menu2 {
+	FONT-SIZE: 10pt;
+	COLOR: #1EA1BC;
+	TEXT-DECORATION: none;
+	height: 21px;
+	line-height: 18px;
+}
+A.menu2:link {
+	FONT-SIZE: 10pt;
+	COLOR: #1EA1BC;
+	TEXT-DECORATION: none;
+}
+A.menu2:visited {
+	FONT-SIZE: 10pt; COLOR: #1EA1BC; TEXT-DECORATION: none
+}
+A.menu2:active {
+	FONT-SIZE: 10pt; COLOR: #1EA1BC; TEXT-DECORATION: none
+}
+A.menu2:hover {
+	FONT-SIZE: 10pt; COLOR: #031C25; TEXT-DECORATION: none
+}
+.menu3 {
+	FONT-SIZE:12pt;
+	COLOR: #FFFFFF;
+	TEXT-DECORATION: none;
+	font-weight: normal;
+	font-family: \5fae\8f6f\96c5\9ed1;
+
+}
+A.menu3 {
+	FONT-SIZE: 10pt; COLOR: #79663e; TEXT-DECORATION: none
+}
+A.menu3:link {
+	FONT-SIZE: 10pt;
+	COLOR: #CCCCCC;
+	TEXT-DECORATION: none;
+	font-weight: 700;
+	font-family: "\5fae\8f6f\96c5\9ed1";
+}
+A.menu3:visited {
+	FONT-SIZE: 10pt;
+	COLOR: #CCCCCC;
+	TEXT-DECORATION: none;
+	font-family: "\5fae\8f6f\96c5\9ed1";
+	font-weight: 700;
+	height: 61px;
+	width: 91px;
+}
+A.menu3:active {
+	FONT-SIZE: 10pt;
+	COLOR: #1EA1BC;
+	TEXT-DECORATION: none;
+	height: 61px;
+	width: 91px;
+	font-family: "\5fae\8f6f\96c5\9ed1";
+	font-weight: 700;
+}
+A.menu3:hover {
+	FONT-WEIGHT: normal;
+	FONT-SIZE: 10pt;
+	COLOR: #DA251C;
+	TEXT-DECORATION: none;
+	font-family: "\5fae\8f6f\96c5\9ed1";
+}
+.menu4 {
+	FONT-SIZE: 12pt;
+	COLOR: #21424B;
+	TEXT-DECORATION: none;
+	font-family: "\5fae\8f6f\96c5\9ed1";
+	line-height: 27px;
+	font-weight: 500;
+}
+A.menu4 {
+	FONT-SIZE: 12pt; COLOR: #7e653f; TEXT-DECORATION: none
+}
+A.menu4:link {
+	FONT-SIZE: 12pt;
+	COLOR: #0D3946;
+	TEXT-DECORATION: none
+}
+A.menu4:visited {
+	FONT-SIZE: 12pt; COLOR: #0D3946; TEXT-DECORATION: none
+}
+A.menu4:active {
+	FONT-SIZE: 12pt; COLOR: #7e653f; TEXT-DECORATION: none
+}
+A.menu4:hover {
+	COLOR: #ffc224; TEXT-DECORATION: underline
+}
+.menu5 {
+	FONT-SIZE: 36pt;
+	COLOR: #FFFFFF;
+	LINE-HEIGHT: 130%;
+	TEXT-DECORATION: none;
+	font-weight: normal;
+	font-family: "\5fae\8f6f\96c5\9ed1";
+}
+A.menu5 {
+	FONT-SIZE: 9pt; COLOR: #ffffff; LINE-HEIGHT: 130%; TEXT-DECORATION: none
+}
+A.menu5:link {
+	FONT-SIZE: 9pt; COLOR: #333333; LINE-HEIGHT: 130%; TEXT-DECORATION: none
+}
+A.menu5:visited {
+	FONT-SIZE: 9pt; COLOR: #ffffff; LINE-HEIGHT: 130%; TEXT-DECORATION: none
+}
+A.menu5:active {
+	FONT-SIZE: 9pt; COLOR: #ffffff; LINE-HEIGHT: 130%; TEXT-DECORATION: none
+}
+A.menu5:hover {
+	FONT-SIZE: 9pt; COLOR: #000000; LINE-HEIGHT: 130%; TEXT-DECORATION: none
+}
+.bg1 {
+	background-image: url(../image/dndt/003.jpg);
+	background-repeat: repeat-y;
+}
+.menu6 {
+	FONT-SIZE: 10pt;
+	COLOR: #1EA1BC;
+	line-height: 18px;
+	font-family: "\5fae\8f6f\96c5\9ed1";
+}
+A.menu6 {
+	FONT-SIZE: 10pt;
+	COLOR: #444444;
+	font-family: "\5fae\8f6f\96c5\9ed1";
+}
+A.menu6:link {
+	FONT-SIZE: 10pt;
+	COLOR: #0058B1;
+	font-family: \5fae\8f6f\96c5\9ed1;
+}
+A.menu6:visited {
+	FONT-SIZE: 10pt;
+	COLOR: #0058b1;
+	font-family: \5fae\8f6f\96c5\9ed1;
+}
+A.menu6:active {
+	FONT-SIZE: 10pt;
+	COLOR: #444444;
+	font-family: "\5fae\8f6f\96c5\9ed1";
+}
+A.menu6:hover {
+	FONT-SIZE: 10pt;
+	COLOR: #069;
+	font-family: "\5fae\8f6f\96c5\9ed1";
+}
+.bg1 {
+	background-repeat: repeat-y;
+	background-image: url(../image/dndt/003.jpg);
+}
+.bg2 {
+	background-repeat: no-repeat;
+	background-image: url(../image/dndt/008.jpg);
+	background-position: right center;
+}
+.km tr td table tr td #Accordion1 .AccordionPanel.AccordionPanelOpen .AccordionPanelContent table tr td {
+	background-repeat: repeat-x;
+	background-position: bottom;
+	line-height: 26px;
+}
+#nr .bg1 tr td table tr td table tr td table tr td table tr td table tr td img {
+	border: 2px solid #CCC;
+}

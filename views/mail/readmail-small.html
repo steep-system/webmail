@@ -1,0 +1,300 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+    <title><?php echo LANG_MAIL_M0034;?>:<?php echo $maildata['subject'];?></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link href="../../style/mail_list.css" type="text/css"  rel="Stylesheet" />
+    <link href="../../skin/default/mailList_skin.css" type="text/css"  rel="Stylesheet" />
+    <link rel="stylesheet" type="text/css" href="../../js/lightbox/jquery.lightbox.packed.css" />
+    <link href="../../skin/default/skin.css" type="text/css"  rel="Stylesheet" />
+    <script src="../index/getscript?mod=readmail"></script>
+    <script src="../index/lang"></script>
+    <script>
+    //document.oncontextmenu=new Function("event.returnValue=false;");
+    //document.onselectstart=new Function("event.returnValue=false;");
+    var timer = null;
+    $(document).ready( function() {
+    	$('body').bind('click',function(){
+    		if($('#folder').val()==""){
+    			parent.setSelect();
+    		}
+    	});
+
+    	$('#btnDel').bind('click',function(){
+    		Dialog.confirm(lang.mail.M0090,function(){
+    			if($('#folder').val()!=""){
+    				$.ajax({
+    					type: "post",
+    					url : "delmails",
+    					dataType:'html',
+    					data:"f="+$('#folder').val()+"&param="+$('#mid').val()+",&time="+new Date().getTime(),
+    					success: function(data,textStatus){
+    						if(data){
+    							window.parent.top.showtip(lang.mail.M0007);
+    							backtolist($('#folder').val(),1);
+    						}else{
+    							Dlalog.alert(lang.common.COM008);
+    						}
+    					}
+    				});
+    			}else{
+    				$.ajax({
+    					type: "post",
+    					url : "delmails",
+    					dataType:'html',
+    					data:"f="+parent.$('#folder').val()+"&param="+$('#mid').val()+",&time="+new Date().getTime(),
+    					success: function(data,textStatus){
+    						if(data){
+    							window.parent.top.showtip(lang.mail.M0007);
+    							parent.$('#readmail').attr('src','blank');
+    							parent.list(parent.$('#curpage').val());
+    						}else{
+    							Dlalog.alert(lang.common.COM008);
+    						}
+    					}
+    				});
+    			}
+    		});
+    	});
+
+    	$('#btnPrint').bind('click',function(){
+    		var url = "print?mid=<?php echo base64_encode($mid);?>&f=<?php echo $folder;?>&p=<?php echo $offset;?>&showimg="+$('#showimg').val();
+    		window.open(url);
+    	})
+    	checkFeedback();
+    	show_time();
+    });
+
+    function showimg(){
+    	var folder = "";
+    	if(typeof($('#folder').val())=="undefined"){
+    		folder = parent.$('#folder').val();
+    	}else if($('#folder').val()!=""){
+    		folder = $('#folder').val();
+    	}else{
+    		folder = parent.$('#folder').val();
+    	}
+
+    	$.ajax({
+    		type: "post",
+    		url : "setshowimg",
+    		dataType:'html',
+    		data:"f="+folder+"&mid="+$('#mid').val()+"&val=1&time="+new Date().getTime(),
+    		success: function(data,textStatus){
+    			if(data){
+    				$('#showimg').val(1);
+    				$('#showimgtip').empty();
+    				showcontent();
+    			}else{
+    				Dlalog.alert(lang.common.COM008);
+    			}
+    		}
+    	});
+    }
+
+    function showcontent(){
+    	var url = "readmail?mid=<?php echo base64_encode($mid);?>&f=<?php echo $folder;?>&type=1&back=<?php echo $_GET['back'];?>&page=<?php echo $_GET['page'];?>&time="+new Date().getTime();
+    	window.location.href = url;
+    }
+
+    function charsetTip(){
+    	$('#charset_tip').html('<font color="red">'+lang.mail.M0091+'</font>');
+    	parent.setSelect();
+    }
+
+    function setMail(mark){
+    	var oper = mark.split(".");
+    	$.ajax({
+    		type: "post",
+    		url : "setmail",
+    		dataType:'html',
+    		data:"f="+parent.$('#folder').val()+"&mid="+$('#mid').val()+",&oper="+oper[0]+"&val="+oper[1]+"&time="+new Date().getTime(),
+    		success: function(data,textStatus){
+    			if(data){
+    				if(oper[1]==1){
+    					$('#flag').html('<span class="icoJob" onclick="setMail(\'flag.0\')" title="'+lang.mail.M0092+'" style="cursor:hand;"></span>');
+    					parent.$('#flag_'+$('#pid').val()).html('<span class="icoJob"></span>');
+    				}else{
+    					$('#flag').html('<span class="icoJobClear" onclick="setMail(\'flag.1\')" title="'+lang.mail.M0093+'" style="cursor:hand;"></span>');
+    					parent.$('#flag_'+$('#pid').val()).empty();
+    				}
+    			}else{
+    				Dialog.alert(lang.mail.M0004);
+    			}
+    		}
+    	});
+    }
+
+    function openeml(param){
+    	window.open("reademl?param="+param);
+    }
+    
+    function opencontent(param,type){
+    	window.open("opencontent?param="+param+"&type="+type);
+    }
+
+    function cancelTimeSend(){
+    	$.ajax({
+    		type: "post",
+    		url : "cancelrandsendtime",
+    		dataType:'html',
+    		data:"f=sent&mid="+$('#mid').val()+"&tid="+$('#tid').val()+"&time="+new Date().getTime(),
+    		success: function(data,textStatus){
+    			if(data){
+    				window.top.getinfo();
+    				parent.list(parent.$('#curpage').val(),'RCV','DSC');
+    			}else{
+    				Dialog.alert(lang.mail.M0004);
+    			}
+    		}
+    	});
+    }
+
+    function show_time(){
+    	if($('#sendtime').val()!=''){
+    		countdown($('#sendtime').val());
+    	}
+    }
+
+    function countdown(sec){
+    	var showtime = "";
+    	var m = s = 0;
+    	if(sec>0){
+    		m = Math.round(sec/60);
+    		s = sec%60
+    		if(m){
+    			showtime = m + lang.common.COM032 + s + lang.common.COM033;
+    		}else{
+    			showtime = s + lang.common.COM033;
+    		}
+    		$('#timemark').html(showtime + lang.mail.M0097)
+    		sec-=1;
+    		timer = window.setTimeout("countdown("+sec+")", 1000);
+    	}else{
+    		clearTimeout(timer);
+    		$('#timemark').html(lang.mail.M0095+"...");
+    	}
+    }
+
+    function checkFeedback(){
+    	var feedback = $('#feedback').val();
+    	if(feedback!=''){
+    		Dialog.confirm(lang.mail.M0098,function(){
+    			$.ajax({
+    				type: "post",
+    				url : "sendfeedback",
+    				dataType:'html',
+    				data:"param="+feedback+"&time="+new Date().getTime(),
+    				success: function(data,textStatus){
+    					if(data){
+    						window.top.showtip(lang.mail.M0099);
+    						//window.location.reload();
+    					}
+    				}
+    			});
+    		},function(){
+    			//window.location.reload();
+    		});
+    	}
+    }
+
+    function backtolist(folder,page){
+    	if((folder=='inbox')||(folder=='sent')||(folder=='draft')||(folder=='trash')||(folder=='junk')||(folder=='_result_')){
+    		window.location.href = '../mail/mailbox?f='+folder+'&page='+page+'&time='+new Date().getTime();
+    	}else{
+    		window.location.href = '../mail/myfolder?folder='+folder+'&page='+page+'&time='+new Date().getTime();
+    	}
+    }
+    
+    function backtouserlist(folder,user,page){
+    	if((folder=='inbox')||(folder=='sent')||(folder=='draft')||(folder=='trash')||(folder=='junk')){
+    		window.location.href = '../mail/usermailbox?f='+folder+'&user='+user+'&page='+page+'&time='+new Date().getTime();
+    	}else{
+    		window.location.href = '../mail/myfolder?folder='+folder+'&page='+page+'&time='+new Date().getTime();
+    	}
+    }
+    
+    function viewMailLog(mid){
+    	var diag = new Dialog();
+    	diag.Title = "<?php echo LANG_MAIL_M0152;?>";
+    	diag.URL = "viewmaillog?mid="+mid;
+    	diag.Width = 560;
+    	diag.Height = 330;
+    	diag.show();
+    }
+    </script>
+    <style>
+    html{ overflow-x: hidden; overflow-y: auto; }
+    #div_L_Receivor span{font-size:11px;}
+    .mailFileOl{font-size:11px;}
+    .divBottom1{font-size:11px;}
+    </style>
+</head>
+<input type="hidden" id="mid" value="<?php echo base64_encode($mid);?>">
+<input type="hidden" id="curplayer" value="">
+<input type="hidden" id="showimg" value="<?php echo $isshowimg;?>">
+<input type="hidden" id="pid" value="<?php echo $pid;?>">
+<input type="hidden" id="type" value="<?php echo $type;?>">
+<input type="hidden" id="sendtime" value="<?php echo $sendtime_date;?>">
+<input type="hidden" id="tid" value="<?php echo $tid;?>">
+<input type="hidden" id="feedback" value="<?php if((!$maildata['read'])&&(!empty($maildata['feedback']))){echo base64_encode(json_encode(array('to'=>$maildata['feedback'],'subject'=>$maildata['subject'],'charset'=>$maildata['randcharset'])));}?>">
+<body>
+    <div id="divPanel">
+        <div id="divTop" style="margin:0 0 0 0;">
+          <div id="divDown">
+                <div id="divLeftWords">
+                	<div id="div_L_Subject">
+					<span style="float:left;margin-right:5px;"><?php echo LANG_MAIL_M0034;?>：<?php echo $maildata['subject'];?></span>
+					<span id="flag" style="margin-right:5px;"><?php echo $flag;?></span>
+					<span style="margin-right:5px;"><a href="readmail?mid=<?php echo base64_encode($mid);?>&f=<?php echo $folder;?>&p=<?php echo $offset;?>" target="_blank" title="<?php echo LANG_MAIL_M0051;?>"><img src="../../skin/default/image/new_readmail.gif" width="11" height="11" border="0"></a></span>
+					<span><?php echo $strback;?></span>
+					</div>
+                    <div class="newclear"></div>
+                    <div id="div_L_Sendor">
+                        <span class="sendor"><?php echo LANG_MAIL_M0033;?>：</span>
+                        <span><?php echo $maildata['from'];?></span>
+                    </div>
+                    <div id="div_L_Sendor">
+                        <span class="sendor"><?php echo LANG_MAIL_M0087;?>：</span>
+                        <span><?php echo $maildata['date'];?></span>
+                    </div>
+                    <div id="div_L_Sendor">
+                        <span class="sendor"><?php echo LANG_MAIL_M0050;?>：</span>
+                        <span><?php echo $maildata['to'];?></span>
+                    </div>
+                    <?php echo $mail_cc;?>
+                    <?php echo $attach_tip;?>
+                    <div id="div_L_Receivor">
+                    	<span><a href="write?mid=<?php echo base64_encode($mid);?>&f=<?php echo $folder;?>&p=<?php echo $offset;?>&oper=reply" target="_blank" class="bluelink"><?php echo LANG_MAIL_M0046;?></a></span><span style="padding:0px 5px 0px 5px;">|</span>
+                    	<span><a href="write?mid=<?php echo base64_encode($mid);?>&f=<?php echo $folder;?>&p=<?php echo $offset;?>&oper=replyall" target="_blank" class="bluelink"><?php echo LANG_MAIL_M0047;?></a></span><span style="padding:0px 5px 0px 5px;">|</span>
+                    	<span><a href="write?mid=<?php echo base64_encode($mid);?>&f=<?php echo $folder;?>&p=<?php echo $offset;?>&oper=transmit" target="_blank" class="bluelink"><?php echo LANG_MAIL_M0040;?></a></span><span style="padding:0px 5px 0px 5px;">|</span>
+                    	<span><a href="write?mid=<?php echo base64_encode($mid);?>&f=<?php echo $folder;?>&p=<?php echo $offset;?>&oper=attach" target="_blank" class="bluelink"><?php echo LANG_MAIL_M0042;?></a></span><span style="padding:0px 5px 0px 5px;">|</span>
+                        <span><a href="maildownload?param=<?php echo base64_encode($mid);?>|<?php echo $folder;?>" class="bluelink"><?php echo LANG_MAIL_M0052;?></a></span><span style="padding:0px 5px 0px 5px;">|</span>
+                        <span><a href="javascript:void(0);" class="bluelink" id="btnDel"><?php echo LANG_MAIL_M0014;?></a></span><span style="padding:0px 5px 0px 5px;">|</span>
+                        <?php echo $str_sque;?>
+                        <?php echo $opt_recall;?>
+                        <span><a href="###" class="bluelink" id="btnPrint"><?php echo LANG_MAIL_M0048;?></a></span><span style="padding:0px 5px 0px 5px;">|</span>
+                        <span id="charset_tip"><a href="javascript:void(0)" class="bluelink" onclick="charsetTip();"><?php echo LANG_MAIL_M0049;?></a></span>
+                        <?php echo $str_timesend;?>
+                        <span><?php echo $showimg;?></span>
+                    </div>
+                </div>
+          </div>
+        </div>
+        <div style="background-color:#FFFFFF;min-height:150px;">
+        <div id="mailcontent" style='width:98%;margin:5px 5px 5px 5px;word-break:break-all;word-wrap:break-word;overflow:hidden;font-family:Arial,"Times New Roman","微软雅黑","宋体";overflow-x:auto;'><?php echo $content;?></div>
+        </div>
+        
+        <div id="divBottom1" class="divBottom1" style="display:<?php echo $showattach;?>;">
+          <div id="divAvertise">
+            <span><div class="icoFile">&nbsp;</div>　<?php echo LANG_MAIL_M0053;?>(<?php echo $attach_count;?><?php echo LANG_COMMON_COM034;?>)</span></div>
+        </div>
+      <div id="divBottom2" class="divBottom2" style="display:<?php echo $showattach;?>;">
+   <ol class="mailFileOl"><?php echo $attachlist;?></ol>
+  </div><br>
+</div>
+<input type="hidden" id="folder" value="<?php echo $listfolder;?>">
+</body>
+<style>body{width:100%;}</style>
+</html>
+
