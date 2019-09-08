@@ -133,32 +133,32 @@ class setController extends Common
 			}
 			
 			if ($data['inreply']) {
-				$cfgcontent = "REPLY_SWITCH = " . $data['inreply'] . "\n";
+				if ($data['duration']) {
+					$cfgcontent = "OOF_STATE = 2\n";
+				} else {
+					$cfgcontent = "OOF_STATE = 1\n";
+				}
 			} else {
-				$cfgcontent = "REPLY_SWITCH = 0\n";
+				$cfgcontent = "OOF_STATE = 0\n";
 			}
 			if ($data['exreply']) {
-				$cfgcontent .= "EXTERNAL_SWITCH = " . $data['exreply'] . "\n";
+				$cfgcontent .= "ALLOW_EXTERNAL_OOF = 1\n";
 			} else {
-				$cfgcontent .= "EXTERNAL_SWITCH = 0\n";
+				$cfgcontent .= "ALLOW_EXTERNAL_OOF = 0\n";
 			}
 			if ($data['excheck']) {
-				$cfgcontent .= "EXTERNAL_CHECK = " . $data['excheck'] . "\n";
+				$cfgcontent .= "EXTERNAL_AUDIENCE = 1\n";
 			} else {
-				$cfgcontent .= "EXTERNAL_CHECK = 0\n";
+				$cfgcontent .= "EXTERNAL_AUDIENCE = 0\n";
 			}
-			if ($data['duration']) {
-				$cfgcontent .= "DURATION_SWITCH = " . $data['duration'] . "\n";
-			} else {
-				$cfgcontent .= "DURATION_SWITCH = 0\n";
+			if ($data['startday'] && $data['starttime']) {
+				$cfgcontent .= "START_TIME = " . strtotime($data['startday'] . " " . $data['starttime']) . "\n";
 			}
-			if ($data['startday'] && $data['endday']) {
-				$cfgcontent .= "DURATION_DATE = " . $data['startday'] . "~" . $data['endday'] . "\n";
-			}
-			if ($data['starttime'] && $data['endtime']) {
-				$cfgcontent .= "DURATION_TIME = " . $data['starttime'] . "~" . $data['endtime'] . "\n";
+			if ($data['endday'] && $data['endtime']) {
+				$cfgcontent .= "END_TIME = " . strtotime($data['endday'] . " " . $data['endtime']) . "\n";
 			}
 			file_put_contents($this->sinfo['maildir']  . "/config/autoreply.cfg", $cfgcontent);
+			chmod($this->sinfo['maildir']  . "/config/autoreply.cfg", 0666);
 		} else if($_GET['type']==2){
 			if(empty($data['fwdaddress']) || $data['fwdaddress'] == '') {
 				$data['autofwd'] = 0;

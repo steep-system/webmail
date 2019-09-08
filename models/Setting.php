@@ -41,16 +41,39 @@ class WebMail_Model_Setting extends WebMail_Model_Base
 		$data = $jsonoper->getAllRecords();
 		$autoreply = parse_ini_file($this->path . "config/autoreply.cfg", false, INI_SCANNER_RAW);
 		if ($autoreply) {
-			$pos = strpos($autoreply['DURATION_DATE'], '~');
-			$data['startday'] = substr($autoreply['DURATION_DATE'], 0, $pos);
-			$data['endday'] = substr($autoreply['DURATION_DATE'], $pos + 1);
-			$pos = strpos($autoreply['DURATION_TIME'], '~');
-			$data['starttime'] = substr($autoreply['DURATION_TIME'], 0, $pos);
-			$data['endtime'] = substr($autoreply['DURATION_TIME'], $pos + 1);
-			$data['inreply'] = $autoreply['REPLY_SWITCH'];
-			$data['exreply'] = $autoreply['EXTERNAL_SWITCH'];
-			$data['excheck'] = $autoreply['EXTERNAL_CHECK'];
-			$data['duration'] = $autoreply['DURATION_SWITCH'];
+			$data['startday'] = date("Y-m-d", $autoreply['START_TIME']);
+			$data['endday'] = date("Y-m-d", $autoreply['END_TIME']);
+			$data['starttime'] = date("H:i", $autoreply['START_TIME']);
+			$data['endtime'] = date("H:i", $autoreply['END_TIME']);
+			switch ($autoreply['OOF_STATE']) {
+			case 2:
+				$data['inreply'] = 1;
+				if ($autoreply['ALLOW_EXTERNAL_OOF']) {
+					$data['exreply'] = 1;
+				} else {
+					$data['exreply'] = 0;
+				}
+				$data['duration'] = 1;
+				break;
+			case 1:
+				$data['inreply'] = 1;
+				if ($autoreply['ALLOW_EXTERNAL_OOF']) {
+					$data['exreply'] = 1;
+				} else {
+					$data['exreply'] = 0;
+				}
+				$data['duration'] = 0;
+				break;
+			default:
+				$data['inreply'] = 0;
+				$data['exreply'] = 0;
+				$data['duration'] = 0;
+			}
+			if ($autoreply['EXTERNAL_AUDIENCE']) {
+				$data['excheck'] = 1;
+			} else {
+				$data['excheck'] = 0;
+			}
 			$content = file_get_contents($this->path . "config/internal-reply");
 			if ($content) {
 				$pos = strpos($content, "\r\n\r\n");
